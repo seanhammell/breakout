@@ -17,6 +17,7 @@ Renderer::Renderer() {
 
 Renderer::~Renderer() {
   Destroy();
+  instantiated_ = false;
 }
 
 bool Renderer::Create() {
@@ -43,5 +44,4 @@ void Renderer::Destroy() {
 
   renderer_ = NULL;
   window_ = NULL;
-  instantiated_ = false;
 }

@@ -12,10 +12,14 @@ class Renderer {
   ~Renderer();
 
  private:
+  // Creates the window and renderer and returns whether the creation was
+  // successful.
   bool Create();
+
+  // Destroys the window and renderer.
   void Destroy();
 
-  static bool instantiated_;
+  static inline bool instantiated_{ false };
   SDL_Window *window_{ NULL };
   SDL_Renderer *renderer_{ NULL };
 };
