@@ -51,6 +51,11 @@ bool Renderer::Create() {
     return false;
   }
 
+  if (SDL_RenderSetLogicalSize(renderer_, kVirtualWidth, kVirtualHeight) != 0) {
+    fprintf(stderr, "Error setting locigal dimensions: %s\n", SDL_GetError());
+    return false;
+  }
+
   return true;
 }
 

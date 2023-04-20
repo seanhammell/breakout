@@ -5,8 +5,11 @@
 
 class Renderer {
  public:
-  static constexpr int kWindowWidth{ 1280 };
-  static constexpr int kWindowHeight{ 720 };
+  static constexpr int kWindowWidth{ 768 };
+  static constexpr int kWindowHeight{ 640 };
+
+  static constexpr int kVirtualWidth{ 192 };
+  static constexpr int kVirtualHeight{ 160 };
 
   Renderer();
   ~Renderer();
