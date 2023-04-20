@@ -11,12 +11,11 @@ class Renderer {
   Renderer();
   ~Renderer();
 
- private:
-  // Creates the window and renderer and returns whether the creation was
-  // successful.
-  bool Create();
+  void Clear();
+  void Present();
 
-  // Destroys the window and renderer.
+ private:
+  bool Create();
   void Destroy();
 
   static inline bool instantiated_{ false };

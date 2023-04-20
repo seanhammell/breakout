@@ -24,6 +24,18 @@ int main() {
 
   Renderer renderer;
 
-  Close();
+  SDL_Event e;
+  for (;;) {
+    while (SDL_PollEvent(&e)) {
+      if (e.type == SDL_QUIT) {
+        Close();
+        return 0;
+      }
+    }
+
+    renderer.Clear();
+    renderer.Present();
+  }
+
   return 0;
 }
