@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "src/renderer.h"
+#include "src/texture.h"
 
 bool Open() {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -27,6 +28,8 @@ int main() {
     Close();
     return 0;
   }
+
+  Texture texture;
 
   SDL_Event e;
   for (;;) {
