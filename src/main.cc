@@ -30,6 +30,7 @@ int main() {
   }
 
   Texture texture;
+  texture.LoadFromFile(renderer.GetRenderer(), "./graphics/blocks.png");
 
   SDL_Event e;
   for (;;) {

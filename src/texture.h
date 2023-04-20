@@ -6,10 +6,12 @@
 class Texture {
  public:
   Texture() {}
-  ~Texture() { Destroy(); }
+  ~Texture() { Free(); }
+
+  bool LoadFromFile(SDL_Renderer *renderer, const char *path);
 
  private:
-  void Destroy();
+  void Free();
 
   SDL_Texture *texture_{ nullptr };
   int width_{ 0 };

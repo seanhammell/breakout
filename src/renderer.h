@@ -11,7 +11,8 @@ class Renderer {
   Renderer();
   ~Renderer();
 
-  bool IsInstantiated();
+  bool IsInstantiated() { return instantiated_; }
+  SDL_Renderer *GetRenderer() { return renderer_; }
 
   void Clear();
   void Present();

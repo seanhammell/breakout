@@ -23,11 +23,6 @@ Renderer::~Renderer() {
   instantiated_ = false;
 }
 
-// Returns if there is an active and valid Renderer instance.
-bool Renderer::IsInstantiated() {
-  return instantiated_;
-}
-
 // Clears the rendering target.
 void Renderer::Clear() {
   SDL_SetRenderDrawColor(renderer_, 0x2E, 0x34, 0x40, 0xFF);
