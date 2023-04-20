@@ -11,6 +11,8 @@ class Renderer {
   Renderer();
   ~Renderer();
 
+  bool IsInstantiated();
+
   void Clear();
   void Present();
 

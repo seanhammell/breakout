@@ -23,6 +23,10 @@ int main() {
   }
 
   Renderer renderer;
+  if (!renderer.IsInstantiated()) {
+    Close();
+    return 0;
+  }
 
   SDL_Event e;
   for (;;) {
