@@ -42,6 +42,7 @@ int main() {
     }
 
     renderer.Clear();
+    texture.Render(renderer.GetRenderer(), 0, 0);
     renderer.Present();
   }
 

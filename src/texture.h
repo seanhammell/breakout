@@ -10,6 +10,8 @@ class Texture {
 
   bool LoadFromFile(SDL_Renderer *renderer, const char *path);
 
+  void Render(SDL_Renderer *render, const int x, const int y);
+
  private:
   void Free();
 

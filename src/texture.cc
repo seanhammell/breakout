@@ -40,3 +40,8 @@ bool Texture::LoadFromFile(SDL_Renderer *renderer, const char *path) {
 
   return texture_ != NULL;
 }
+
+void Texture::Render(SDL_Renderer *renderer, const int x, const int y) {
+  SDL_Rect dest{ x, y, width_, height_ };
+  SDL_RenderCopy(renderer, texture_, NULL, &dest);
+}
