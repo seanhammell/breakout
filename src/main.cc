@@ -47,10 +47,10 @@ int main() {
   }
 
   Texture texture;
-  texture.LoadFromFile(renderer.GetRenderer(), "./graphics/blocks.png");
+  texture.LoadFromFile(renderer.GetRenderer(), "./img/blocks.png");
 
   Font font;
-  font.LoadFromFile("./fonts/8-bit.ttf", 8);
+  font.LoadFromFile("./fonts/PixeloidMono.ttf", 8);
 
   SDL_Event e;
   for (;;) {

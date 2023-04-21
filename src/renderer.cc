@@ -38,14 +38,15 @@ void Renderer::Present() {
 // successful.
 bool Renderer::Create() {
   window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED, kWindowWidth, kWindowHeight, SDL_WINDOW_SHOWN);
+                             SDL_WINDOWPOS_CENTERED, kWindowWidth,
+                             kWindowHeight, SDL_WINDOW_SHOWN);
   if (window_ == NULL) {
     fprintf(stderr, "Error creating window: %s\n", SDL_GetError());
     return false;
   }
 
-  renderer_ = SDL_CreateRenderer(window_, -1,
-    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  renderer_ = SDL_CreateRenderer(window_, -1, (SDL_RENDERER_ACCELERATED |
+                                               SDL_RENDERER_PRESENTVSYNC));
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());
     return false;

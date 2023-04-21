@@ -9,13 +9,16 @@ class Font {
   Font() {}
   ~Font() { Free(); }
 
+  TTF_Font *GetFont() const { return font_; }
+  SDL_Color GetColor() const { return color_; }
+
   bool LoadFromFile(const char *path, const int size);
 
  private:
   void Free();
 
   TTF_Font *font_{ NULL };
-  //SDL_Color color_{ 0x00, 0x00, 0x00, 0xFF };
+  SDL_Color color_{ 0x00, 0x00, 0x00, 0xFF };
 };
 
 #endif  // SRC_FONT_H_

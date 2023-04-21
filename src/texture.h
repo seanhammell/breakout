@@ -3,12 +3,15 @@
 
 #include <SDL2/SDL.h>
 
+#include "src/font.h"
+
 class Texture {
  public:
   Texture() {}
   ~Texture() { Free(); }
 
   bool LoadFromFile(SDL_Renderer *renderer, const char *path);
+  bool LoadFromText(SDL_Renderer *renderer, const Font& font, const char *text);
 
   void Render(SDL_Renderer *render, const int x, const int y);
 
