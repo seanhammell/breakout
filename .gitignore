@@ -1,3 +1,4 @@
 *.dSYM/
 breakout
 *.aseprite
+*.DS_Store

@@ -5,16 +5,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-// Frees the current texture if it exists.
-void Texture::Free() {
-  if (texture_ != nullptr) {
-    SDL_DestroyTexture(texture_);
-    texture_ = nullptr;
-    width_ = 0;
-    height_ = 0;
-  }
-}
-
 // Loads a texture from the given file and returns whether the load was
 // successful.
 bool Texture::LoadFromFile(SDL_Renderer *renderer, const char *path) {
@@ -44,4 +34,14 @@ bool Texture::LoadFromFile(SDL_Renderer *renderer, const char *path) {
 void Texture::Render(SDL_Renderer *renderer, const int x, const int y) {
   SDL_Rect dest{ x, y, width_, height_ };
   SDL_RenderCopy(renderer, texture_, NULL, &dest);
+}
+
+// Frees the current texture if it exists.
+void Texture::Free() {
+  if (texture_ != nullptr) {
+    SDL_DestroyTexture(texture_);
+    texture_ = nullptr;
+    width_ = 0;
+    height_ = 0;
+  }
 }
