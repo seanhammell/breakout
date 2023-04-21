@@ -68,6 +68,7 @@ int main() {
 
   fps.StartTimerFPS();
   for (;;) {
+    fps.StartTimerCap();
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
         Close();
@@ -79,8 +80,10 @@ int main() {
     kTextTexture.LoadFromText(kRenderer.GetRenderer(), kFont, fps_buffer);
 
     kRenderer.Clear();
-    kTextTexture.Render(kRenderer.GetRenderer(), 0, 0);
+    kTextTexture.Render(kRenderer.GetRenderer(), 1, 0);
     kRenderer.Present();
+
+    fps.Synch();
   }
 
   return 0;

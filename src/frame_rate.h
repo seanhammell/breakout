@@ -15,6 +15,8 @@ class FrameRate {
   void StartTimerFPS();
   void StartTimerCap();
 
+  void Synch();
+
   double CalculateFPS();
 
  private:

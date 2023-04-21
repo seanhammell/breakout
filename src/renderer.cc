@@ -45,8 +45,7 @@ bool Renderer::Create() {
     return false;
   }
 
-  renderer_ = SDL_CreateRenderer(window_, -1, (SDL_RENDERER_ACCELERATED |
-                                               SDL_RENDERER_PRESENTVSYNC));
+  renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());
     return false;
