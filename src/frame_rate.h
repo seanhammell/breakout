@@ -15,9 +15,11 @@ class FrameRate {
   void StartTimerFPS();
   void StartTimerCap();
 
+  double CalculateFPS();
+
  private:
-  uint64_t fps_ticks_{ 0 };
-  uint64_t cap_ticks_{ 0 };
+  uint64_t fps_start_{ 0 };
+  uint64_t cap_start_{ 0 };
   uint64_t counted_frames_{ 0 };
 };
 

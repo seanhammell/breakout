@@ -7,6 +7,7 @@
 #include "src/renderer.h"
 #include "src/texture.h"
 #include "src/font.h"
+#include "src/frame_rate.h"
 
 static Renderer kRenderer;
 
@@ -61,9 +62,11 @@ int main() {
     return 0;
   }
 
-  kTextTexture.LoadFromText(kRenderer.GetRenderer(), kFont, "Breakout");
-
   SDL_Event e;
+  FrameRate fps;
+  char fps_buffer[10];
+
+  fps.StartTimerFPS();
   for (;;) {
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
@@ -71,6 +74,9 @@ int main() {
         return 0;
       }
     }
+
+    sprintf(fps_buffer, "FPS: %2.0f", fps.CalculateFPS());
+    kTextTexture.LoadFromText(kRenderer.GetRenderer(), kFont, fps_buffer);
 
     kRenderer.Clear();
     kTextTexture.Render(kRenderer.GetRenderer(), 0, 0);
