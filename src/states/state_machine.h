@@ -11,6 +11,7 @@ class StateMachine {
   ~StateMachine() {}
 
   void HandleInput(SDL_Event input);
+  void Update();
   
  private:
   State *state_;

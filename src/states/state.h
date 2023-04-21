@@ -10,6 +10,7 @@ class State {
   virtual ~State() {}
 
   virtual void HandleInput(StateMachine& state_machine, SDL_Event input);
+  virtual void Update();
 };
 
 #endif  // SRC_STATES_STATE_H_
