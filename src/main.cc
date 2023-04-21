@@ -8,6 +8,11 @@
 #include "src/texture.h"
 #include "src/font.h"
 
+static Renderer kRenderer;
+
+static Font kFont;
+static Texture kTextTexture;
+
 // Initializes project SDL libraries.
 bool Open() {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -28,6 +33,16 @@ bool Open() {
   return true;
 }
 
+// Loads the top-level meida files.
+bool LoadMedia() {
+  if (!kFont.LoadFromFile("./fonts/cs50_font.ttf", 8)) {
+    fprintf(stderr, "Failed to load font\n");
+    return false;
+  }
+
+  return true;
+}
+
 // Quits project SDL libraries.
 void Close() {
   TTF_Quit();
@@ -36,20 +51,17 @@ void Close() {
 }
 
 int main() {
-  if (!Open()) {
-    return 0;
-  }
-
-  Renderer renderer;
-  if (!renderer.IsInstantiated()) {
+  if (!Open() || !LoadMedia() || !kRenderer.IsInstantiated()) {
     Close();
     return 0;
   }
 
-  Font font;
-  Texture text;
-  font.LoadFromFile("./fonts/cs50_font.ttf", 8);
-  text.LoadFromText(renderer.GetRenderer(), font, "Breakout");
+  if (!LoadMedia()) {
+    Close();
+    return 0;
+  }
+
+  kTextTexture.LoadFromText(kRenderer.GetRenderer(), kFont, "Breakout");
 
   SDL_Event e;
   for (;;) {
@@ -60,9 +72,9 @@ int main() {
       }
     }
 
-    renderer.Clear();
-    text.Render(renderer.GetRenderer(), 0, 0);
-    renderer.Present();
+    kRenderer.Clear();
+    kTextTexture.Render(kRenderer.GetRenderer(), 0, 0);
+    kRenderer.Present();
   }
 
   return 0;
