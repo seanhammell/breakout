@@ -18,7 +18,7 @@ class Font {
   void Free();
 
   TTF_Font *font_{ NULL };
-  SDL_Color color_{ 0x00, 0x00, 0x00, 0xFF };
+  SDL_Color color_{ 0xEC, 0xEF, 0xF4, 0xFF };
 };
 
 #endif  // SRC_FONT_H_

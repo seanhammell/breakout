@@ -46,11 +46,10 @@ int main() {
     return 0;
   }
 
-  Texture texture;
-  texture.LoadFromFile(renderer.GetRenderer(), "./img/blocks.png");
-
   Font font;
-  font.LoadFromFile("./fonts/PixeloidMono.ttf", 8);
+  Texture text;
+  font.LoadFromFile("./fonts/cs50_font.ttf", 8);
+  text.LoadFromText(renderer.GetRenderer(), font, "Breakout");
 
   SDL_Event e;
   for (;;) {
@@ -62,6 +61,7 @@ int main() {
     }
 
     renderer.Clear();
+    text.Render(renderer.GetRenderer(), 0, 0);
     renderer.Present();
   }
 
