@@ -7,13 +7,14 @@
 
 class StateMachine {
  public:
-  StateMachine() {}
-  ~StateMachine() {}
+  StateMachine();
+  ~StateMachine();
 
   void HandleInput(SDL_Event input);
   void Update();
   
  private:
+  static inline bool instantiated_{ false };
   State *state_;
 };
 
