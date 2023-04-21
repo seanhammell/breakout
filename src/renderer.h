@@ -8,8 +8,8 @@ class Renderer {
   static constexpr int kWindowWidth{ 768 };
   static constexpr int kWindowHeight{ 640 };
 
-  static constexpr int kVirtualWidth{ 192 };
-  static constexpr int kVirtualHeight{ 160 };
+  static constexpr int kVirtualWidth{ 384 };
+  static constexpr int kVirtualHeight{ 320 };
 
   Renderer();
   ~Renderer();
