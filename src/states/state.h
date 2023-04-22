@@ -9,7 +9,7 @@ class State {
  public:
   virtual ~State() {}
 
-  virtual State *HandleInput(StateMachine& state_machine, SDL_Event input);
+  virtual State *HandleInput(const StateMachine& fsm, SDL_Event input);
   virtual void Update();
 };
 

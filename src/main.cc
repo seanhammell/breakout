@@ -12,7 +12,7 @@
 static Renderer kRenderer;
 
 static Font kFont;
-static Texture kTextTexture;
+static Texture kTextFPS;
 
 // Initializes project SDL libraries.
 bool Open() {
@@ -52,39 +52,41 @@ void Close() {
 }
 
 int main() {
-  if (!Open() || !LoadMedia() || !kRenderer.IsInstantiated()) {
-    Close();
-    return 0;
-  }
-
-  if (!LoadMedia()) {
-    Close();
-    return 0;
-  }
-
   SDL_Event e;
   FrameRate fps;
   char fps_buffer[10];
+
+  if (!Open() || !LoadMedia() || !kRenderer.IsInstantiated()) {
+    goto cleanup;
+  }
+
+  if (!LoadMedia()) {
+    goto cleanup;
+  }
 
   fps.StartTimerFPS();
   for (;;) {
     fps.StartTimerCap();
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
-        Close();
-        return 0;
+        goto cleanup;
       }
     }
 
     sprintf(fps_buffer, "FPS: %2.0f", fps.CalculateFPS());
-    kTextTexture.LoadFromText(kRenderer.GetRenderer(), kFont, fps_buffer);
+    if (!kTextFPS.LoadFromText(kRenderer.GetRenderer(), kFont, fps_buffer)) {
+      fprintf(stderr, "Failed to load fps text\n");
+      goto cleanup;
+    }
 
     kRenderer.Clear();
-    kTextTexture.Render(kRenderer.GetRenderer(), 1, 0);
+    kTextFPS.Render(kRenderer.GetRenderer(), 1, 0);
     kRenderer.Present();
 
     fps.Synch();
   }
 
+cleanup:
+  Close();
   return 0;
 }

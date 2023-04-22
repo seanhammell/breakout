@@ -9,7 +9,7 @@ class MenuState final : public State {
  public:
   ~MenuState() override;
 
-  State *HandleInput(StateMachine& state_machine, SDL_Event input) override;
+  State *HandleInput(const StateMachine& fsm, SDL_Event input) override;
   void Update() override;
 };
 
