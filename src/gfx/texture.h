@@ -1,9 +1,9 @@
-#ifndef SRC_TEXTURE_H_
-#define SRC_TEXTURE_H_
+#ifndef SRC_GFX_TEXTURE_H_
+#define SRC_GFX_TEXTURE_H_
 
 #include <SDL2/SDL.h>
 
-#include "src/font.h"
+#include "src/gfx/font.h"
 
 class Texture {
  public:
@@ -23,4 +23,4 @@ class Texture {
   int height_{ 0 };
 };
 
-#endif  // SRC_TEXTURE_H_
+#endif  // SRC_GFX_TEXTURE_H_

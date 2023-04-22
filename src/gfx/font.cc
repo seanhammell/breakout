@@ -1,4 +1,4 @@
-#include "src/font.h"
+#include "src/gfx/font.h"
 
 #include <stdio.h>
 

@@ -1,4 +1,4 @@
-#include "src/texture.h"
+#include "src/gfx/texture.h"
 
 #include <stdio.h>
 
@@ -6,7 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "src/font.h"
+#include "src/gfx/font.h"
 
 // Loads a texture from the provided image path and returns whether the load was
 // successful.

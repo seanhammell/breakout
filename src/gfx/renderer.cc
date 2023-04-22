@@ -1,4 +1,4 @@
-#include "src/renderer.h"
+#include "src/gfx/renderer.h"
 
 #include <stdio.h>
 

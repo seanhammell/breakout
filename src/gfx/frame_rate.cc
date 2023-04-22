@@ -1,4 +1,4 @@
-#include "src/frame_rate.h"
+#include "src/gfx/frame_rate.h"
 
 #include <cstdint>
 

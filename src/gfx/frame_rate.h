@@ -1,5 +1,5 @@
-#ifndef SRC_FRAME_RATE_H_
-#define SRC_FRAME_RATE_H_
+#ifndef SRC_GFX_FRAME_RATE_H_
+#define SRC_GFX_FRAME_RATE_H_
 
 #include <cstdint>
 
@@ -25,4 +25,4 @@ class FrameRate {
   uint64_t counted_frames_{ 0 };
 };
 
-#endif  // SRC_FRAME_RATE_H_
+#endif  // SRC_GFX_FRAME_RATE_H_

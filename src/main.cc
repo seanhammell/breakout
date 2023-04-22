@@ -4,10 +4,10 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "src/renderer.h"
-#include "src/texture.h"
-#include "src/font.h"
-#include "src/frame_rate.h"
+#include "src/gfx/renderer.h"
+#include "src/gfx/texture.h"
+#include "src/gfx/font.h"
+#include "src/gfx/frame_rate.h"
 
 static Renderer kRenderer;
 
