@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <cassert>
+#include <cstdint>
 
 #include <SDL2/SDL.h>
 
@@ -22,13 +23,17 @@ Window::~Window() {
 
 void Window::Loop() {
   SDL_Event e;
-  ticks_ = SDL_GetTicks64();
   while (true) {
+    ticks_ = SDL_GetTicks64();
+
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
         return;
       }
     }
+
+    CalculateFPS();
+    SynchFPS();
   }
 }
 
@@ -47,4 +52,22 @@ bool Window::Create() {
 void Window::Destroy() {
   SDL_DestroyWindow(window_);
   window_ = NULL;
+}
+
+void Window::CalculateFPS() {
+  const uint64_t now{ SDL_GetTicks64() };
+  if (now - last_second_ > 1000) {
+    SDL_Log("FPS: %llu\n", fps_);
+    fps_ = 0;
+    last_second_ = now;
+  }
+
+  ++fps_;
+}
+
+void Window::SynchFPS() {
+  const uint64_t remainder{ SDL_GetTicks64() - ticks_ };
+  if (remainder < kTicksPerFrame) {
+    SDL_Delay(kTicksPerFrame - remainder);
+  }
 }
