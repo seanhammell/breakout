@@ -5,10 +5,10 @@
 #include <cassert>
 #include <cstdint>
 
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 
 Window::Window() {
-  assert(!instantiated_);
+  assert(!instantiated_);  // ensures there is only one Window instance.
   if (!Create()) {
     Destroy();
   } else {
@@ -65,7 +65,7 @@ void Window::CalculateFPS() {
   ++fps_;
 }
 
-void Window::SynchFPS() {
+void Window::SynchFPS() const {
   const uint64_t remainder{ SDL_GetTicks64() - ticks_ };
   if (remainder < kTicksPerFrame) {
     SDL_Delay(kTicksPerFrame - remainder);
