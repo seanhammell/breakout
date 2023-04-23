@@ -17,9 +17,9 @@ class Window {
   Window();
   ~Window();
 
-  // Returns whether the is instantiated. If an error occurred while creating
-  // the SDL_Window, instantiated will be false, so we can use this to ensure
-  // the Window is valid before entering the game loop.
+  // Returns whether the Window is instantiated. If an error occurred while
+  // creating the SDL_Window, instantiated will be false, so we can use this to
+  // ensure the Window is valid before entering the game loop.
   bool IsInstantiated() const { return instantiated_; }
 
   // Controls the game loop.
