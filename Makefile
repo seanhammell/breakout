@@ -1,6 +1,6 @@
 CC = clang++
 CFLAGS = -g -std=c++17 -pedantic-errors -Wall -Wextra -Werror
-SRC = src/main.cc src/gfx/window.cc src/gfx/renderer.cc
+SRC = src/main.cc src/gfx/window.cc src/gfx/renderer.cc src/fsm/menu_state.cc
 INC = -I .
 LIB = -l SDL2
 TARGET = breakout

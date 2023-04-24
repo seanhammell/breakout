@@ -8,6 +8,8 @@
 #include "SDL2/SDL.h"
 
 #include "src/state.h"
+#include "src/gfx/renderer.h"
+#include "src/fsm/menu_state.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -24,12 +26,15 @@ Window::~Window() {
 }
 
 void Window::Loop() {
+  kState.game_state = new MenuState();
+
   SDL_Event e;
   while (true) {
     ticks_ = SDL_GetTicks64();
 
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
+        delete kState.game_state;
         return;
       }
     }
@@ -43,6 +48,11 @@ void Window::Loop() {
 }
 
 bool Window::Create() {
+  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+    fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
+    return false;
+  }
+
   window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED,
                              SDL_WINDOWPOS_CENTERED, kWindowWidth,
                              kWindowHeight, SDL_WINDOW_SHOWN);
@@ -56,6 +66,8 @@ bool Window::Create() {
 
 void Window::Destroy() {
   SDL_DestroyWindow(window_);
+  SDL_Quit();
+
   window_ = NULL;
 }
 
