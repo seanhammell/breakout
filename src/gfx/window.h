@@ -22,6 +22,9 @@ class Window {
   // ensure the Window is valid before entering the game loop.
   bool IsInstantiated() const { return instantiated_; }
 
+  // Provides access to the SDL_Window.
+  SDL_Window *GetWindow() const { return window_; }
+
   // Controls the game loop.
   void Loop();
 

@@ -26,7 +26,7 @@ class Renderer {
   void Destroy();
 
   bool instantiated_{ false };
-  SDL_Renderer *renderer_;
+  SDL_Renderer *renderer_{ NULL };
 };
 
 #endif  // SRC_GFX_RENDERER_H_
