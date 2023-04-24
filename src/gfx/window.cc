@@ -7,6 +7,8 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/state.h"
+
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
   if (!Create()) {
@@ -31,6 +33,9 @@ void Window::Loop() {
         return;
       }
     }
+
+    kState.renderer.Clear();
+    kState.renderer.Present();
 
     CalculateFPS();
     SynchFPS();

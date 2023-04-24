@@ -18,6 +18,12 @@ class Renderer {
   // Provides access to the SDL_Renderer.
   SDL_Renderer *GetRenderer() const { return renderer_; }
 
+  // Clears the renderer to prepare for a new frame.
+  void Clear();
+
+  // Updates the screen with any rendering done since the previous call.
+  void Present();
+
  private:
   // Creates the SDL_Renderer and returns whether the creation was successful.
   bool Create();

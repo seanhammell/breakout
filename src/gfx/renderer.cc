@@ -17,9 +17,18 @@ Renderer::Renderer() {
   }
 }
 
-Renderer::Renderer() {
+Renderer::~Renderer() {
   Destroy();
   instantiated_ = false;
+}
+
+void Renderer::Clear() {
+  SDL_SetRenderDrawColor(renderer_, 0x2E, 0x34, 0x40, 0xFF);
+  SDL_RenderClear(renderer_);
+}
+
+void Renderer::Present() {
+  SDL_RenderPresent(renderer_);
 }
 
 bool Renderer::Create() {
