@@ -2,7 +2,11 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/ecs/gfx/graphics_component.h"
+#include "src/ecs/gfx/menu_graphics_component.h"
 #include "src/fsm/state_machine.h"
+
+MenuState::MenuState() : graphics_{ new MenuGraphicsComponent() } {}
 
 StateMachine *MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN) {
@@ -12,4 +16,8 @@ StateMachine *MenuState::HandleInput(SDL_Event input) {
   }
 
   return NULL;
+}
+
+void MenuState::Update() {
+  graphics_->Update();
 }

@@ -10,8 +10,8 @@ LDFLAGS := -lSDL2 -l SDL2_image
 # Finds all of the .cc files in the specified ./src directories.
 SRC_DIR := ./src
 SRCS := $(wildcard $(SRC_DIR)/*.cc)
-SRCS += $(wildcard $(SRC_DIR)/gfx/*.cc)
-SRCS += $(wildcard $(SRC_DIR)/fsm/*.cc)
+SRCS += $(wildcard $(SRC_DIR)/**/*.cc)
+SRCS += $(wildcard $(SRC_DIR)/**/**/*.cc)
 
 # Specifies .o files in the ./build directory, maintaining the same file
 # structure as the ./src directory.
