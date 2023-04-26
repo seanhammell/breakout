@@ -1,8 +1,8 @@
-breakout
+build/
 
 CPPLINT.cfg
 lint.sh
 
 *.dSYM/
-*.aseprite
 *.DS_Store
+*.aseprite
