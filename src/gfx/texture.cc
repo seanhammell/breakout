@@ -30,6 +30,15 @@ bool Texture::LoadFromFile(const char *path) {
   return texture_ != NULL;
 }
 
+void Texture::Render(const int x, const int y, SDL_Rect *clip) {
+  SDL_Rect dest{ x, y, width_, height_};
+  if (clip != NULL) {
+    dest.h = clip->w;
+    dest.h = clip->h;
+  }
+  SDL_RenderCopy(kState.renderer.GetRenderer(), texture_, clip, &dest);
+}
+
 void Texture::Free() {
   if (texture_ != NULL) {
     SDL_DestroyTexture(texture_);

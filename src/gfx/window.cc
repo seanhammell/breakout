@@ -10,6 +10,7 @@
 #include "src/state.h"
 #include "src/fsm/menu_state.h"
 #include "src/gfx/renderer.h"
+#include "src/gfx/texture.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -30,6 +31,9 @@ void Window::Loop() {
   assert(kState.renderer.IsInstantiated());
   kState.game_state = new MenuState();
 
+  Texture menu;
+  menu.LoadFromFile("./img/menu.png");
+
   SDL_Event e;
   while (true) {
     ticks_ = SDL_GetTicks64();
@@ -42,6 +46,7 @@ void Window::Loop() {
     }
 
     kState.renderer.Clear();
+    menu.Render(0, 0);
     kState.renderer.Present();
 
     CalculateFPS();

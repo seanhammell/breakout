@@ -11,6 +11,9 @@ class Texture {
   // Loads a texture from the given path.
   bool LoadFromFile(const char *path);
 
+  // Renders the texture to the screen.
+  void Render(const int x, const int y, SDL_Rect *clip = NULL);
+
  private:
   // Frees the current texture if it exists.
   void Free();

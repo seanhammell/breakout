@@ -4,8 +4,8 @@
 #include "SDL2/SDL.h"
 
 #include "src/fsm/state_machine.h"
-#include "src/gfx/window.h"
 #include "src/gfx/renderer.h"
+#include "src/gfx/window.h"
 
 struct State {
   Window window;
