@@ -9,7 +9,7 @@
 class MenuState : public StateMachine {
  public:
   MenuState();
-  ~MenuState() {}
+  ~MenuState();
 
   // Handles user input at the main menu.
   StateMachine *HandleInput(SDL_Event input) override;

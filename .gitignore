@@ -5,4 +5,5 @@ lint.sh
 
 *.dSYM/
 *.DS_Store
+*.vscode
 *.aseprite
