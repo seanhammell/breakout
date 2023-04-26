@@ -8,8 +8,11 @@ class Texture {
   Texture() {}
   ~Texture() { Free(); }
 
+  // Loads a texture from the given path.
+  bool LoadFromFile(const char *path);
+
  private:
-  // Frees the current Texture if it exists.
+  // Frees the current texture if it exists.
   void Free();
 
   SDL_Texture *texture_{ NULL };
