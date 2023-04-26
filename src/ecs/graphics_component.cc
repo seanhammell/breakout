@@ -1,4 +1,4 @@
-#include "src/ecs/gfx/graphics_component.h"
+#include "src/ecs/graphics_component.h"
 
 #include "src/gfx/texture.h"
 

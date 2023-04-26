@@ -8,8 +8,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/state.h"
-#include "src/ecs/gfx/graphics_component.h"
-#include "src/ecs/gfx/menu_graphics_component.h"
+#include "src/ecs/graphics_component.h"
 #include "src/fsm/menu_state.h"
 #include "src/gfx/renderer.h"
 
