@@ -26,6 +26,11 @@ Window::~Window() {
 }
 
 void Window::Loop() {
+  if (!kState.renderer.IsInstantiated()) {
+    fprintf(stderr, "Invalid renderer instance\n");
+    return;
+  }
+
   kState.game_state = new MenuState();
 
   SDL_Event e;

@@ -7,6 +7,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/state.h"
+#include "src/gfx/window.h"
 
 Renderer::Renderer() {
   assert(!instantiated_);  // ensures there is only one Renderer instance.
@@ -32,6 +33,11 @@ void Renderer::Present() {
 }
 
 bool Renderer::Create() {
+  if (!kState.window.IsInstantiated()) {
+    fprintf(stderr, "Invalid window instance\n");
+    return false;
+  }
+
   renderer_ = SDL_CreateRenderer(kState.window.GetWindow(), -1,
                                  SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {

@@ -12,7 +12,7 @@ class Renderer {
   Renderer();
   ~Renderer();
 
-  // Returns whether the Renderer is instantiated.
+  // Returns whether the renderer is instantiated.
   bool IsInstantiated() const { return instantiated_; }
 
   // Provides access to the SDL_Renderer.
