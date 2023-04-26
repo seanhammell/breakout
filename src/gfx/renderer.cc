@@ -33,11 +33,7 @@ void Renderer::Present() {
 }
 
 bool Renderer::Create() {
-  if (!kState.window.IsInstantiated()) {
-    fprintf(stderr, "Invalid window instance\n");
-    return false;
-  }
-
+  assert(kState.window.IsInstantiated());
   renderer_ = SDL_CreateRenderer(kState.window.GetWindow(), -1,
                                  SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {
