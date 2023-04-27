@@ -1,4 +1,4 @@
-#include "src/gfx/window.h"
+#include "src/graphic/window.h"
 
 #include <stdio.h>
 
@@ -8,8 +8,8 @@
 #include "SDL2/SDL.h"
 
 #include "src/game.h"
-#include "src/fsm/menu_state.h"
-#include "src/gfx/renderer.h"
+#include "src/graphic/renderer.h"
+#include "src/state/menu_state.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.

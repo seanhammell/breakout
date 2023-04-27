@@ -1,11 +1,11 @@
-#ifndef SRC_FSM_MENU_STATE_H_
-#define SRC_FSM_MENU_STATE_H_
+#ifndef SRC_STATE_MENU_STATE_H_
+#define SRC_STATE_MENU_STATE_H_
 
 #include "SDL2/SDL.h"
 
-#include "src/fsm/state_machine.h"
-#include "src/gfx/texture.h"
-#include "src/gfx/ui_element.h"
+#include "src/graphic/texture.h"
+#include "src/graphic/ui_element.h"
+#include "src/state/state_machine.h"
 
 class MenuState : public StateMachine {
  public:
@@ -29,4 +29,4 @@ class MenuState : public StateMachine {
   UIElement title_;
 };
 
-#endif  // SRC_FSM_MENU_STATE_H_
+#endif  // SRC_STATE_MENU_STATE_H_

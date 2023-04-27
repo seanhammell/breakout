@@ -1,4 +1,4 @@
-#include "src/gfx/texture.h"
+#include "src/graphic/texture.h"
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"

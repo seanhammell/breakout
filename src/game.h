@@ -3,9 +3,9 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/fsm/state_machine.h"
-#include "src/gfx/renderer.h"
-#include "src/gfx/window.h"
+#include "src/graphic/renderer.h"
+#include "src/graphic/window.h"
+#include "src/state/state_machine.h"
 
 struct Game {
   Window window;

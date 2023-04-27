@@ -1,5 +1,5 @@
-#ifndef SRC_GFX_WINDOW_H_
-#define SRC_GFX_WINDOW_H_
+#ifndef SRC_GRAPHIC_WINDOW_H_
+#define SRC_GRAPHIC_WINDOW_H_
 
 #include <cstdint>
 
@@ -49,4 +49,4 @@ class Window {
   uint64_t last_second_{ 0 };
 };
 
-#endif  // SRC_GFX_WINDOW_H_
+#endif  // SRC_GRAPHIC_WINDOW_H_

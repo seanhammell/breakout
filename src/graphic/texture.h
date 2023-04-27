@@ -1,5 +1,5 @@
-#ifndef SRC_GFX_TEXTURE_H_
-#define SRC_GFX_TEXTURE_H_
+#ifndef SRC_GRAPHIC_TEXTURE_H_
+#define SRC_GRAPHIC_TEXTURE_H_
 
 #include "SDL2/SDL.h"
 
@@ -23,4 +23,4 @@ class Texture {
   int height_{ 0 };
 };
 
-#endif  // SRC_GFX_TEXTURE_H_
+#endif  // SRC_GRAPHIC_TEXTURE_H_

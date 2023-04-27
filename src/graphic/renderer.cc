@@ -1,4 +1,4 @@
-#include "src/gfx/renderer.h"
+#include "src/graphic/renderer.h"
 
 #include <stdio.h>
 
@@ -7,7 +7,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/game.h"
-#include "src/gfx/window.h"
+#include "src/graphic/window.h"
 
 Renderer::Renderer() {
   assert(!instantiated_);  // ensures there is only one Renderer instance.

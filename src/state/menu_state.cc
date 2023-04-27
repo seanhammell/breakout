@@ -1,10 +1,10 @@
-#include "src/fsm/menu_state.h"
+#include "src/state/menu_state.h"
 
 #include "SDL2/SDL.h"
 
-#include "src/fsm/state_machine.h"
-#include "src/gfx/texture.h"
-#include "src/gfx/ui_element.h"
+#include "src/state/state_machine.h"
+#include "src/graphic/texture.h"
+#include "src/graphic/ui_element.h"
 
 MenuState::MenuState() {
   title_ = UIElement(&texture_, {0, 0, 142, 16}, 25, 40);

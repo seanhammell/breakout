@@ -1,8 +1,8 @@
-#include "src/gfx/ui_element.h"
+#include "src/graphic/ui_element.h"
 
 #include "SDL2/SDL.h"
 
-#include "src/gfx/texture.h"
+#include "src/graphic/texture.h"
 
 UIElement::UIElement(Texture *texture, SDL_Rect clip, int x, int y)
   : texture_{ texture }, clip_{ clip }, x_{ x }, y_{ y } {}

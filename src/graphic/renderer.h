@@ -1,5 +1,5 @@
-#ifndef SRC_GFX_RENDERER_H_
-#define SRC_GFX_RENDERER_H_
+#ifndef SRC_GRAPHIC_RENDERER_H_
+#define SRC_GRAPHIC_RENDERER_H_
 
 #include "SDL2/SDL.h"
 
@@ -35,4 +35,4 @@ class Renderer {
   SDL_Renderer *renderer_{ NULL };
 };
 
-#endif  // SRC_GFX_RENDERER_H_
+#endif  // SRC_GRAPHIC_RENDERER_H_
