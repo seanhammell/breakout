@@ -1,5 +1,5 @@
-#ifndef SRC_STATE_H_
-#define SRC_STATE_H_
+#ifndef SRC_GAME_H_
+#define SRC_GAME_H_
 
 #include "SDL2/SDL.h"
 
@@ -7,12 +7,12 @@
 #include "src/gfx/renderer.h"
 #include "src/gfx/window.h"
 
-struct State {
+struct Game {
   Window window;
   Renderer renderer;
   StateMachine *game_state;
 };
 
-extern State kState;
+extern Game kGame;
 
-#endif  // SRC_STATE_H_
+#endif  // SRC_GAME_H_

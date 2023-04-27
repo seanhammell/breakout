@@ -1,10 +1,10 @@
-#include "src/state.h"
+#include "src/game.h"
 
 // Global game state.
-State kState;
+Game kGame;
 
 int main() {
-  kState.window.Loop();
+  kGame.window.Loop();
 
   return 0;
 }

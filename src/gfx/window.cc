@@ -7,7 +7,7 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/state.h"
+#include "src/game.h"
 #include "src/fsm/menu_state.h"
 #include "src/gfx/renderer.h"
 
@@ -26,10 +26,10 @@ Window::~Window() {
 }
 
 void Window::Loop() {
-  assert(kState.window.IsInstantiated());
-  assert(kState.renderer.IsInstantiated());
+  assert(kGame.window.IsInstantiated());
+  assert(kGame.renderer.IsInstantiated());
   assert(LoadMedia());
-  kState.game_state = new MenuState();
+  kGame.game_state = new MenuState();
 
   SDL_Event e;
   while (true) {
@@ -37,14 +37,14 @@ void Window::Loop() {
 
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
-        delete kState.game_state;
+        delete kGame.game_state;
         return;
       }
     }
 
-    kState.renderer.Clear();
-    kState.game_state->Render();
-    kState.renderer.Present();
+    kGame.renderer.Clear();
+    kGame.game_state->Render();
+    kGame.renderer.Present();
 
     CalculateFPS();
     SynchFPS();

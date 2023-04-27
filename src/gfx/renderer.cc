@@ -6,7 +6,7 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/state.h"
+#include "src/game.h"
 #include "src/gfx/window.h"
 
 Renderer::Renderer() {
@@ -33,8 +33,8 @@ void Renderer::Present() {
 }
 
 bool Renderer::Create() {
-  assert(kState.window.IsInstantiated());
-  renderer_ = SDL_CreateRenderer(kState.window.GetWindow(), -1,
+  assert(kGame.window.IsInstantiated());
+  renderer_ = SDL_CreateRenderer(kGame.window.GetWindow(), -1,
                                  SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());
