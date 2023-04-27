@@ -5,7 +5,7 @@ CXX := clang++
 CXXFLAGS := -g -std=c++17 -pedantic-errors
 CXXFLAGS += -Wall -Wextra -Werror
 CXXFLAGS += -I.
-LDFLAGS := -lSDL2 -l SDL2_image
+LDFLAGS := -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # Finds all of the .cc files in the specified ./src directories.
 SRC_DIR := ./src

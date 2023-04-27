@@ -14,7 +14,7 @@ bool Texture::LoadFromFile(const char *path) {
     return false;
   }
 
-  SDL_Texture *temp{ SDL_CreateTextureFromSurface(kGame.renderer.GetRenderer(),
+  SDL_Texture *temp{ SDL_CreateTextureFromSurface(kGame.renderer.renderer(),
                                                   sprite_sheet) };
   if (temp == NULL) {
     fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
@@ -36,7 +36,7 @@ void Texture::Render(const int x, const int y, SDL_Rect *clip) {
     dest.h = clip->w;
     dest.h = clip->h;
   }
-  SDL_RenderCopy(kGame.renderer.GetRenderer(), texture_, clip, &dest);
+  SDL_RenderCopy(kGame.renderer.renderer(), texture_, clip, &dest);
 }
 
 void Texture::Free() {

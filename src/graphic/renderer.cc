@@ -23,6 +23,14 @@ Renderer::~Renderer() {
   instantiated_ = false;
 }
 
+bool Renderer::instantiated() const {
+  return instantiated_;
+}
+
+SDL_Renderer *Renderer::renderer() const {
+  return renderer_;
+}
+
 void Renderer::Clear() {
   SDL_SetRenderDrawColor(renderer_, 0x2E, 0x34, 0x40, 0xFF);
   SDL_RenderClear(renderer_);
@@ -33,8 +41,8 @@ void Renderer::Present() {
 }
 
 bool Renderer::Create() {
-  assert(kGame.window.IsInstantiated());
-  renderer_ = SDL_CreateRenderer(kGame.window.GetWindow(), -1,
+  assert(kGame.window.instantiated());
+  renderer_ = SDL_CreateRenderer(kGame.window.window(), -1,
                                  SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());

@@ -12,11 +12,9 @@ class Renderer {
   Renderer();
   ~Renderer();
 
-  // Returns whether the renderer is instantiated.
-  bool IsInstantiated() const { return instantiated_; }
-
-  // Provides access to the SDL_Renderer.
-  SDL_Renderer *GetRenderer() const { return renderer_; }
+  // Getters.
+  bool instantiated() const;
+  SDL_Renderer *renderer() const;
 
   // Clears the renderer to prepare for a new frame.
   void Clear();

@@ -25,9 +25,17 @@ Window::~Window() {
   instantiated_ = false;
 }
 
+bool Window::instantiated() const {
+  return instantiated_;
+}
+
+SDL_Window *Window::window() const {
+  return window_;
+}
+
 void Window::Loop() {
-  assert(kGame.window.IsInstantiated());
-  assert(kGame.renderer.IsInstantiated());
+  assert(kGame.window.instantiated());
+  assert(kGame.renderer.instantiated());
   assert(LoadMedia());
   kGame.game_state = new MenuState();
 

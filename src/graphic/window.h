@@ -17,11 +17,9 @@ class Window {
   Window();
   ~Window();
 
-  // Returns whether the window is instantiated.
-  bool IsInstantiated() const { return instantiated_; }
-
-  // Provides access to the SDL_Window.
-  SDL_Window *GetWindow() const { return window_; }
+  // Getters.
+  bool instantiated() const;
+  SDL_Window *window() const;
 
   // Controls the game loop.
   void Loop();
