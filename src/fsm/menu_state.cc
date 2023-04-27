@@ -2,12 +2,17 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/ecs/graphics_component.h"
 #include "src/fsm/state_machine.h"
+#include "src/gfx/texture.h"
+#include "src/gfx/ui_element.h"
 
-MenuState::MenuState()
-  : graphics_{ new GraphicsComponent(GraphicsComponent::kMenu) } {}
-MenuState::~MenuState() { delete graphics_; }
+MenuState::MenuState() {
+  title_ = UIElement(&texture_, {0, 0, 142, 16}, 25, 40);
+}
+
+bool MenuState::Load() {
+  return texture_.LoadFromFile("./img/menu.png");
+}
 
 StateMachine *MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN) {
@@ -19,6 +24,6 @@ StateMachine *MenuState::HandleInput(SDL_Event input) {
   return NULL;
 }
 
-void MenuState::Update() {
-  graphics_->Update();
+void MenuState::Render() {
+  title_.Render();
 }

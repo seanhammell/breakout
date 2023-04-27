@@ -8,7 +8,6 @@
 #include "SDL2/SDL.h"
 
 #include "src/state.h"
-#include "src/ecs/graphics_component.h"
 #include "src/fsm/menu_state.h"
 #include "src/gfx/renderer.h"
 
@@ -29,7 +28,7 @@ Window::~Window() {
 void Window::Loop() {
   assert(kState.window.IsInstantiated());
   assert(kState.renderer.IsInstantiated());
-  assert(GraphicsComponent::LoadTextures());
+  assert(LoadMedia());
   kState.game_state = new MenuState();
 
   SDL_Event e;
@@ -44,7 +43,7 @@ void Window::Loop() {
     }
 
     kState.renderer.Clear();
-    kState.game_state->Update();
+    kState.game_state->Render();
     kState.renderer.Present();
 
     CalculateFPS();
@@ -67,6 +66,10 @@ bool Window::Create() {
   }
 
   return true;
+}
+
+bool Window::LoadMedia() {
+  return MenuState::Load();
 }
 
 void Window::Destroy() {

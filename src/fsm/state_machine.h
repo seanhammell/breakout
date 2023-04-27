@@ -9,6 +9,7 @@ class StateMachine {
 
   virtual StateMachine *HandleInput(SDL_Event) = 0;
   virtual void Update() = 0;
+  virtual void Render() = 0;
 };
 
 #endif  // SRC_FSM_STATE_MACHINE_H_

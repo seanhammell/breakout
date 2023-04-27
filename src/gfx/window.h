@@ -30,6 +30,9 @@ class Window {
   // Creates the SDL_Window and returns whether the creation was successful.
   bool Create();
 
+  // Loads all media for the game and returns whether the load was successful.
+  bool LoadMedia();
+
   // Destroys the SDL_Window.
   void Destroy();
 
