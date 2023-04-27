@@ -8,7 +8,11 @@
 class Texture {
  public:
   Texture() {}
-  ~Texture() { Free(); }
+  ~Texture();
+
+  // Getters.
+  int width() const;
+  int height() const;
 
   // Loads a texture from the given path.
   bool LoadFromFile(const char *path);

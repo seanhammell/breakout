@@ -7,11 +7,26 @@
 #include "src/graphic/ui_element.h"
 
 MenuState::MenuState() {
-  title_ = UIElement(&texture_, {0, 0, 142, 16}, 25, 40);
+  title_ = UIElement(&title_texture_, 0, 80 - title_texture_.height());
+  prompt_ = UIElement(&prompt_texture_, 0, 80 + prompt_texture_.height());
+  title_.CenterHorizontal();
+  prompt_.CenterHorizontal();
 }
 
 bool MenuState::Load() {
-  return texture_.LoadFromFile("./img/menu.png");
+  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) {
+    return false;
+  }
+
+  if (!title_texture_.LoadFromFile("./img/menu.png")) {
+    return false;
+  }
+
+  if (!prompt_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY")) {
+    return false;
+  }
+
+  return true;
 }
 
 StateMachine *MenuState::HandleInput(SDL_Event input) {
@@ -26,4 +41,5 @@ StateMachine *MenuState::HandleInput(SDL_Event input) {
 
 void MenuState::Render() {
   title_.Render();
+  prompt_.Render();
 }

@@ -8,8 +8,12 @@
 class UIElement {
  public:
   UIElement() {}
+  UIElement(Texture *texture, int x, int y);
   UIElement(Texture *texture, SDL_Rect clip, int x, int y);
   ~UIElement() {}
+
+  // Horizontally centers the element on the screen.
+  void CenterHorizontal();
 
   // Renders the element to the screen.
   void Render();

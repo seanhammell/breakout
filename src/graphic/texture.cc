@@ -6,6 +6,18 @@
 
 #include "src/game.h"
 
+Texture::~Texture() {
+  Free();
+}
+
+int Texture::width() const {
+  return width_;
+}
+
+int Texture::height() const {
+  return height_;
+}
+
 bool Texture::LoadFromFile(const char *path) {
   Free();
 

@@ -25,8 +25,11 @@ class MenuState : public StateMachine {
   void Render() override;
 
  private:
-  static inline Texture texture_{ };
+  static inline Font font_{ };
+  static inline Texture title_texture_{ };
+  static inline Texture prompt_texture_{ };
   UIElement title_;
+  UIElement prompt_;
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_
