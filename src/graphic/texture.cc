@@ -2,6 +2,7 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 
 #include "src/game.h"
 
@@ -26,6 +27,27 @@ bool Texture::LoadFromFile(const char *path) {
   width_ = sprite_sheet->w;
   height_ = sprite_sheet->h;
   SDL_FreeSurface(sprite_sheet);
+
+  return texture_ != NULL;
+}
+
+bool Texture::LoadFromText(const Font& font, const char *text) {
+  Free();
+
+  SDL_Surface *surface{ TTF_RenderText_Solid(font.font(), text, font.color()) };
+  if (surface == NULL) {
+    fprintf(stderr, "Error rendering text surface: %s\n", TTF_GetError());
+    return false;
+  }
+
+  texture_ = SDL_CreateTextureFromSurface(kGame.renderer.renderer(), surface);
+  if (texture_ == NULL) {
+    fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
+    return false;
+  }
+
+  width_ = surface->w;
+  height_ = surface->h;
 
   return texture_ != NULL;
 }
