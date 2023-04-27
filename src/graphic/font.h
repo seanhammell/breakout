@@ -13,6 +13,9 @@ class Font {
   TTF_Font *font() const;
   SDL_Color color() const;
 
+  // Loads a font from the given path.
+  bool LoadFromFile(const char *path, const int size);
+
  private:
   // Frees the resources associated with the font.
   void Free();

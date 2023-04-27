@@ -6,6 +6,8 @@
 #include <cstdint>
 
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 
 #include "src/game.h"
 #include "src/graphic/renderer.h"
@@ -65,6 +67,16 @@ bool Window::Create() {
     return false;
   }
 
+  if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+    fprintf(stderr, "Error initializing SDL_image: %s\n", IMG_GetError());
+    return false;
+  }
+
+  if (TTF_Init() != 0) {
+    fprintf(stderr, "Error initializing SDL_ttf: %s\n", TTF_GetError());
+    return false;
+  }
+
   window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED,
                              SDL_WINDOWPOS_CENTERED, kWindowWidth,
                              kWindowHeight, SDL_WINDOW_SHOWN);
@@ -82,6 +94,8 @@ bool Window::LoadMedia() {
 
 void Window::Destroy() {
   SDL_DestroyWindow(window_);
+  TTF_Quit();
+  IMG_Quit();
   SDL_Quit();
 
   window_ = NULL;
