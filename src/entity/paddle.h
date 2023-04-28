@@ -17,7 +17,6 @@ class Paddle {
 
   ~Paddle() = default;
 
-  // Setters.
   void set_velocity(int velocity);
 
   // Handles user input for the paddle.

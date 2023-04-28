@@ -13,7 +13,6 @@ class Renderer {
 
   ~Renderer();
 
-  // Getters.
   bool get_instantiated() const;
   SDL_Renderer *get_renderer() const;
 

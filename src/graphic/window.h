@@ -18,7 +18,6 @@ class Window {
 
   ~Window();
 
-  // Getters.
   bool get_instantiated() const;
   SDL_Window *get_window() const;
 

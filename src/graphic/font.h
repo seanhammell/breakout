@@ -10,7 +10,6 @@ class Font {
 
   ~Font();
 
-  // Getters.
   TTF_Font *get_font() const;
   SDL_Color get_color() const;
 

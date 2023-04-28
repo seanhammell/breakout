@@ -11,7 +11,6 @@ class Texture {
 
   ~Texture();
 
-  // Getters.
   int get_width() const;
   int get_height() const;
 
