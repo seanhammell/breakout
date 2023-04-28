@@ -8,6 +8,6 @@ GraphicsComponent::GraphicsComponent(Texture *texture, SDL_Rect clip)
     : texture_{ texture }, clip_{ clip } {}
 
 
-void GraphicsComponent::Update(int x, int y) {
+void GraphicsComponent::Render(int x, int y) {
   texture_->Render(x, y, &clip_);
 }

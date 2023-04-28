@@ -19,7 +19,12 @@ bool PlayState::Load() {
   return true;
 }
 
-void PlayState::Update() {
-  paddle_.Update();
+StateMachine *PlayState::Update(SDL_Event input) {
+  paddle_.Update(input);
+  return NULL;
+}
+
+void PlayState::Render() {
   score_display_.Render();
+  paddle_.Render();
 }

@@ -10,11 +10,11 @@ Texture::~Texture() {
   Free();
 }
 
-int Texture::width() const {
+int Texture::get_width() const {
   return width_;
 }
 
-int Texture::height() const {
+int Texture::get_height() const {
   return height_;
 }
 
@@ -27,7 +27,7 @@ bool Texture::LoadFromFile(const char *path) {
     return false;
   }
 
-  SDL_Texture *temp{ SDL_CreateTextureFromSurface(kGame.renderer.renderer(),
+  SDL_Texture *temp{ SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(),
                                                   sprite_sheet) };
   if (temp == NULL) {
     fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
@@ -46,13 +46,15 @@ bool Texture::LoadFromFile(const char *path) {
 bool Texture::LoadFromText(const Font& font, const char *text) {
   Free();
 
-  SDL_Surface *surface{ TTF_RenderText_Solid(font.font(), text, font.color()) };
+  SDL_Surface *surface{ TTF_RenderText_Solid(font.get_font(), text,
+                                             font.get_color()) };
   if (surface == NULL) {
     fprintf(stderr, "Error rendering text surface: %s\n", TTF_GetError());
     return false;
   }
 
-  texture_ = SDL_CreateTextureFromSurface(kGame.renderer.renderer(), surface);
+  texture_ = SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(),
+                                          surface);
   if (texture_ == NULL) {
     fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
     return false;
@@ -70,7 +72,7 @@ void Texture::Render(const int x, const int y, SDL_Rect *clip) {
     dest.h = clip->w;
     dest.h = clip->h;
   }
-  SDL_RenderCopy(kGame.renderer.renderer(), texture_, clip, &dest);
+  SDL_RenderCopy(kGame.renderer.get_renderer(), texture_, clip, &dest);
 }
 
 void Texture::Free() {

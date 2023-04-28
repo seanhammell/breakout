@@ -9,11 +9,11 @@ Font::~Font() {
   Free();
 }
 
-TTF_Font *Font::font() const {
+TTF_Font *Font::get_font() const {
   return font_;
 }
 
-SDL_Color Font::color() const {
+SDL_Color Font::get_color() const {
   return color_;
 }
 

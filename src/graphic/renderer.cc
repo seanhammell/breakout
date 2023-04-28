@@ -23,11 +23,11 @@ Renderer::~Renderer() {
   instantiated_ = false;
 }
 
-bool Renderer::instantiated() const {
+bool Renderer::get_instantiated() const {
   return instantiated_;
 }
 
-SDL_Renderer *Renderer::renderer() const {
+SDL_Renderer *Renderer::get_renderer() const {
   return renderer_;
 }
 
@@ -41,8 +41,8 @@ void Renderer::Present() {
 }
 
 bool Renderer::Create() {
-  assert(kGame.window.instantiated());
-  renderer_ = SDL_CreateRenderer(kGame.window.window(), -1,
+  assert(kGame.window.get_instantiated());
+  renderer_ = SDL_CreateRenderer(kGame.window.get_window(), -1,
                                  SDL_RENDERER_ACCELERATED);
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());

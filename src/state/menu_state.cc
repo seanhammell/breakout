@@ -9,8 +9,8 @@
 #include "src/state/play_state.h"
 
 MenuState::MenuState()
-    : title_{ &title_texture_, 0, 80 - title_texture_.height() },
-      prompt_{ &prompt_texture_, 0, 80 + prompt_texture_.height() } {
+    : title_{ &title_texture_, 0, 80 - title_texture_.get_height() },
+      prompt_{ &prompt_texture_, 0, 80 + prompt_texture_.get_height() } {
   title_.AlignCenterHorizontal();
   prompt_.AlignCenterHorizontal();
 }
@@ -21,20 +21,19 @@ bool MenuState::Load() {
   if (!prompt_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY")) {
     return false;
   }
+
   return true;
 }
 
-StateMachine *MenuState::HandleInput(SDL_Event input) {
-  if (input.type == SDL_KEYDOWN) {
-    if (input.key.keysym.sym == SDLK_SPACE) {
-      return new PlayState();
-    }
+StateMachine *MenuState::Update(SDL_Event input) {
+  if (input.key.keysym.sym == SDLK_SPACE) {
+    return new PlayState();
   }
 
   return NULL;
 }
 
-void MenuState::Update() {
+void MenuState::Render() {
   title_.Render();
   prompt_.Render();
 }

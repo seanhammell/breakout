@@ -13,7 +13,7 @@ class GraphicsComponent {
   ~GraphicsComponent() = default;
 
   // Renders the GraphicsComponent at the specified coordinates.
-  void Update(int x, int y);
+  void Render(int x, int y);
 
  private:
   Texture *texture_{ NULL };

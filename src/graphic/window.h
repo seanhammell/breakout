@@ -19,8 +19,8 @@ class Window {
   ~Window();
 
   // Getters.
-  bool instantiated() const;
-  SDL_Window *window() const;
+  bool get_instantiated() const;
+  SDL_Window *get_window() const;
 
   // Controls the game loop.
   void Loop();

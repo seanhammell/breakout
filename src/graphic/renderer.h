@@ -14,8 +14,8 @@ class Renderer {
   ~Renderer();
 
   // Getters.
-  bool instantiated() const;
-  SDL_Renderer *renderer() const;
+  bool get_instantiated() const;
+  SDL_Renderer *get_renderer() const;
 
   // Clears the Renderer to prepare for a new frame.
   void Clear();

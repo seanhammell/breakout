@@ -12,8 +12,8 @@ class Texture {
   ~Texture();
 
   // Getters.
-  int width() const;
-  int height() const;
+  int get_width() const;
+  int get_height() const;
 
   // Loads the Texture from the file at the given path.
   bool LoadFromFile(const char *path);

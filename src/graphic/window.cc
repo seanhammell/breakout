@@ -28,17 +28,17 @@ Window::~Window() {
   instantiated_ = false;
 }
 
-bool Window::instantiated() const {
+bool Window::get_instantiated() const {
   return instantiated_;
 }
 
-SDL_Window *Window::window() const {
+SDL_Window *Window::get_window() const {
   return window_;
 }
 
 void Window::Loop() {
-  assert(kGame.window.instantiated());
-  assert(kGame.renderer.instantiated());
+  assert(kGame.window.get_instantiated());
+  assert(kGame.renderer.get_instantiated());
   assert(LoadMedia());
   kGame.game_state = new MenuState();
 
@@ -52,15 +52,17 @@ void Window::Loop() {
         return;
       }
 
-      StateMachine *new_state = kGame.game_state->HandleInput(e);
-      if (new_state != NULL) {
-        delete kGame.game_state;
-        kGame.game_state = new_state;
+      if (e.type == SDL_KEYDOWN) {
+        StateMachine *new_state = kGame.game_state->Update(e);
+        if (new_state != NULL) {
+          delete kGame.game_state;
+          kGame.game_state = new_state;
+        }
       }
     }
 
     kGame.renderer.Clear();
-    kGame.game_state->Update();
+    kGame.game_state->Render();
     kGame.renderer.Present();
 
     CalculateFPS();
