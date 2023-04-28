@@ -20,11 +20,11 @@ class Paddle {
   // Setters.
   void set_velocity(int velocity);
 
-  // Updates the Paddle with one frame of behavior.
-  void Update(SDL_Event input);
+  // Handles user input for the paddle.
+  void HandleInput(SDL_Event input);
 
-  // Renders the Paddle to the screen.
-  void Render();
+  // Updates the Paddle with one frame of behavior.
+  void Update();
 
  private:
   int x_{ 0 };

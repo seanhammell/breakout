@@ -7,7 +7,7 @@ class Paddle;
 
 class InputComponent {
  public:
-  const int kPaddleVelocity{ 10 };
+  const int kPaddleVelocity{ 4 };
 
   InputComponent() = default;
 

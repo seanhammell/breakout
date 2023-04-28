@@ -13,11 +13,11 @@ void Paddle::set_velocity(int velocity) {
   velocity_ = velocity;
 }
 
-void Paddle::Update(SDL_Event input) {
+void Paddle::HandleInput(SDL_Event input) {
   input_.Update(this, input);
-  x_ += velocity_;
 }
 
-void Paddle::Render() {
+void Paddle::Update() {
+  x_ += velocity_;
   graphics_.Render(x_, y_);
 }

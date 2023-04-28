@@ -18,11 +18,11 @@ class PlayState : public StateMachine {
   // Loads the Textures and Font needed by PlayState.
   static bool Load();
 
-  // Responds to user input and updates the entities and score.
-  StateMachine *Update(SDL_Event input) override;
+  // Responds to user input during the game.
+  StateMachine *HandleInput(SDL_Event input) override;
 
-  // Renders the entities and score.
-  void Render() override;
+  // Updates the entities and score.
+  void Update() override;
 
  private:
   static inline Font font_{ };

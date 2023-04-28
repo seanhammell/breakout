@@ -17,11 +17,11 @@ class MenuState : public StateMachine {
   // Loads the textures and font needed by MenuState.
   static bool Load();
 
-  // Responds to user input.
-  StateMachine *Update(SDL_Event input) override;
+  // Responds to user input at the main menu.
+  StateMachine *HandleInput(SDL_Event input) override;
 
-  // Renders the title and prompt to the screen.
-  void Render() override;
+  // Renders the title and prompt.
+  void Update() override;
 
  private:
   static inline Font font_{ };

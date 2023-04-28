@@ -52,17 +52,15 @@ void Window::Loop() {
         return;
       }
 
-      if (e.type == SDL_KEYDOWN) {
-        StateMachine *new_state = kGame.game_state->Update(e);
-        if (new_state != NULL) {
-          delete kGame.game_state;
-          kGame.game_state = new_state;
-        }
+      StateMachine *new_state = kGame.game_state->HandleInput(e);
+      if (new_state != NULL) {
+        delete kGame.game_state;
+        kGame.game_state = new_state;
       }
     }
 
     kGame.renderer.Clear();
-    kGame.game_state->Render();
+    kGame.game_state->Update();
     kGame.renderer.Present();
 
     CalculateFPS();
