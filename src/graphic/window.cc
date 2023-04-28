@@ -60,7 +60,7 @@ void Window::Loop() {
     }
 
     kGame.renderer.Clear();
-    kGame.game_state->Render();
+    kGame.game_state->Update();
     kGame.renderer.Present();
 
     CalculateFPS();

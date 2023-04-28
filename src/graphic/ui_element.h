@@ -21,9 +21,9 @@ class UIElement {
 
  private:
   Texture *texture_{ NULL };
-  SDL_Rect clip_{ };
   int x_{ 0 };
   int y_{ 0 };
+  SDL_Rect clip_{ };
 };
 
 #endif  // SRC_GRAPHIC_UI_ELEMENT_H_

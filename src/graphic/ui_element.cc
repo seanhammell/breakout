@@ -5,7 +5,7 @@
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
-UIElement::UIElement(Texture *texture, int x, int y, SDL_Rect clip = { })
+UIElement::UIElement(Texture *texture, int x, int y, SDL_Rect clip)
     : texture_{ texture }, x_{ x }, y_{ y }, clip_{ clip } {
   // If the width of the clip is 0, assume the element is the entire texture.
   if (clip.w == 0) {

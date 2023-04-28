@@ -10,7 +10,7 @@
 class Paddle {
  public:
   Paddle() = default;
-  Paddle(Texture *texture, SDL_Rect clip = {0, 8, 64, 8});
+  Paddle(Texture *texture, SDL_Rect clip = {16, 6, 32, 4});
 
   ~Paddle() = default;
 
