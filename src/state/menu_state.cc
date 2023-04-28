@@ -8,9 +8,9 @@
 #include "src/state/state_machine.h"
 #include "src/state/play_state.h"
 
-MenuState::MenuState() {
-  title_ = UIElement(&title_texture_, 0, 80 - title_texture_.height());
-  prompt_ = UIElement(&prompt_texture_, 0, 80 + prompt_texture_.height());
+MenuState::MenuState()
+    : title_{ &title_texture_, 0, 80 - title_texture_.height() },
+      prompt_{ &prompt_texture_, 0, 80 + prompt_texture_.height() } {
   title_.AlignCenterHorizontal();
   prompt_.AlignCenterHorizontal();
 }

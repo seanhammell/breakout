@@ -29,8 +29,8 @@ class MenuState : public StateMachine {
   static inline Font font_{ };
   static inline Texture title_texture_{ };
   static inline Texture prompt_texture_{ };
-  UIElement title_;
-  UIElement prompt_;
+  UIElement title_{ };
+  UIElement prompt_{ };
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_

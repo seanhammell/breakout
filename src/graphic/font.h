@@ -6,7 +6,7 @@
 
 class Font {
  public:
-  Font() {}
+  Font() = default;
   ~Font();
 
   // Getters.

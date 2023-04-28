@@ -8,8 +8,7 @@
 #include "src/graphic/ui_element.h"
 
 PlayState::PlayState()
-    : score_display_{ UIElement(&score_texture_, 0, 5) },
-      paddle_{ Paddle(&blocks_texture_, {0, 8, 64, 8}) } {
+    : score_display_{ &score_texture_, 0, 5 }, paddle_{ &blocks_texture_ } {
   score_display_.AlignRightHorizontal();
 }
 

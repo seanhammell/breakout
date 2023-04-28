@@ -7,7 +7,7 @@
 
 class Texture {
  public:
-  Texture() {}
+  Texture() = default;
   ~Texture();
 
   // Getters.

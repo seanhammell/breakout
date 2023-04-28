@@ -30,8 +30,8 @@ class PlayState : public StateMachine {
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };
-  UIElement score_display_;
-  Paddle paddle_;
+  UIElement score_display_{ };
+  Paddle paddle_{ };
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_

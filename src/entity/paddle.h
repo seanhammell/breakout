@@ -9,7 +9,8 @@
 
 class Paddle {
  public:
-  Paddle(Texture *texture, SDL_Rect clip);
+  Paddle() = default;
+  Paddle(Texture *texture, SDL_Rect clip = {0, 8, 64, 8});
   ~Paddle() {}
 
   // Updates the paddle with any changes since the last frame.
@@ -20,7 +21,7 @@ class Paddle {
   const int y_{ Renderer::kVirtualHeight - 20 };
   // InputComponent input_;
   // PhysicsComponent physics_;
-  GraphicsComponent graphics_;
+  GraphicsComponent graphics_{ };
 };
 
 #endif  // SRC_ENTITY_PADDLE_H_

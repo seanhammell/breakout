@@ -7,9 +7,8 @@
 
 class UIElement {
  public:
-  UIElement() {}
-  UIElement(Texture *texture, int x, int y);
-  UIElement(Texture *texture, SDL_Rect clip, int x, int y);
+  UIElement() = default;
+  UIElement(Texture *texture, int x, int y, SDL_Rect clip = { });
   ~UIElement() {}
 
   // Aligns the element horizontally.
@@ -21,7 +20,7 @@ class UIElement {
 
  private:
   Texture *texture_{ NULL };
-  SDL_Rect clip_;
+  SDL_Rect clip_{ };
   int x_{ 0 };
   int y_{ 0 };
 };

@@ -5,16 +5,14 @@
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
-UIElement::UIElement(Texture *texture, int x, int y)
-    : texture_{ texture }, x_{ x }, y_{ y } {
-  clip_.x = 0;
-  clip_.y = 0;
-  clip_.w = texture_->width();
-  clip_.h = texture_->height();
+UIElement::UIElement(Texture *texture, int x, int y, SDL_Rect clip = { })
+    : texture_{ texture }, x_{ x }, y_{ y }, clip_{ clip } {
+  // If the width of the clip is 0, assume the element is the entire texture.
+  if (clip.w == 0) {
+    clip_.w = texture->width();
+    clip_.h = texture_->height();
+  }
 }
-
-UIElement::UIElement(Texture *texture, SDL_Rect clip, int x, int y)
-    : texture_{ texture }, clip_{ clip }, x_{ x }, y_{ y } {}
 
 void UIElement::AlignCenterHorizontal() {
   x_ = (Renderer::kVirtualWidth / 2) - (texture_->width() / 2);

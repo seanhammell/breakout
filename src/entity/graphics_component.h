@@ -7,6 +7,7 @@
 
 class GraphicsComponent {
  public:
+  GraphicsComponent() = default;
   GraphicsComponent(Texture *texture_, SDL_Rect clip);
   ~GraphicsComponent() {}
 
