@@ -16,8 +16,12 @@ UIElement::UIElement(Texture *texture, int x, int y)
 UIElement::UIElement(Texture *texture, SDL_Rect clip, int x, int y)
     : texture_{ texture }, clip_{ clip }, x_{ x }, y_{ y } {}
 
-void UIElement::CenterHorizontal() {
+void UIElement::AlignCenterHorizontal() {
   x_ = (Renderer::kVirtualWidth / 2) - (texture_->width() / 2);
+}
+
+void UIElement::AlignRightHorizontal() {
+  x_ = Renderer::kVirtualWidth - texture_->width() - 5;
 }
 
 void UIElement::Render() {

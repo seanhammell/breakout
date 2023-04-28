@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
 #include "src/state/state_machine.h"

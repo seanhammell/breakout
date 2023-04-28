@@ -12,6 +12,7 @@
 #include "src/game.h"
 #include "src/graphic/renderer.h"
 #include "src/state/menu_state.h"
+#include "src/state/play_state.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -49,6 +50,12 @@ void Window::Loop() {
       if (e.type == SDL_QUIT) {
         delete kGame.game_state;
         return;
+      }
+
+      StateMachine *new_state = kGame.game_state->HandleInput(e);
+      if (new_state != NULL) {
+        delete kGame.game_state;
+        kGame.game_state = new_state;
       }
     }
 
@@ -89,7 +96,9 @@ bool Window::Create() {
 }
 
 bool Window::LoadMedia() {
-  return MenuState::Load();
+  if (!MenuState::Load()) { return false; }
+  if (!PlayState::Load()) { return false; }
+  return true;
 }
 
 void Window::Destroy() {

@@ -2,15 +2,17 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/state/state_machine.h"
+#include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
+#include "src/state/state_machine.h"
+#include "src/state/play_state.h"
 
 MenuState::MenuState() {
   title_ = UIElement(&title_texture_, 0, 80 - title_texture_.height());
   prompt_ = UIElement(&prompt_texture_, 0, 80 + prompt_texture_.height());
-  title_.CenterHorizontal();
-  prompt_.CenterHorizontal();
+  title_.AlignCenterHorizontal();
+  prompt_.AlignCenterHorizontal();
 }
 
 bool MenuState::Load() {
@@ -32,7 +34,7 @@ bool MenuState::Load() {
 StateMachine *MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN) {
     if (input.key.keysym.sym == SDLK_SPACE) {
-      return new MenuState();
+      return new PlayState();
     }
   }
 

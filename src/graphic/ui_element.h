@@ -12,8 +12,9 @@ class UIElement {
   UIElement(Texture *texture, SDL_Rect clip, int x, int y);
   ~UIElement() {}
 
-  // Horizontally centers the element on the screen.
-  void CenterHorizontal();
+  // Aligns the element horizontally.
+  void AlignCenterHorizontal();
+  void AlignRightHorizontal();
 
   // Renders the element to the screen.
   void Render();
