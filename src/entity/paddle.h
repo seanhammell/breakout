@@ -11,7 +11,8 @@ class Paddle {
  public:
   Paddle() = default;
   Paddle(Texture *texture, SDL_Rect clip = {0, 8, 64, 8});
-  ~Paddle() {}
+
+  ~Paddle() = default;
 
   // Updates the paddle with any changes since the last frame.
   void Update();

@@ -11,7 +11,8 @@
 class MenuState : public StateMachine {
  public:
   MenuState();
-  ~MenuState() {}
+
+  ~MenuState() = default;
 
   // Loads all resources needed for the menu.
   static bool Load();

@@ -7,6 +7,7 @@
 class Font {
  public:
   Font() = default;
+
   ~Font();
 
   // Getters.

@@ -5,7 +5,7 @@
 
 class StateMachine {
  public:
-  virtual ~StateMachine() {}
+  virtual ~StateMachine() = default;
 
   virtual StateMachine *HandleInput(SDL_Event) = 0;
   virtual void Update() = 0;

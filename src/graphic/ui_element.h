@@ -9,7 +9,8 @@ class UIElement {
  public:
   UIElement() = default;
   UIElement(Texture *texture, int x, int y, SDL_Rect clip = { });
-  ~UIElement() {}
+
+  ~UIElement() = default;
 
   // Aligns the element horizontally.
   void AlignCenterHorizontal();

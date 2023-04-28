@@ -12,7 +12,8 @@
 class PlayState : public StateMachine {
  public:
   PlayState();
-  ~PlayState() {}
+
+  ~PlayState() = default;
 
   // Loads all resources nedded for gameplay.
   static bool Load();

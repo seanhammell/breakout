@@ -8,6 +8,7 @@
 class Texture {
  public:
   Texture() = default;
+
   ~Texture();
 
   // Getters.

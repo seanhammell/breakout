@@ -10,6 +10,7 @@ class Renderer {
   static const int kVirtualHeight{ 160 };
 
   Renderer();
+
   ~Renderer();
 
   // Getters.

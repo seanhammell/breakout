@@ -15,6 +15,7 @@ class Window {
   static const int kTicksPerFrame{ 16 };
 
   Window();
+
   ~Window();
 
   // Getters.
