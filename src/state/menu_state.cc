@@ -16,18 +16,11 @@ MenuState::MenuState() {
 }
 
 bool MenuState::Load() {
-  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) {
-    return false;
-  }
-
-  if (!title_texture_.LoadFromFile("./img/menu.png")) {
-    return false;
-  }
-
+  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
+  if (!title_texture_.LoadFromFile("./img/menu.png")) { return false; }
   if (!prompt_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY")) {
     return false;
   }
-
   return true;
 }
 

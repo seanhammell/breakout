@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
@@ -28,7 +29,9 @@ class PlayState : public StateMachine {
  private:
   static inline Font font_{ };
   static inline Texture score_texture_{ };
+  static inline Texture blocks_texture_{ };
   UIElement score_display_;
+  Paddle paddle_;
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_
