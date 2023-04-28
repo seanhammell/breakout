@@ -17,7 +17,7 @@ class Renderer {
   bool instantiated() const;
   SDL_Renderer *renderer() const;
 
-  // Clears the renderer to prepare for a new frame.
+  // Clears the Renderer to prepare for a new frame.
   void Clear();
 
   // Updates the screen with any rendering done since the previous call.

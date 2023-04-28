@@ -19,7 +19,7 @@ bool PlayState::Load() {
   return true;
 }
 
-void PlayState::Render() {
-  score_display_.Render();
+void PlayState::Update() {
   paddle_.Update();
+  score_display_.Render();
 }

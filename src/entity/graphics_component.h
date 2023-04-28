@@ -12,12 +12,12 @@ class GraphicsComponent {
 
   ~GraphicsComponent() = default;
 
-  // Renders the graphics at the specified coordinates.
+  // Renders the GraphicsComponent at the specified coordinates.
   void Update(int x, int y);
 
  private:
   Texture *texture_{ NULL };
-  SDL_Rect clip_;
+  SDL_Rect clip_{ };
 };
 
 #endif  // SRC_ENTITY_GRAPHICS_COMPONENT_H_

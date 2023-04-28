@@ -14,22 +14,20 @@ class MenuState : public StateMachine {
 
   ~MenuState() = default;
 
-  // Loads all resources needed for the menu.
+  // Loads the textures and font needed by MenuState.
   static bool Load();
 
-  // Handles user input at the menu.
+  // Responds to user input while in MenuState.
   StateMachine *HandleInput(SDL_Event input) override;
 
-  // Update the menu with any changes since the last frame.
-  void Update() override {}
-
-  // Render the menu to the screen.
-  void Render() override;
+  // Renders the title and prompt to the screen.
+  void Update() override;
 
  private:
   static inline Font font_{ };
   static inline Texture title_texture_{ };
   static inline Texture prompt_texture_{ };
+
   UIElement title_{ };
   UIElement prompt_{ };
 };

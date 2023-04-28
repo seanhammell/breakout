@@ -15,22 +15,20 @@ class PlayState : public StateMachine {
 
   ~PlayState() = default;
 
-  // Loads all resources nedded for gameplay.
+  // Loads the Textures and Font needed by PlayState.
   static bool Load();
 
-  // Handles user input while playing the game.
-  StateMachine *HandleInput(SDL_Event) { return NULL; }
+  // Responds to user input while in PlayState.
+  StateMachine *HandleInput(SDL_Event) override { return NULL; }
 
-  // Updates the score and game entities with any changes since the last frame.
-  void Update() {}
-
-  // Render the game to the screen.
-  void Render();
+  // Updates the entities and score.
+  void Update() override;
 
  private:
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };
+
   UIElement score_display_{ };
   Paddle paddle_{ };
 };

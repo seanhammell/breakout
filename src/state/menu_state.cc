@@ -34,7 +34,7 @@ StateMachine *MenuState::HandleInput(SDL_Event input) {
   return NULL;
 }
 
-void MenuState::Render() {
+void MenuState::Update() {
   title_.Render();
   prompt_.Render();
 }

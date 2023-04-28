@@ -12,11 +12,11 @@ class UIElement {
 
   ~UIElement() = default;
 
-  // Aligns the element horizontally.
+  // Aligns the UIElement horizontally.
   void AlignCenterHorizontal();
   void AlignRightHorizontal();
 
-  // Renders the element to the screen.
+  // Renders the UIElement to the screen.
   void Render();
 
  private:

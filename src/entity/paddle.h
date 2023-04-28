@@ -14,11 +14,11 @@ class Paddle {
 
   ~Paddle() = default;
 
-  // Updates the paddle with any changes since the last frame.
+  // Updates the Paddle with one frame of behavior.
   void Update();
 
  private:
-  int x_{ };
+  int x_{ 0 };
   const int y_{ Renderer::kVirtualHeight - 20 };
   // InputComponent input_;
   // PhysicsComponent physics_;
