@@ -8,15 +8,15 @@ void InputComponent::Update(Paddle *paddle, SDL_Event input) {
   if (input.type == SDL_KEYDOWN) {
     switch (input.key.keysym.sym) {
       case SDLK_LEFT:
-        paddle->set_velocity(-kPaddleVelocity);
+        paddle->velocity_ = -kPaddleVelocity;
         break;
       case SDLK_RIGHT:
-        paddle->set_velocity(kPaddleVelocity);
+        paddle->velocity_ = kPaddleVelocity;
         break;
       default:
         break;
     }
   } else if (input.type == SDL_KEYUP) {
-    paddle->set_velocity(0);
+    paddle->velocity_ = 0;
   }
 }

@@ -11,17 +11,13 @@
 
 class Paddle {
  public:
+  friend class InputComponent;
+  friend class PhysicsComponent;
+
   Paddle() = default;
   Paddle(Texture *texture, SDL_Rect clip = {16, 6, 32, 4});
 
   ~Paddle() = default;
-
-  int get_x();
-  int get_width();
-  int get_velocity();
-
-  void set_x(int x);
-  void set_velocity(int velocity);
 
   // Handles user input for the paddle.
   void HandleInput(SDL_Event input);

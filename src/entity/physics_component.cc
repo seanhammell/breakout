@@ -4,13 +4,13 @@
 #include "src/graphic/renderer.h"
 
 void PhysicsComponent::Update(Paddle *paddle) {
-  paddle->set_x(paddle->get_x() + paddle->get_velocity());
+  paddle->x_ += paddle->velocity_;
   if (OutsideScreenBounds(paddle)) {
-    paddle->set_x(paddle->get_x() - paddle->get_velocity());
+    paddle->x_ -= paddle->velocity_;
   }
 }
 
 bool PhysicsComponent::OutsideScreenBounds(Paddle *paddle) {
-  return (paddle->get_x() < 0 ||
-          paddle->get_x() + paddle->get_width() > Renderer::kVirtualWidth);
+  return (paddle->x_ < 0 ||
+          paddle->x_ + paddle->width_ > Renderer::kVirtualWidth);
 }

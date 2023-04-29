@@ -12,26 +12,6 @@ Paddle::Paddle(Texture *texture, SDL_Rect clip)
       input_{ InputComponent() }, physics_{ PhysicsComponent() },
       graphics_{ GraphicsComponent(texture, clip) } {}
 
-int Paddle::get_x() {
-  return x_;
-}
-
-int Paddle::get_width() {
-  return width_;
-}
-
-int Paddle::get_velocity() {
-  return velocity_;
-}
-
-void Paddle::set_x(int x) {
-  x_ = x;
-}
-
-void Paddle::set_velocity(int velocity) {
-  velocity_ = velocity;
-}
-
 void Paddle::HandleInput(SDL_Event input) {
   input_.Update(this, input);
 }
