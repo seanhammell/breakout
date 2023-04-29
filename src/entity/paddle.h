@@ -11,17 +11,13 @@
 
 class Paddle {
  public:
-  // The paddle is actually 32x4 but because the Renderer is scaled down by
-  // a factor of 4 from the actual window we set the width as 64x8.
-  static const int kWidth{ 64 };
-  static const int kHeight{ 8 };
-
   Paddle() = default;
-  Paddle(Texture *texture, SDL_Rect clip = {16, 6, kWidth / 2, kHeight / 2});
+  Paddle(Texture *texture, SDL_Rect clip = {16, 6, 32, 4});
 
   ~Paddle() = default;
 
   int get_x();
+  int get_width();
   int get_velocity();
 
   void set_x(int x);
@@ -36,6 +32,8 @@ class Paddle {
  private:
   int x_{ 0 };
   const int y_{ Renderer::kVirtualHeight - 20 };
+  int width_{ 0 };
+  int height_{ 0 };
   int velocity_{ 0 };
   InputComponent input_{ };
   PhysicsComponent physics_{ };

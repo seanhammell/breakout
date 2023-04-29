@@ -8,10 +8,16 @@
 #include "src/graphic/texture.h"
 
 Paddle::Paddle(Texture *texture, SDL_Rect clip)
-    : graphics_{ GraphicsComponent(texture, clip) } {}
+    : width_{ texture->get_width() }, height_{ texture->get_height() },
+      input_{ InputComponent() }, physics_{ PhysicsComponent() },
+      graphics_{ GraphicsComponent(texture, clip) } {}
 
 int Paddle::get_x() {
   return x_;
+}
+
+int Paddle::get_width() {
+  return width_;
 }
 
 int Paddle::get_velocity() {
