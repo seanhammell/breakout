@@ -8,7 +8,8 @@
 #include "src/graphic/ui_element.h"
 
 PlayState::PlayState()
-    : score_display_{ &score_texture_, 0, 5 }, paddle_{ &blocks_texture_ } {
+    : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
+      paddle_{ &blocks_texture_ } {
   score_display_.AlignRightHorizontal();
 }
 
@@ -26,5 +27,6 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 
 void PlayState::Update() {
   score_display_.Render();
+  ball_.Update();
   paddle_.Update();
 }

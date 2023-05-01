@@ -11,11 +11,15 @@
 
 class Paddle {
  public:
+  static const int kPaddleWidth{ 32 };
+  static const int kPaddleHeight{ 4 };
+
   friend class InputComponent;
   friend class PhysicsComponent;
 
   Paddle() = default;
-  Paddle(Texture *texture, SDL_Rect clip = {16, 6, 32, 4});
+  Paddle(Texture *texture, SDL_Rect clip = {16, 6, kPaddleWidth,
+                                            kPaddleHeight});
 
   ~Paddle() = default;
 
@@ -26,10 +30,8 @@ class Paddle {
   void Update();
 
  private:
-  int x_{ 0 };
+  int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
   const int y_{ Renderer::kVirtualHeight - 20 };
-  int width_{ 0 };
-  int height_{ 0 };
   int velocity_{ 0 };
   InputComponent input_{ };
   PhysicsComponent physics_{ };

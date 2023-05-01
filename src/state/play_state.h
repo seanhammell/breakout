@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/ball.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
@@ -30,6 +31,7 @@ class PlayState : public StateMachine {
   static inline Texture blocks_texture_{ };
 
   UIElement score_display_{ };
+  Ball ball_{ };
   Paddle paddle_{ };
 };
 

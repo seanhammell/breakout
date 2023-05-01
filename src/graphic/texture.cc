@@ -69,7 +69,7 @@ bool Texture::LoadFromText(const Font& font, const char *text) {
 void Texture::Render(const int x, const int y, SDL_Rect *clip) {
   SDL_Rect dest{ x, y, width_, height_};
   if (clip != NULL) {
-    dest.h = clip->w;
+    dest.w = clip->w;
     dest.h = clip->h;
   }
   SDL_RenderCopy(kGame.renderer.get_renderer(), texture_, clip, &dest);

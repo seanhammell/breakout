@@ -8,8 +8,7 @@
 #include "src/graphic/texture.h"
 
 Paddle::Paddle(Texture *texture, SDL_Rect clip)
-    : width_{ texture->get_width() }, height_{ texture->get_height() },
-      input_{ InputComponent() }, physics_{ PhysicsComponent() },
+    : input_{ InputComponent() }, physics_{ PhysicsComponent() },
       graphics_{ GraphicsComponent(texture, clip) } {}
 
 void Paddle::HandleInput(SDL_Event input) {

@@ -12,5 +12,5 @@ void PhysicsComponent::Update(Paddle *paddle) {
 
 bool PhysicsComponent::OutsideScreenBounds(Paddle *paddle) {
   return (paddle->x_ < 0 ||
-          paddle->x_ + paddle->width_ > Renderer::kVirtualWidth);
+          paddle->x_ + Paddle::kPaddleWidth > Renderer::kVirtualWidth);
 }
