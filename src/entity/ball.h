@@ -3,8 +3,8 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/entity/graphics_component.h"
-#include "src/entity/physics_component.h"
+#include "src/entity/component/graphics.h"
+#include "src/entity/component/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 

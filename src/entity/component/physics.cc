@@ -1,4 +1,4 @@
-#include "src/entity/physics_component.h"
+#include "src/entity/component/physics.h"
 
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"

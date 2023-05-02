@@ -1,5 +1,5 @@
-#ifndef SRC_ENTITY_GRAPHICS_COMPONENT_H_
-#define SRC_ENTITY_GRAPHICS_COMPONENT_H_
+#ifndef SRC_ENTITY_COMPONENT_GRAPHICS_H_
+#define SRC_ENTITY_COMPONENT_GRAPHICS_H_
 
 #include "SDL2/SDL.h"
 
@@ -20,4 +20,4 @@ class GraphicsComponent {
   SDL_Rect clip_{ };
 };
 
-#endif  // SRC_ENTITY_GRAPHICS_COMPONENT_H_
+#endif  // SRC_ENTITY_COMPONENT_GRAPHICS_H_

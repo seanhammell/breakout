@@ -1,5 +1,5 @@
-#ifndef SRC_ENTITY_INPUT_COMPONENT_H_
-#define SRC_ENTITY_INPUT_COMPONENT_H_
+#ifndef SRC_ENTITY_COMPONENT_INPUT_H_
+#define SRC_ENTITY_COMPONENT_INPUT_H_
 
 #include "SDL2/SDL.h"
 
@@ -17,4 +17,4 @@ class InputComponent {
   void Update(Paddle *paddle, SDL_Event input);
 };
 
-#endif  // SRC_ENTITY_INPUT_COMPONENT_H_
+#endif  // SRC_ENTITY_COMPONENT_INPUT_H_

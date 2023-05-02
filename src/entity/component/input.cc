@@ -1,4 +1,4 @@
-#include "src/entity/input_component.h"
+#include "src/entity/component/input.h"
 
 #include "SDL2/SDL.h"
 

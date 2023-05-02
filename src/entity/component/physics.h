@@ -1,5 +1,5 @@
-#ifndef SRC_ENTITY_PHYSICS_COMPONENT_H_
-#define SRC_ENTITY_PHYSICS_COMPONENT_H_
+#ifndef SRC_ENTITY_COMPONENT_PHYSICS_H_
+#define SRC_ENTITY_COMPONENT_PHYSICS_H_
 
 class Ball;
 class Paddle;
@@ -17,4 +17,4 @@ class PhysicsComponent {
   bool OutsideScreenBounds(Paddle *paddle);
 };
 
-#endif  // SRC_ENTITY_PHYSICS_COMPONENT_H_
+#endif  // SRC_ENTITY_COMPONENT_PHYSICS_H_

@@ -1,4 +1,4 @@
-#include "src/entity/graphics_component.h"
+#include "src/entity/component/graphics.h"
 
 #include "SDL2/SDL.h"
 
