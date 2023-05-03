@@ -44,8 +44,6 @@ void Window::Loop() {
 
   SDL_Event e;
   while (true) {
-    ticks_ = SDL_GetTicks64();
-
     while (SDL_PollEvent(&e)) {
       if (e.type == SDL_QUIT) {
         delete kGame.game_state;
@@ -64,9 +62,14 @@ void Window::Loop() {
     kGame.renderer.Clear();
     kGame.game_state->Render();
     kGame.renderer.Present();
+    ++fps_;
 
-    CalculateFPS();
-    SynchFPS();
+    uint64_t now{ SDL_GetTicks64() };
+    if (now - last_second_ > 1000ull) {
+      SDL_Log("FPS: %d\n", fps_);
+      fps_ = 0;
+      last_second_ = now;
+    }
   }
 }
 
@@ -110,22 +113,4 @@ void Window::Destroy() {
   SDL_Quit();
 
   window_ = NULL;
-}
-
-void Window::CalculateFPS() {
-  const uint64_t now{ SDL_GetTicks64() };
-  if (now - last_second_ > 1000) {
-    SDL_Log("FPS: %llu\n", fps_);
-    fps_ = 0;
-    last_second_ = now;
-  }
-
-  ++fps_;
-}
-
-void Window::SynchFPS() const {
-  const uint64_t remainder{ SDL_GetTicks64() - ticks_ };
-  if (remainder < kTicksPerFrame) {
-    SDL_Delay(kTicksPerFrame - remainder);
-  }
 }

@@ -43,7 +43,8 @@ void Renderer::Present() {
 bool Renderer::Create() {
   assert(kGame.window.get_instantiated());
   renderer_ = SDL_CreateRenderer(kGame.window.get_window(), -1,
-                                 SDL_RENDERER_ACCELERATED);
+                                 SDL_RENDERER_ACCELERATED |
+                                 SDL_RENDERER_PRESENTVSYNC);
   if (renderer_ == NULL) {
     fprintf(stderr, "Error creating renderer: %s\n", SDL_GetError());
     return false;

@@ -9,9 +9,9 @@
 class Paddle {
  public:
   static const int kPaddleY{ Renderer::kVirtualHeight - 20 };
-  static const int kPaddleWidth{ 16 };
+  static const int kPaddleWidth{ 24 };
   static const int kPaddleHeight{ 2 };
-  static const int kPaddleVelocity{ 4 };
+  static const int kPaddleVelocity{ 2 };
 
   Paddle() = default;
   Paddle(Texture *texture, SDL_Rect clip = {0, 3, kPaddleWidth,
@@ -19,7 +19,7 @@ class Paddle {
 
   ~Paddle() = default;
 
-  int get_x() { return x_; }
+  int get_x() const { return x_; }
 
   // Handles user input for the paddle.
   void HandleInput(SDL_Event input);

@@ -12,13 +12,13 @@ class Ball {
   static const int kBallHeight{ 2 };
 
   Ball() = default;
-  Ball(Texture *texture, SDL_Rect clip = {16, 3, kBallWidth, kBallHeight});
+  Ball(Texture *texture, SDL_Rect clip = {24, 3, kBallWidth, kBallHeight});
 
   ~Ball() = default;
 
-  int get_x() { return x_; }
-  int get_y() { return y_; }
-  int get_y_velocity() { return y_velocity_; }
+  int get_x() const { return x_; }
+  int get_y() const { return y_; }
+  int get_y_velocity() const { return y_velocity_; }
 
   void set_x_velocity(int velocity) { x_velocity_ = velocity; }
   void set_y_velocity(int velocity) { y_velocity_ = velocity; }

@@ -11,9 +11,6 @@ class Window {
   static const int kWindowWidth{ 768 };
   static const int kWindowHeight{ 640 };
 
-  // Number of milliseconds per frame.
-  static const int kTicksPerFrame{ 16 };
-
   Window();
 
   ~Window();
@@ -34,17 +31,10 @@ class Window {
   // Destroys the SDL_Window.
   void Destroy();
 
-  // Calculates and logs the fps each second.
-  void CalculateFPS();
-
-  // Delays the game loop to match the specified kTicksPerFrame.
-  void SynchFPS() const;
-
   bool instantiated_{ false };
   SDL_Window *window_{ NULL };
-  uint64_t ticks_{ 0 };
-  uint64_t fps_{ 0 };
-  uint64_t last_second_{ 0 };
+  int fps_{ 0 };
+  uint64_t last_second_{ SDL_GetTicks64() };
 };
 
 #endif  // SRC_GRAPHIC_WINDOW_H_
