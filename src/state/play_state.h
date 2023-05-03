@@ -31,12 +31,13 @@ class PlayState : public StateMachine {
   // Renders the game objects and score to the screen.
   void Render() override;
 
-  // Handles collisions for the game objects in PlayState.
-  void ResolveCollisions();
-
  private:
   // Loads the starting Bricks for a given level.
   void LoadLevel();
+
+  // Handles collisions between game objects.
+  void BallPaddleCollision();
+  void BallBrickCollision();
 
   static inline Font font_{ };
   static inline Texture score_texture_{ };

@@ -32,7 +32,8 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 void PlayState::Update() {
   ball_.Update();
   paddle_.Update();
-  ResolveCollisions();
+  BallPaddleCollision();
+  BallBrickCollision();
 }
 
 void PlayState::Render() {
@@ -44,7 +45,17 @@ void PlayState::Render() {
   }
 }
 
-void PlayState::ResolveCollisions() {
+void PlayState::LoadLevel() {
+  for (int row{ 0 }; row < 8; ++row) {
+    int y{ row * 4 + 20 };
+    auto type{ static_cast<Brick::BrickType>(Brick::kRed - row / 2) };
+    for (int col{ 0 }; col < 24; ++col) {
+      bricks_.push_back(Brick(col * 8 + 1, y, type, &blocks_texture_));
+    }
+  }
+}
+
+void PlayState::BallPaddleCollision() {
   int ball_x{ ball_.get_x() };
   int ball_y{ ball_.get_y() };
   int paddle_x{ paddle_.get_x() };
@@ -63,12 +74,24 @@ void PlayState::ResolveCollisions() {
   ball_.set_y_velocity(-ball_.get_y_velocity());
 }
 
-void PlayState::LoadLevel() {
-  for (int row{ 0 }; row < 8; ++row) {
-    int y{ row * 4 + 20 };
-    auto type{ static_cast<Brick::BrickType>(Brick::kRed - row / 2) };
-    for (int col{ 0 }; col < 24; ++col) {
-      bricks_.push_back(Brick(col * 8 + 1, y, type, &blocks_texture_));
+void PlayState::BallBrickCollision() {
+  int ball_x{ ball_.get_x() };
+  int ball_y{ ball_.get_y() };
+
+  for (size_t i{ 0 }; i < bricks_.size(); ++i) {
+    int brick_x{ bricks_[i].get_x() };
+    int brick_y{ bricks_[i].get_y() };
+
+    if (ball_x + Ball::kBallWidth < brick_x ||
+        ball_x > brick_x + Brick::kBrickWidth ||
+        ball_y + Ball::kBallHeight < brick_y ||
+        ball_y > brick_y + Brick::kBrickHeight) {
+      continue;
     }
+
+    bricks_.erase(bricks_.begin() + i);
+
+    ball_.set_x_velocity(-ball_.get_x_velocity());
+    ball_.set_y_velocity(-ball_.get_y_velocity());
   }
 }

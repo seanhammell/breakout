@@ -20,6 +20,7 @@ class Ball {
 
   int get_x() const { return x_; }
   int get_y() const { return y_; }
+  int get_x_velocity() const { return x_velocity_; }
   int get_y_velocity() const { return y_velocity_; }
 
   void set_x_velocity(int velocity) { x_velocity_ = velocity; }

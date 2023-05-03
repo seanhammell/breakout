@@ -22,6 +22,9 @@ class Brick {
 
   ~Brick() = default;
 
+  int get_x() const { return x_; }
+  int get_y() const { return y_; }
+
   // Renders the Brick to the screen.
   void Render();
 
