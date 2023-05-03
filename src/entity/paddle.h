@@ -19,6 +19,8 @@ class Paddle {
 
   ~Paddle() = default;
 
+  int get_x() { return x_; }
+
   // Handles user input for the paddle.
   void HandleInput(SDL_Event input);
 

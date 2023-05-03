@@ -25,6 +25,9 @@ class PlayState : public StateMachine {
   // Updates the entities and score.
   void Update() override;
 
+  // Handles collisions for the game objects in PlayState.
+  void ResolveCollisions();
+
  private:
   static inline Font font_{ };
   static inline Texture score_texture_{ };

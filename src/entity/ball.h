@@ -16,14 +16,21 @@ class Ball {
 
   ~Ball() = default;
 
+  int get_x() { return x_; }
+  int get_y() { return y_; }
+  int get_y_velocity() { return y_velocity_; }
+
+  void set_x_velocity(int velocity) { x_velocity_ = velocity; }
+  void set_y_velocity(int velocity) { y_velocity_ = velocity; }
+
   // Updates the Ball with one frame of behavior.
   void Update();
 
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 24};
-  int x_velocity_{ 2 };
-  int y_velocity_{ 2 };
+  int x_velocity_{ 0 };
+  int y_velocity_{ 1 };
   bool is_live_{ true };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
