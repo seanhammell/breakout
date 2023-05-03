@@ -11,7 +11,6 @@ LDFLAGS := -lSDL2 -lSDL2_image -lSDL2_ttf
 SRC_DIR := ./src
 SRCS := $(wildcard $(SRC_DIR)/*.cc)
 SRCS += $(wildcard $(SRC_DIR)/**/*.cc)
-SRCS += $(wildcard $(SRC_DIR)/**/**/*.cc)
 
 # Specifies .o files in the ./build directory, maintaining the same file
 # structure as the ./src directory.

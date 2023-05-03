@@ -2,12 +2,11 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/entity/component/graphics.h"
 #include "src/graphic/texture.h"
 
 Ball::Ball(Texture *texture, SDL_Rect clip)
-    : graphics_{ GraphicsComponent(texture, clip) } {}
+    : texture_{ texture }, clip_{ clip } {}
 
 void Ball::Update() {
-  graphics_.Render(x_, y_);
+  texture_->Render(x_, y_, &clip_);
 }

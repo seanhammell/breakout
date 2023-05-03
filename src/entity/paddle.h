@@ -3,7 +3,6 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/entity/component/graphics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -12,8 +11,6 @@ class Paddle {
   static const int kPaddleWidth{ 32 };
   static const int kPaddleHeight{ 4 };
   static const int kPaddleVelocity{ 4 };
-
-  friend class PhysicsComponent;
 
   Paddle() = default;
   Paddle(Texture *texture, SDL_Rect clip = {16, 6, kPaddleWidth,
@@ -31,7 +28,8 @@ class Paddle {
   int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
   const int y_{ Renderer::kVirtualHeight - 20 };
   int velocity_{ 0 };
-  GraphicsComponent graphics_{ };
+  Texture *texture_{ NULL };
+  SDL_Rect clip_{ };
 };
 
 #endif  // SRC_ENTITY_PADDLE_H_

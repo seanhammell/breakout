@@ -3,7 +3,6 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/entity/component/graphics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -23,7 +22,8 @@ class Ball {
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 24};
-  GraphicsComponent graphics_{ };
+  Texture *texture_{ NULL };
+  SDL_Rect clip_{ };
 };
 
 #endif  // SRC_ENTITY_BALL_H_
