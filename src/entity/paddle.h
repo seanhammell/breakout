@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 
 #include "src/entity/component/graphics.h"
-#include "src/entity/component/input.h"
 #include "src/entity/component/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
@@ -13,8 +12,8 @@ class Paddle {
  public:
   static const int kPaddleWidth{ 32 };
   static const int kPaddleHeight{ 4 };
+  static const int kPaddleVelocity{ 4 };
 
-  friend class InputComponent;
   friend class PhysicsComponent;
 
   Paddle() = default;
@@ -33,7 +32,6 @@ class Paddle {
   int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
   const int y_{ Renderer::kVirtualHeight - 20 };
   int velocity_{ 0 };
-  InputComponent input_{ };
   PhysicsComponent physics_{ };
   GraphicsComponent graphics_{ };
 };
