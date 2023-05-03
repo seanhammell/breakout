@@ -26,3 +26,7 @@ void Ball::Update() {
 
   texture_->Render(x_, y_, &clip_);
 }
+
+void Ball::Render() {
+  texture_->Render(x_, y_, &clip_);
+}

@@ -20,8 +20,11 @@ class MenuState : public StateMachine {
   // Responds to user input at the main menu.
   StateMachine *HandleInput(SDL_Event input) override;
 
+  // There is nothing to update at the main menu.
+  void Update() override {}
+
   // Renders the title and prompt.
-  void Update() override;
+  void Render() override;
 
  private:
   static inline Font font_{ };

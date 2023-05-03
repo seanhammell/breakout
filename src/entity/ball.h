@@ -26,6 +26,9 @@ class Ball {
   // Updates the Ball with one frame of behavior.
   void Update();
 
+  // Renders the Ball to the screen.
+  void Render();
+
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 24};

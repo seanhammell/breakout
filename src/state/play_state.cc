@@ -26,10 +26,15 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 }
 
 void PlayState::Update() {
-  score_display_.Render();
   ball_.Update();
   paddle_.Update();
   ResolveCollisions();
+}
+
+void PlayState::Render() {
+  score_display_.Render();
+  ball_.Render();
+  paddle_.Render();
 }
 
 void PlayState::ResolveCollisions() {

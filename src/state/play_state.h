@@ -25,6 +25,9 @@ class PlayState : public StateMachine {
   // Updates the entities and score.
   void Update() override;
 
+  // Renders the game objects and score to the screen.
+  void Render() override;
+
   // Handles collisions for the game objects in PlayState.
   void ResolveCollisions();
 

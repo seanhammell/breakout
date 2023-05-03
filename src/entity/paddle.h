@@ -27,6 +27,9 @@ class Paddle {
   // Updates the Paddle with one frame of behavior.
   void Update();
 
+  // Renders the Paddle to the screen.
+  void Render();
+
  private:
   int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
   int velocity_{ 0 };

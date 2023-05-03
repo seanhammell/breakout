@@ -39,6 +39,8 @@ void Paddle::Update() {
   if (x_ < 0 || x_ + kPaddleWidth > Renderer::kVirtualWidth) {
     x_ -= velocity_;
   }
+}
 
+void Paddle::Render() {
   texture_->Render(x_, kPaddleY, &clip_);
 }
