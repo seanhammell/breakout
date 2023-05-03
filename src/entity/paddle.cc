@@ -40,5 +40,5 @@ void Paddle::Update() {
     x_ -= velocity_;
   }
 
-  texture_->Render(x_, y_, &clip_);
+  texture_->Render(x_, kPaddleY, &clip_);
 }
