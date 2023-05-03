@@ -8,11 +8,11 @@
 
 class Ball {
  public:
-  static const int kBallWidth{ 4 };
-  static const int kBallHeight{ 4 };
+  static const int kBallWidth{ 2 };
+  static const int kBallHeight{ 2 };
 
   Ball() = default;
-  Ball(Texture *texture, SDL_Rect clip = {48, 6, kBallWidth, kBallHeight});
+  Ball(Texture *texture, SDL_Rect clip = {16, 3, kBallWidth, kBallHeight});
 
   ~Ball() = default;
 
@@ -22,6 +22,9 @@ class Ball {
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 24};
+  int x_velocity_{ 2 };
+  int y_velocity_{ 2 };
+  bool is_live_{ true };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };

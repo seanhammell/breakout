@@ -9,12 +9,12 @@
 class Paddle {
  public:
   static const int kPaddleY{ Renderer::kVirtualHeight - 20 };
-  static const int kPaddleWidth{ 32 };
-  static const int kPaddleHeight{ 4 };
+  static const int kPaddleWidth{ 16 };
+  static const int kPaddleHeight{ 2 };
   static const int kPaddleVelocity{ 4 };
 
   Paddle() = default;
-  Paddle(Texture *texture, SDL_Rect clip = {16, 6, kPaddleWidth,
+  Paddle(Texture *texture, SDL_Rect clip = {0, 3, kPaddleWidth,
                                             kPaddleHeight});
 
   ~Paddle() = default;
