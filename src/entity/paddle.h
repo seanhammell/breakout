@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 
 #include "src/entity/component/graphics.h"
-#include "src/entity/component/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -32,7 +31,6 @@ class Paddle {
   int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
   const int y_{ Renderer::kVirtualHeight - 20 };
   int velocity_{ 0 };
-  PhysicsComponent physics_{ };
   GraphicsComponent graphics_{ };
 };
 

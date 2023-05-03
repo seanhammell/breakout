@@ -4,7 +4,6 @@
 #include "SDL2/SDL.h"
 
 #include "src/entity/component/graphics.h"
-#include "src/entity/component/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -24,7 +23,6 @@ class Ball {
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 24};
-  PhysicsComponent physics_{ };
   GraphicsComponent graphics_{ };
 };
 

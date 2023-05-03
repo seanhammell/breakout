@@ -3,12 +3,11 @@
 #include "SDL2/SDL.h"
 
 #include "src/entity/component/graphics.h"
-#include "src/entity/component/physics.h"
+#include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
 Paddle::Paddle(Texture *texture, SDL_Rect clip)
-    : physics_{ PhysicsComponent() },
-      graphics_{ GraphicsComponent(texture, clip) } {}
+    : graphics_{ GraphicsComponent(texture, clip) } {}
 
 void Paddle::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
@@ -37,6 +36,10 @@ void Paddle::HandleInput(SDL_Event input) {
 }
 
 void Paddle::Update() {
-  physics_.Update(this);
+  x_ += velocity_;
+  if (x_ < 0 || x_ + kPaddleWidth > Renderer::kVirtualWidth) {
+    x_ -= velocity_;
+  }
+
   graphics_.Render(x_, y_);
 }
