@@ -1,9 +1,12 @@
 #ifndef SRC_STATE_PLAY_STATE_H_
 #define SRC_STATE_PLAY_STATE_H_
 
+#include <vector>
+
 #include "SDL2/SDL.h"
 
 #include "src/entity/ball.h"
+#include "src/entity/brick.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
@@ -39,6 +42,7 @@ class PlayState : public StateMachine {
   UIElement score_display_{ };
   Ball ball_{ };
   Paddle paddle_{ };
+  std::vector<Brick> bricks_{ };
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_

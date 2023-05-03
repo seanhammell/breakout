@@ -2,6 +2,8 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/ball.h"
+#include "src/entity/brick.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
@@ -11,6 +13,13 @@ PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
       paddle_{ &blocks_texture_ } {
   score_display_.AlignRightHorizontal();
+  for (int i{ 0 }; i < 4; ++i) {
+    for (int j{ 1 }; j < 192; j += 8) {
+      bricks_.push_back(Brick(j, 24 + i * 4,
+                              static_cast<Brick::BrickType>(i),
+                              &blocks_texture_));
+    }
+  }
 }
 
 bool PlayState::Load() {
@@ -36,6 +45,9 @@ void PlayState::Render() {
   score_display_.Render();
   ball_.Render();
   paddle_.Render();
+  for (Brick brick : bricks_) {
+    brick.Render();
+  }
 }
 
 void PlayState::ResolveCollisions() {

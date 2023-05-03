@@ -37,7 +37,7 @@ class Ball {
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 23};
-  int x_velocity_{ (std::rand() % 8) - 4 };
+  int x_velocity_{ (std::rand() % 7) - 3 };
   int y_velocity_{ -1 };
   bool is_live_{ true };
   Texture *texture_{ NULL };

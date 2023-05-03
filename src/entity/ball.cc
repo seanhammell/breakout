@@ -36,7 +36,7 @@ void Ball::Update() {
     if (y_ > Renderer::kVirtualHeight) {
       x_ = (Renderer::kVirtualWidth - kBallWidth) / 2;
       y_ = Renderer::kVirtualHeight - 23;
-      x_velocity_ = (std::rand() % 8) - 4;
+      x_velocity_ = (std::rand() % 7) - 3;
       y_velocity_ = -1;
       is_live_ = false;
     }

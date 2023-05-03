@@ -7,8 +7,7 @@
 
 class Window {
  public:
-  // Window dimensions are based on the Atari 2600 (scaled up by a factor of 4).
-  static const int kWindowWidth{ 768 };
+  static const int kWindowWidth{ 772 };
   static const int kWindowHeight{ 640 };
 
   Window();
