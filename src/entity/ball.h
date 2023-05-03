@@ -31,9 +31,9 @@ class Ball {
 
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
-  int y_{ Renderer::kVirtualHeight - 24};
-  int x_velocity_{ 0 };
-  int y_velocity_{ 1 };
+  int y_{ Renderer::kVirtualHeight - 22};
+  int x_velocity_{ 1 };
+  int y_velocity_{ -1 };
   bool is_live_{ true };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };

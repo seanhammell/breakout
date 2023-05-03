@@ -18,9 +18,15 @@ void Ball::Update() {
       x_velocity_ = -x_velocity_;
     }
 
-    if (y_ < 0 || y_ + kBallHeight > Renderer::kVirtualHeight) {
+    if (y_ < 0) {
       y_ -= y_velocity_;
       y_velocity_ = -y_velocity_;
+    }
+
+    if (y_ > Renderer::kVirtualHeight) {
+      is_live_ = false;
+      x_ = (Renderer::kVirtualWidth - kBallWidth) / 2 ;
+      y_ = Renderer::kVirtualHeight - 22;
     }
   }
 
