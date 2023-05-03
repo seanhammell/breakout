@@ -21,6 +21,7 @@ bool PlayState::Load() {
 }
 
 StateMachine *PlayState::HandleInput(SDL_Event input) {
+  ball_.HandleInput(input);
   paddle_.HandleInput(input);
   return NULL;
 }

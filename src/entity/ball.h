@@ -1,6 +1,8 @@
 #ifndef SRC_ENTITY_BALL_H_
 #define SRC_ENTITY_BALL_H_
 
+#include <cstdlib>
+
 #include "SDL2/SDL.h"
 
 #include "src/graphic/renderer.h"
@@ -23,6 +25,9 @@ class Ball {
   void set_x_velocity(int velocity) { x_velocity_ = velocity; }
   void set_y_velocity(int velocity) { y_velocity_ = velocity; }
 
+  // Serves the Ball if it isn't live.
+  void HandleInput(SDL_Event input);
+
   // Updates the Ball with one frame of behavior.
   void Update();
 
@@ -31,8 +36,8 @@ class Ball {
 
  private:
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
-  int y_{ Renderer::kVirtualHeight - 22};
-  int x_velocity_{ 1 };
+  int y_{ Renderer::kVirtualHeight - 23};
+  int x_velocity_{ (std::rand() % 8) - 4 };
   int y_velocity_{ -1 };
   bool is_live_{ true };
   Texture *texture_{ NULL };

@@ -1,5 +1,7 @@
 #include "src/entity/ball.h"
 
+#include <cstdlib>
+
 #include "SDL2/SDL.h"
 
 #include "src/graphic/renderer.h"
@@ -7,6 +9,14 @@
 
 Ball::Ball(Texture *texture, SDL_Rect clip)
     : texture_{ texture }, clip_{ clip } {}
+
+void Ball::HandleInput(SDL_Event input) {
+  if (!is_live_ && input.type == SDL_KEYDOWN) {
+    if (input.key.keysym.sym == SDLK_SPACE) {
+      is_live_ = true;
+    }
+  }
+}
 
 void Ball::Update() {
   if (is_live_) {
@@ -24,13 +34,13 @@ void Ball::Update() {
     }
 
     if (y_ > Renderer::kVirtualHeight) {
+      x_ = (Renderer::kVirtualWidth - kBallWidth) / 2;
+      y_ = Renderer::kVirtualHeight - 23;
+      x_velocity_ = (std::rand() % 8) - 4;
+      y_velocity_ = -1;
       is_live_ = false;
-      x_ = (Renderer::kVirtualWidth - kBallWidth) / 2 ;
-      y_ = Renderer::kVirtualHeight - 22;
     }
   }
-
-  texture_->Render(x_, y_, &clip_);
 }
 
 void Ball::Render() {

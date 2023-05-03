@@ -21,7 +21,7 @@ class Paddle {
 
   int get_x() const { return x_; }
 
-  // Handles user input for the paddle.
+  // Handles user input for the Paddle.
   void HandleInput(SDL_Event input);
 
   // Updates the Paddle with one frame of behavior.
