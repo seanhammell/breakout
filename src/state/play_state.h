@@ -35,6 +35,9 @@ class PlayState : public StateMachine {
   void ResolveCollisions();
 
  private:
+  // Loads the starting Bricks for a given level.
+  void LoadLevel();
+
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };

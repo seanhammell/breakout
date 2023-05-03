@@ -13,13 +13,7 @@ PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
       paddle_{ &blocks_texture_ } {
   score_display_.AlignRightHorizontal();
-  for (int i{ 0 }; i < 4; ++i) {
-    for (int j{ 1 }; j < 192; j += 8) {
-      bricks_.push_back(Brick(j, 24 + i * 4,
-                              static_cast<Brick::BrickType>(i),
-                              &blocks_texture_));
-    }
-  }
+  LoadLevel();
 }
 
 bool PlayState::Load() {
@@ -67,4 +61,14 @@ void PlayState::ResolveCollisions() {
 
   ball_.set_x_velocity((ball_center - paddle_center) / 6);
   ball_.set_y_velocity(-ball_.get_y_velocity());
+}
+
+void PlayState::LoadLevel() {
+  for (int row{ 0 }; row < 8; ++row) {
+    int y{ row * 4 + 20 };
+    auto type{ static_cast<Brick::BrickType>(Brick::kRed - row / 2) };
+    for (int col{ 0 }; col < 24; ++col) {
+      bricks_.push_back(Brick(col * 8 + 1, y, type, &blocks_texture_));
+    }
+  }
 }
