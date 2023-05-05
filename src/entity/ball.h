@@ -2,9 +2,11 @@
 #define SRC_ENTITY_BALL_H_
 
 #include <cstdlib>
+#include <vector>
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/brick.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
@@ -31,7 +33,7 @@ class Ball {
   void HandleInput(SDL_Event input);
 
   // Updates the Ball with one frame of behavior.
-  void Update(const Paddle& paddle);
+  void Update(const Paddle& paddle, std::vector<Brick> *bricks);
 
   // Renders the Ball to the screen.
   void Render();
@@ -41,8 +43,9 @@ class Ball {
   void Move();
   void Unmove();
 
-  // Handles Ball/Paddle collisions.
+  // Handles collisions with the Paddle and Bricks.
   void PaddleCollision(const Paddle& paddle);
+  void BrickCollision(std::vector<Brick> *bricks);
 
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 23};

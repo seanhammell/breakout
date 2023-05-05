@@ -4,6 +4,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/brick.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
@@ -19,7 +20,7 @@ void Ball::HandleInput(SDL_Event input) {
   }
 }
 
-void Ball::Update(const Paddle& paddle) {
+void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
   if (is_live_) {
     Move();
 
@@ -42,6 +43,7 @@ void Ball::Update(const Paddle& paddle) {
     }
 
     PaddleCollision(paddle);
+    BrickCollision(bricks);
   }
 }
 
@@ -70,12 +72,31 @@ void Ball::PaddleCollision(const Paddle& paddle) {
   }
 
   Unmove();
-
   int ball_center{ x_ + (kBallWidth / 2) };
   int paddle_center{ paddle_x + (Paddle::kPaddleWidth / 2) };
 
-  x_velocity_ = (ball_center - paddle_center) / 6;
+  x_velocity_ = (ball_center - paddle_center) / 4;
   y_velocity_ *= -1;
-
   Move();
+}
+
+void Ball::BrickCollision(std::vector<Brick> *bricks) {
+  for (size_t i{ 0 }; i < bricks->size(); ++i) {
+    int brick_x{ (*bricks)[i].get_x() };
+    int brick_y{ (*bricks)[i].get_y() };
+
+    if (x_ + kBallWidth < brick_x ||
+        x_ > brick_x + Brick::kBrickWidth ||
+        y_ + kBallHeight < brick_y ||
+        y_ > brick_y + Brick::kBrickHeight) {
+      continue;
+    }
+
+    bricks->erase(bricks->begin() + i);
+
+    Unmove();
+    x_velocity_ *= -1;
+    y_velocity_ *= -1;
+    Move();
+  }
 }

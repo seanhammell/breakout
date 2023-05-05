@@ -35,10 +35,6 @@ class PlayState : public StateMachine {
   // Loads the starting Bricks for a given level.
   void LoadLevel();
 
-  // Handles collisions between game objects.
-  void BallPaddleCollision();
-  void BallBrickCollision();
-
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };
