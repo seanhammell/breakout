@@ -4,6 +4,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -18,20 +19,9 @@ void Ball::HandleInput(SDL_Event input) {
   }
 }
 
-void Ball::Update() {
+void Ball::Update(const Paddle& paddle) {
   if (is_live_) {
-    x_ += x_velocity_;
-    y_ += y_velocity_;
-
-    if (x_ < 0 || x_ + kBallWidth > Renderer::kVirtualWidth) {
-      x_ -= x_velocity_;
-      x_velocity_ = -x_velocity_;
-    }
-
-    if (y_ < 0) {
-      y_ -= y_velocity_;
-      y_velocity_ = -y_velocity_;
-    }
+    Move();
 
     if (y_ > Renderer::kVirtualHeight) {
       x_ = (Renderer::kVirtualWidth - kBallWidth) / 2;
@@ -40,9 +30,52 @@ void Ball::Update() {
       y_velocity_ = -1;
       is_live_ = false;
     }
+
+    if (x_ < 0 || x_ + kBallWidth > Renderer::kVirtualWidth) {
+      Unmove();
+      x_velocity_ = -x_velocity_;
+    }
+
+    if (y_ < 0) {
+      Unmove();
+      y_velocity_ = -y_velocity_;
+    }
+
+    PaddleCollision(paddle);
   }
 }
 
 void Ball::Render() {
   texture_->Render(x_, y_, &clip_);
+}
+
+void Ball::Move() {
+  x_ += x_velocity_;
+  y_ += y_velocity_;
+}
+
+void Ball::Unmove() {
+  x_ -= x_velocity_;
+  y_ -= y_velocity_;
+}
+
+void Ball::PaddleCollision(const Paddle& paddle) {
+  int paddle_x{ paddle.get_x() };
+
+  if (x_ + kBallWidth < paddle_x ||
+      x_ > paddle_x + Paddle::kPaddleWidth ||
+      y_ + kBallHeight < Paddle::kPaddleY ||
+      y_ > Paddle::kPaddleY + Paddle::kPaddleHeight) {
+    return;
+  }
+
+  Unmove();
+
+  int ball_center{ x_ + (kBallWidth / 2) };
+  int paddle_center{ paddle_x + (Paddle::kPaddleWidth / 2) };
+
+  x_velocity_ = (ball_center - paddle_center) / 6;
+  y_velocity_ *= -1;
+
+  Move();
 }

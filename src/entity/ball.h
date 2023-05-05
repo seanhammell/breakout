@@ -5,6 +5,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -30,12 +31,19 @@ class Ball {
   void HandleInput(SDL_Event input);
 
   // Updates the Ball with one frame of behavior.
-  void Update();
+  void Update(const Paddle& paddle);
 
   // Renders the Ball to the screen.
   void Render();
 
  private:
+  // Applies the Ball's velocity.
+  void Move();
+  void Unmove();
+
+  // Handles Ball/Paddle collisions.
+  void PaddleCollision(const Paddle& paddle);
+
   int x_{ (Renderer::kVirtualWidth - kBallWidth) / 2 };
   int y_{ Renderer::kVirtualHeight - 23};
   int x_velocity_{ (std::rand() % 7) - 3 };

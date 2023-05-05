@@ -30,9 +30,8 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 }
 
 void PlayState::Update() {
-  ball_.Update();
+  ball_.Update(paddle_);
   paddle_.Update();
-  BallPaddleCollision();
   BallBrickCollision();
 }
 
@@ -54,26 +53,6 @@ void PlayState::LoadLevel() {
     }
   }
 }
-
-void PlayState::BallPaddleCollision() {
-  int ball_x{ ball_.get_x() };
-  int ball_y{ ball_.get_y() };
-  int paddle_x{ paddle_.get_x() };
-
-  if (ball_x + Ball::kBallWidth < paddle_x ||
-      ball_x > paddle_x + Paddle::kPaddleWidth ||
-      ball_y + Ball::kBallHeight < Paddle::kPaddleY ||
-      ball_y > Paddle::kPaddleY + Paddle::kPaddleHeight) {
-    return;
-  }
-
-  int ball_center{ ball_x + (Ball::kBallWidth / 2) };
-  int paddle_center{ paddle_x + (Paddle::kPaddleWidth / 2) };
-
-  ball_.set_x_velocity((ball_center - paddle_center) / 6);
-  ball_.set_y_velocity(-ball_.get_y_velocity());
-}
-
 void PlayState::BallBrickCollision() {
   int ball_x{ ball_.get_x() };
   int ball_y{ ball_.get_y() };
