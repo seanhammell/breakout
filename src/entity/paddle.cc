@@ -12,10 +12,10 @@ void Paddle::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
       case SDLK_LEFT:
-        velocity_ -= kPaddleVelocity;
+        x_vel_ -= kPaddleVelocity;
         break;
       case SDLK_RIGHT:
-        velocity_ += kPaddleVelocity;
+        x_vel_ += kPaddleVelocity;
         break;
       default:
         break;
@@ -23,10 +23,10 @@ void Paddle::HandleInput(SDL_Event input) {
   } else if (input.type == SDL_KEYUP) {
     switch (input.key.keysym.sym) {
       case SDLK_LEFT:
-        velocity_ += kPaddleVelocity;
+        x_vel_ += kPaddleVelocity;
         break;
       case SDLK_RIGHT:
-        velocity_ -= kPaddleVelocity;
+        x_vel_ -= kPaddleVelocity;
         break;
       default:
         break;
@@ -35,12 +35,12 @@ void Paddle::HandleInput(SDL_Event input) {
 }
 
 void Paddle::Update() {
-  x_ += velocity_;
-  if (x_ < 0 || x_ + kPaddleWidth > Renderer::kVirtualWidth) {
-    x_ -= velocity_;
+  x_pos_ += x_vel_;
+  if (x_pos_ < 0 || x_pos_ + kPaddleWidth > Renderer::kVirtualWidth) {
+    x_pos_ -= x_vel_;
   }
 }
 
 void Paddle::Render() {
-  texture_->Render(x_, kPaddleY, &clip_);
+  texture_->Render(x_pos_, kPaddleY, &clip_);
 }

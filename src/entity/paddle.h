@@ -19,7 +19,7 @@ class Paddle {
 
   ~Paddle() = default;
 
-  int get_x() const { return x_; }
+  int get_x_pos() const { return x_pos_; }
 
   // Handles user input for the Paddle.
   void HandleInput(SDL_Event input);
@@ -31,8 +31,8 @@ class Paddle {
   void Render();
 
  private:
-  int x_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
-  int velocity_{ 0 };
+  int x_pos_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
+  int x_vel_{ 0 };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };
