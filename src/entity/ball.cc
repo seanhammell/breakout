@@ -71,10 +71,10 @@ void Ball::PaddleCollision(const Paddle& paddle) {
     return;
   }
 
-  Unmove();
   int ball_center{ x_ + (kBallWidth / 2) };
   int paddle_center{ paddle_x + (Paddle::kPaddleWidth / 2) };
 
+  Unmove();
   x_velocity_ = (ball_center - paddle_center) / 4;
   y_velocity_ *= -1;
   Move();
@@ -93,10 +93,5 @@ void Ball::BrickCollision(std::vector<Brick> *bricks) {
     }
 
     bricks->erase(bricks->begin() + i);
-
-    Unmove();
-    x_velocity_ *= -1;
-    y_velocity_ *= -1;
-    Move();
   }
 }
