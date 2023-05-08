@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/entity/paddle.h"
+#include "src/entity/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
@@ -27,12 +28,13 @@ class Ball {
   void Render();
 
  private:
-  void ApplyVelocity(int x_vel, int y_vel);
+  friend class Physics;
 
   int x_pos_{ (Renderer::kVirtualWidth - Ball::kBallWidth) / 2 };
   int y_pos_{ Paddle::kPaddleYPos - kBallHeight };
   int x_vel_{ 3 };
   int y_vel_{ -1 };
+  Physics physics_{ };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };
