@@ -42,5 +42,5 @@ void Paddle::Update() {
 }
 
 void Paddle::Render() {
-  texture_->Render(x_pos_, kPaddleY, &clip_);
+  texture_->Render(x_pos_, kPaddleYPos, &clip_);
 }

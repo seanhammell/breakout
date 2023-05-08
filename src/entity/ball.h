@@ -27,10 +27,12 @@ class Ball {
   void Render();
 
  private:
+  void ApplyVelocity(int x_vel, int y_vel);
+
   int x_pos_{ (Renderer::kVirtualWidth - Ball::kBallWidth) / 2 };
-  int y_pos_{ Paddle::kPaddleY - kBallHeight };
-  int x_vel_{ };
-  int y_vel_{ };
+  int y_pos_{ Paddle::kPaddleYPos - kBallHeight };
+  int x_vel_{ 3 };
+  int y_vel_{ -1 };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };

@@ -8,7 +8,7 @@
 
 class Paddle {
  public:
-  static const int kPaddleY{ Renderer::kVirtualHeight - 20 };
+  static const int kPaddleYPos{ Renderer::kVirtualHeight - 20 };
   static const int kPaddleWidth{ 24 };
   static const int kPaddleHeight{ 2 };
   static const int kPaddleVelocity{ 2 };
