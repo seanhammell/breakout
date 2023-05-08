@@ -1,6 +1,8 @@
 #ifndef SRC_ENTITY_PHSX_H_
 #define SRC_ENTITY_PHSX_H_
 
+#include "src/entity/paddle.h"
+
 class Ball;
 
 class Physics {
@@ -28,7 +30,7 @@ class Physics {
   ~Physics() = default;
 
   // Updates the Ball's position.
-  void Update(Ball *ball);
+  void Update(Ball *ball, const Paddle& paddle);
 
  private:
   // Retuns whether two lines intersect and records the vertex if they do.
@@ -36,6 +38,8 @@ class Physics {
 
   // Moves the Ball along it's path, adjusting for collisions.
   void ApplyVelocity(Ball *ball, int x_velocity, int y_velocity);
+
+  Line paddle_{ };
 };
 
 #endif  // SRC_ENTITY_PHSX_H_

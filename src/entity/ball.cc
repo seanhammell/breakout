@@ -21,8 +21,8 @@ void Ball::HandleInput(SDL_Event input) {
   }
 }
 
-void Ball::Update() {
-  physics_.Update(this);
+void Ball::Update(const Paddle& paddle) {
+  physics_.Update(this, paddle);
 }
 
 void Ball::Render() {

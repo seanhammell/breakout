@@ -30,14 +30,14 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 }
 
 void PlayState::Update() {
-  ball_.Update();
   paddle_.Update();
+  ball_.Update(paddle_);
 }
 
 void PlayState::Render() {
   score_display_.Render();
-  ball_.Render();
   paddle_.Render();
+  ball_.Render();
   // for (Brick brick : bricks_) {
   //   brick.Render();
   // }

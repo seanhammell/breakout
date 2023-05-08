@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include "src/entity/ball.h"
+#include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 
 static const Physics::Line kScreenTop{ 0, 0, Renderer::kVirtualWidth, 0 };
@@ -11,7 +12,12 @@ static const Physics::Line kScreenRight{ Renderer::kVirtualWidth, 0,
                                          Renderer::kVirtualWidth,
                                          Renderer::kVirtualHeight };
 
-void Physics::Update(Ball *ball) {
+void Physics::Update(Ball *ball, const Paddle& paddle) {
+  paddle_.x1 = paddle.get_x_pos();
+  paddle_.y1 = Paddle::kPaddleYPos;
+  paddle_.x2 = paddle_.x1 + Paddle::kPaddleWidth;
+  paddle_.y2 = Paddle::kPaddleYPos;
+
   ApplyVelocity(ball, ball->x_vel_, ball->y_vel_);
 }
 
@@ -59,7 +65,8 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
   vertex.x = path.x2;
   vertex.y = path.y2;
 
-  if (Intersection(path, kScreenTop, &vertex)) {
+  if (Intersection(path, kScreenTop, &vertex) ||
+      Intersection(path, paddle_, &vertex)) {
     axis = kAxisX;
   }
 

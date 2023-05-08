@@ -5,7 +5,7 @@
 
 class Renderer {
  public:
-  // Renderer dimensions to treat the display as if it were 192x160 pixels.
+  // Renderer dimensions to treat the display as if it were 193x160 pixels.
   static const int kVirtualWidth{ 193 };
   static const int kVirtualHeight{ 160 };
 

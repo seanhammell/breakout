@@ -22,7 +22,7 @@ class Ball {
   void HandleInput(SDL_Event input);
 
   // Updates the Ball with one frame of behavior.
-  void Update();
+  void Update(const Paddle& paddle);
 
   // Renders the Ball to the screen.
   void Render();
