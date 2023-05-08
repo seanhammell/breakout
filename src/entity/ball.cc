@@ -1,6 +1,5 @@
 #include "src/entity/ball.h"
 
-#include <cmath>
 #include <cstdlib>
 
 #include "SDL2/SDL.h"
@@ -16,15 +15,25 @@ Ball::Ball(Texture *texture, SDL_Rect clip)
 
 void Ball::HandleInput(SDL_Event input) {
   if (input.key.keysym.sym == SDLK_SPACE && x_vel_ == 0 && y_vel_ == 0) {
-    x_vel_ = 1;
-    y_vel_ = -3;
+    x_vel_ = (std::rand() % 7) - 3;
+    y_vel_ = -1;
   }
 }
 
 void Ball::Update(const Paddle& paddle) {
   physics_.Update(this, paddle);
+  if (y_pos_ > Renderer::kVirtualHeight) {
+    Reset();
+  }
 }
 
 void Ball::Render() {
   texture_->Render(x_pos_, y_pos_, &clip_);
+}
+
+void Ball::Reset() {
+  x_pos_ = (Renderer::kVirtualWidth - Ball::kBallWidth) / 2;
+  y_pos_ = Paddle::kPaddleYPos - kBallHeight;
+  x_vel_ = 0;
+  y_vel_ = 0;
 }

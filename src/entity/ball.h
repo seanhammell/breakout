@@ -1,6 +1,8 @@
 #ifndef SRC_ENTITY_BALL_H_
 #define SRC_ENTITY_BALL_H_
 
+#include <cstdlib>
+
 #include "SDL2/SDL.h"
 
 #include "src/entity/paddle.h"
@@ -30,9 +32,11 @@ class Ball {
  private:
   friend class Physics;
 
+  void Reset();
+
   int x_pos_{ (Renderer::kVirtualWidth - Ball::kBallWidth) / 2 };
   int y_pos_{ Paddle::kPaddleYPos - kBallHeight };
-  int x_vel_{ 3 };
+  int x_vel_{ (std::rand() % 7) - 3 };
   int y_vel_{ -1 };
   Physics physics_{ };
   Texture *texture_{ NULL };
