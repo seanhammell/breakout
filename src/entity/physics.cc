@@ -55,7 +55,7 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
 
   Line path{ };
   Point vertex{ };
-  CollisionAxis axis{ kNone };
+  Collision surface{ kNone };
 
   path.x1 = x_velocity < 0 ? ball->x_pos_ : ball->x_pos_ + Ball::kBallWidth;
   path.y1 = y_velocity < 0 ? ball->y_pos_ : ball->y_pos_ + Ball::kBallHeight;
@@ -65,14 +65,17 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
   vertex.x = path.x2;
   vertex.y = path.y2;
 
-  if (Intersection(path, kScreenTop, &vertex) ||
-      Intersection(path, paddle_, &vertex)) {
-    axis = kAxisX;
+  if (Intersection(path, paddle_, &vertex)) {
+    surface = kPaddle;
+  }
+
+  if (Intersection(path, kScreenTop, &vertex)) {
+    surface = kAxisX;
   }
 
   if (Intersection(path, kScreenLeft, &vertex) ||
       Intersection(path, kScreenRight, &vertex)) {
-    axis = kAxisY;
+    surface = kAxisY;
   }
 
   int dx{ vertex.x - path.x1 };
@@ -84,12 +87,18 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
   x_velocity = abs(dx) > abs(x_velocity) ? 0 : x_velocity - dx;
   y_velocity = abs(dy) > abs(y_velocity) ? 0 : y_velocity - dy;
 
-  if (axis == kAxisX) {
+  if (surface == kPaddle) {
+    int ball_center{ ball->x_pos_ + (Ball::kBallWidth / 2) };
+    int paddle_center{ paddle_.x1 + (Paddle::kPaddleWidth / 2) };
+    ball->x_vel_ = (ball_center - paddle_center) / 4;
+  }
+
+  if (surface == kAxisX || surface == kPaddle) {
     ball->y_vel_ = -ball->y_vel_;
     y_velocity = -y_velocity;
   }
 
-  if (axis == kAxisY) {
+  if (surface == kAxisY) {
     ball->x_vel_ = -ball->x_vel_;
     x_velocity = -x_velocity;
   }

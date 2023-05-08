@@ -7,10 +7,11 @@ class Ball;
 
 class Physics {
  public:
-  enum CollisionAxis{
+  enum Collision{
     kNone,
     kAxisX,
     kAxisY,
+    kPaddle,
   };
 
   struct Point {
