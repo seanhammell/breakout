@@ -31,7 +31,7 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
 
 void PlayState::Update() {
   paddle_.Update();
-  ball_.Update(paddle_);
+  ball_.Update(paddle_, &bricks_);
 }
 
 void PlayState::Render() {

@@ -12,13 +12,9 @@ static const Physics::Line kScreenRight{ Renderer::kVirtualWidth, 0,
                                          Renderer::kVirtualWidth,
                                          Renderer::kVirtualHeight };
 
-void Physics::Update(Ball *ball, const Paddle& paddle) {
-  paddle_.x1 = paddle.get_x_pos();
-  paddle_.y1 = Paddle::kPaddleYPos;
-  paddle_.x2 = paddle_.x1 + Paddle::kPaddleWidth;
-  paddle_.y2 = Paddle::kPaddleYPos;
-
-  ApplyVelocity(ball, ball->x_vel_, ball->y_vel_);
+void Physics::Update(Ball *ball, const Paddle& paddle,
+                     std::vector<Brick> *bricks) {
+  ApplyVelocity(ball, ball->x_vel_, ball->y_vel_, paddle, bricks);
 }
 
 double Physics::Distance(const Point& a, const Point& b) {
@@ -63,7 +59,24 @@ void Physics::CheckCollision(const Line& bound, Collision type) {
   }
 }
 
-void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
+void Physics::CheckPaddle(const Paddle& paddle) {
+  const Line paddle_bound{ paddle.get_x_pos(),
+                           Paddle::kPaddleYPos,
+                           paddle.get_x_pos() + Paddle::kPaddleWidth,
+                           Paddle::kPaddleYPos };
+  CheckCollision(paddle_bound, kPaddle);
+}
+
+void Physics::CheckBricks(std::vector<Brick> *bricks) {
+  for (auto brick : *bricks) {
+    int i{ brick.get_x() };
+    i++;
+  }
+  return;
+}
+
+void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
+                            const Paddle& paddle, std::vector<Brick> *bricks) {
   if (x_velocity == 0 && y_velocity == 0) {
     return;
   }
@@ -80,10 +93,11 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
   nearest_vertex_ = Distance(origin_, vertex_);
   surface_ = kNone;
 
-  CheckCollision(paddle_, kPaddle);
   CheckCollision(kScreenTop, kAxisX);
   CheckCollision(kScreenLeft, kAxisY);
   CheckCollision(kScreenRight, kAxisY);
+  CheckPaddle(paddle);
+  CheckBricks(bricks);
 
   int dx{ path_.x2 - path_.x1 };
   int dy{ path_.y2 - path_.y1 };
@@ -107,7 +121,7 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
       break;
     case kPaddle:
       ball_center = ball->x_pos_ + (Ball::kBallWidth / 2);
-      paddle_center = paddle_.x1 + (Paddle::kPaddleWidth / 2);
+      paddle_center = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2);
       ball->x_vel_ = (ball_center - paddle_center) / 4;
       ball->y_vel_ = -ball->y_vel_;
       y_velocity = -y_velocity;
@@ -116,5 +130,5 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity) {
       break;
   }
 
-  ApplyVelocity(ball, x_velocity, y_velocity);
+  ApplyVelocity(ball, x_velocity, y_velocity, paddle, bricks);
 }

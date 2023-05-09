@@ -24,7 +24,7 @@ class Ball {
   void HandleInput(SDL_Event input);
 
   // Updates the Ball with one frame of behavior.
-  void Update(const Paddle& paddle);
+  void Update(const Paddle& paddle, std::vector<Brick> *bricks);
 
   // Renders the Ball to the screen.
   void Render();
