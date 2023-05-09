@@ -16,8 +16,10 @@
 PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
       paddle_{ &blocks_texture_ } {
+  if (LoadLevel()) {
+    valid();
+  }
   score_display_.AlignRightHorizontal();
-  LoadLevel();
 }
 
 bool PlayState::Load() {
@@ -50,17 +52,19 @@ void PlayState::Render() {
 }
 
 bool PlayState::LoadLevel() {
+  static const int kMaxBricks{ 176 };
+
   int x{ 1 };
   int y{ 20 };
 
-  std::ifstream map{ "./level/01.txt" };
+  std::ifstream map{ "./meta/level_01.txt" };
 
   if (map.fail()) {
     fprintf(stderr, "Error loading map file\n");
     return false;
   }
 
-  for (int i{ 0 }; i < 176; ++i) {
+  for (int i{ 0 }; i < kMaxBricks; ++i) {
     int tile{ -1 };
     map >> tile;
     Brick::BrickType type{ static_cast<Brick::BrickType>(tile) };
@@ -70,11 +74,13 @@ bool PlayState::LoadLevel() {
       return false;
     }
 
-    if (type > Brick::kNoType && type < Brick::kTotalTypes) {
-      bricks_.push_back(Brick(x, y, type, &blocks_texture_));
-    } else {
+    if (type < Brick::kNoType || type > Brick::kTotalTypes) {
       fprintf(stderr, "Invalid brick type\n");
       return false;
+    }
+
+    if (type > Brick::kNoType && type < Brick::kTotalTypes) {
+      bricks_.push_back(Brick(x, y, type, &blocks_texture_));
     }
 
     x += Brick::kBrickWidth;
