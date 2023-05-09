@@ -18,15 +18,15 @@ class Physics {
   };
 
   struct Point {
-    int x;
-    int y;
+    double x;
+    double y;
   };
 
   struct Line {
-    int x1;
-    int y1;
-    int x2;
-    int y2;
+    double x1;
+    double y1;
+    double x2;
+    double y2;
   };
 
   Physics() = default;
@@ -43,9 +43,9 @@ class Physics {
   // Retuns whether two lines intersect and records the vertex if they do.
   bool Intersection(const Line& a, const Line& b);
 
-  // Checks for a collision between the Ball's path and the bound, updating,
-  // the relevant members if the collision is the nearest so far.
-  void CheckCollision(const Line& bound, Collision type);
+  // Checks for a collision between the Ball's path and the bound, returning
+  // whether the collision is the nearest.
+  bool CheckCollision(const Line& bound, Collision type);
 
   // Creates the bounds for the Paddle and Bricks to check for collisions.
   void CheckPaddle(const Paddle& paddle);
@@ -60,6 +60,7 @@ class Physics {
   Line path_{ };
   double nearest_vertex_{ };
   Collision surface_{ };
+  Brick *hit_brick_{ NULL };
 };
 
 #endif  // SRC_ENTITY_PHSX_H_

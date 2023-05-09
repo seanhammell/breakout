@@ -39,16 +39,18 @@ void PlayState::Render() {
   paddle_.Render();
   ball_.Render();
   for (auto brick : bricks_) {
-    brick.Render();
+    if (!brick.is_hit()) {
+      brick.Render();
+    }
   }
 }
 
 void PlayState::LoadLevel() {
   for (int row{ 0 }; row < 8; ++row) {
-    int y{ row * 4 + 20 };
+    int y{ row * Brick::kBrickHeight + 20 };
     auto type{ static_cast<Brick::BrickType>(Brick::kRed - row / 2) };
     for (int col{ 0 }; col < 24; ++col) {
-      bricks_.push_back(Brick(col * 8 + 1, y, type, &blocks_texture_));
+      bricks_.push_back(Brick(col * Brick::kBrickWidth + 1, y, type, &blocks_texture_));
     }
   }
 }

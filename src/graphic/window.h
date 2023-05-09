@@ -7,7 +7,7 @@
 
 class Window {
  public:
-  static const int kWindowWidth{ 772 };
+  static const int kWindowWidth{ 796 };
   static const int kWindowHeight{ 640 };
 
   Window();

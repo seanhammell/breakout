@@ -1,6 +1,7 @@
 #include "src/entity/physics.h"
 
 #include <cmath>
+#include <cstddef>
 
 #include "src/entity/ball.h"
 #include "src/entity/paddle.h"
@@ -22,9 +23,9 @@ double Physics::Distance(const Point& a, const Point& b) {
 }
 
 bool Physics::Intersection(const Line& a, const Line& b) {
-  int denom{ ((b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1)) };
-  int num_a{ ((b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1)) };
-  int num_b{ ((a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1)) };
+  double denom{ ((b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1)) };
+  double num_a{ ((b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1)) };
+  double num_b{ ((a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1)) };
 
   if (denom == 0) {
     if (num_a == 0 && num_b == 0) {
@@ -36,8 +37,8 @@ bool Physics::Intersection(const Line& a, const Line& b) {
     return false;
   }
 
-  double ua{ num_a / static_cast<double>(denom) };
-  double ub{ num_b / static_cast<double>(denom) };
+  double ua{ num_a / denom };
+  double ub{ num_b / denom };
 
   if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
     return false;
@@ -48,21 +49,24 @@ bool Physics::Intersection(const Line& a, const Line& b) {
   return true;
 }
 
-void Physics::CheckCollision(const Line& bound, Collision type) {
+bool Physics::CheckCollision(const Line& bound, Collision type) {
   if (Intersection(path_, bound)) {
     if (Distance(origin_, vertex_) < nearest_vertex_) {
       path_.x2 = vertex_.x;
       path_.y2 = vertex_.y;
       nearest_vertex_ = Distance(origin_, vertex_);
       surface_ = type;
+      return true;
     }
   }
+
+  return false;
 }
 
 void Physics::CheckPaddle(const Paddle& paddle) {
-  const int left{ paddle.get_x_pos() };
-  const int right{ left + Paddle::kPaddleWidth };
-  const int top{ Paddle::kPaddleYPos };
+  const double left{ static_cast<double>(paddle.get_x_pos()) };
+  const double right{ static_cast<double>(left + Paddle::kPaddleWidth) };
+  const double top{ static_cast<double>(Paddle::kPaddleYPos) };
 
   const Line paddle_bound{ left, top, right, top };
 
@@ -70,22 +74,35 @@ void Physics::CheckPaddle(const Paddle& paddle) {
 }
 
 void Physics::CheckBricks(std::vector<Brick> *bricks) {
-  for (auto brick : *bricks) {
-    const int left{ brick.get_x_pos() };
-    const int right{ left + Brick::kBrickWidth };
-    const int top{ brick.get_y_pos() };
-    const int bottom{ top + Brick::kBrickHeight };
+  hit_brick_ = NULL;
+  
+  for (size_t i{ 0 }; i < bricks->size(); ++i) {
+    if ((*bricks)[i].is_hit()) {
+      continue;
+    }
+
+    const double left{ static_cast<double>((*bricks)[i].get_x_pos()) };
+    const double right{ static_cast<double>(left + Brick::kBrickWidth) };
+    const double top{ static_cast<double>((*bricks)[i].get_y_pos()) };
+    const double bottom{ static_cast<double>(top + Brick::kBrickHeight) };
 
     const Line left_bound{ left, top, left, bottom };
     const Line right_bound{ right, top, right, bottom };
     const Line top_bound{ left, top, right, top };
     const Line bottom_bound{ left, bottom, right, bottom };
 
-    CheckCollision(top_bound, kAxisX);
-    CheckCollision(bottom_bound, kAxisX);
+    if (path_.y1 != path_.y2) {
+      if (CheckCollision(top_bound, kAxisX) ||
+          CheckCollision(bottom_bound, kAxisX)) {
+        hit_brick_ = &(*bricks)[i];
+      }
+    }
+
     if (path_.x1 != path_.x2) {
-      CheckCollision(left_bound, kAxisY);
-      CheckCollision(right_bound, kAxisY);
+      if (CheckCollision(left_bound, kAxisY) ||
+          CheckCollision(right_bound, kAxisY)) {
+        hit_brick_ = &(*bricks)[i];
+      }
     }
   }
 }
@@ -117,8 +134,8 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   CheckPaddle(paddle);
   CheckBricks(bricks);
 
-  int dx{ path_.x2 - path_.x1 };
-  int dy{ path_.y2 - path_.y1 };
+  int dx{ static_cast<int>(path_.x2 - path_.x1) };
+  int dy{ static_cast<int>(path_.y2 - path_.y1) };
 
   ball->x_pos_ += dx;
   ball->y_pos_ += dy;
@@ -146,6 +163,10 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
       break;
     default:
       break;
+  }
+
+  if (hit_brick_ != NULL) {
+    hit_brick_->hit();
   }
 
   ApplyVelocity(ball, x_velocity, y_velocity, paddle, bricks);
