@@ -1,5 +1,9 @@
 #include "src/state/play_state.h"
 
+#include <stdio.h>
+
+#include <fstream>
+
 #include "SDL2/SDL.h"
 
 #include "src/entity/ball.h"
@@ -45,12 +49,41 @@ void PlayState::Render() {
   }
 }
 
-void PlayState::LoadLevel() {
-  for (int row{ 0 }; row < 8; ++row) {
-    int y{ row * Brick::kBrickHeight + 20 };
-    auto type{ static_cast<Brick::BrickType>(Brick::kRed - row / 2) };
-    for (int col{ 0 }; col < 24; ++col) {
-      bricks_.push_back(Brick(col * Brick::kBrickWidth + 1, y, type, &blocks_texture_));
+bool PlayState::LoadLevel() {
+  int x{ 1 };
+  int y{ 20 };
+
+  std::ifstream map{ "./level/01.txt" };
+
+  if (map.fail()) {
+    fprintf(stderr, "Error loading map file\n");
+    return false;
+  }
+
+  for (int i{ 0 }; i < 176; ++i) {
+    int tile{ -1 };
+    map >> tile;
+    Brick::BrickType type{ static_cast<Brick::BrickType>(tile) };
+
+    if (map.fail()) {
+      fprintf(stderr, "Unexpected EOF\n");
+      return false;
+    }
+
+    if (type > Brick::kNoType && type < Brick::kTotalTypes) {
+      bricks_.push_back(Brick(x, y, type, &blocks_texture_));
+    } else {
+      fprintf(stderr, "Invalid brick type\n");
+      return false;
+    }
+
+    x += Brick::kBrickWidth;
+    if (x >= Renderer::kVirtualWidth) {
+      x = 1;
+      y += Brick::kBrickHeight;
     }
   }
+
+  map.close();
+  return true;
 }

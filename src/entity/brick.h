@@ -8,10 +8,12 @@
 class Brick {
  public:
   enum BrickType {
+    kNoType,
     kYellow,
     kGreen,
     kOrange,
     kRed,
+    kTotalTypes,
   };
 
   static const int kClipWidth{ 8 };

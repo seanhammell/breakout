@@ -36,8 +36,10 @@ void Paddle::HandleInput(SDL_Event input) {
 
 void Paddle::Update() {
   x_pos_ += x_vel_;
-  if (x_pos_ < 0 || x_pos_ + kPaddleWidth > Renderer::kVirtualWidth) {
-    x_pos_ -= x_vel_;
+  if (x_pos_ < 0) {
+    x_pos_ = 0;
+  } else if (x_pos_ + kPaddleWidth > Renderer::kVirtualWidth) {
+    x_pos_ = Renderer::kVirtualWidth - kPaddleWidth;
   }
 }
 

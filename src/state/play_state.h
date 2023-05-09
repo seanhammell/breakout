@@ -33,7 +33,7 @@ class PlayState : public StateMachine {
 
  private:
   // Loads the starting Bricks for a given level.
-  void LoadLevel();
+  bool LoadLevel();
 
   static inline Font font_{ };
   static inline Texture score_texture_{ };
