@@ -2,6 +2,7 @@
 #define SRC_ENTITY_BALL_H_
 
 #include <cstdlib>
+#include <vector>
 
 #include "SDL2/SDL.h"
 

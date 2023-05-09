@@ -44,7 +44,7 @@ void PlayState::Render() {
   score_display_.Render();
   paddle_.Render();
   ball_.Render();
-  
+
   int broken_bricks{ 0 };
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
@@ -111,9 +111,10 @@ void PlayState::UpdateScore() {
       score += brick.value();
     }
   }
-  
-  char score_buffer[20];
-  sprintf(score_buffer, "SCORE: %d", score);
+
+  constexpr int kBufferLength{ 20 };
+  char score_buffer[kBufferLength];
+  snprintf(score_buffer, kBufferLength - 1, "SCORE: %d", score);
   score_texture_.LoadFromText(font_, score_buffer);
   score_display_.UpdateClip();
   score_display_.AlignRightHorizontal();

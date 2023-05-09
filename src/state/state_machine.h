@@ -8,12 +8,12 @@ class StateMachine {
   virtual ~StateMachine() = default;
 
   bool is_valid() const { return valid_; }
-  void valid(){ valid_ = true; }
+  void valid() { valid_ = true; }
 
   virtual StateMachine *HandleInput(SDL_Event) = 0;
   virtual void Update() = 0;
   virtual void Render() = 0;
- 
+
  private:
   bool valid_{ false };
 };

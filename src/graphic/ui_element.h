@@ -23,7 +23,6 @@ class UIElement {
   void Render();
 
  private:
-
   Texture *texture_{ NULL };
   int x_{ 0 };
   int y_{ 0 };

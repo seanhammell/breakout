@@ -1,5 +1,5 @@
-#ifndef SRC_ENTITY_PHSX_H_
-#define SRC_ENTITY_PHSX_H_
+#ifndef SRC_ENTITY_PHYSICS_H_
+#define SRC_ENTITY_PHYSICS_H_
 
 #include <vector>
 
@@ -63,4 +63,4 @@ class Physics {
   Brick *hit_brick_{ NULL };
 };
 
-#endif  // SRC_ENTITY_PHSX_H_
+#endif  // SRC_ENTITY_PHYSICS_H_

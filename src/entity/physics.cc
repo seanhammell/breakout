@@ -23,9 +23,9 @@ double Physics::Distance(const Point& a, const Point& b) {
 }
 
 bool Physics::Intersection(const Line& a, const Line& b) {
-  double denom{ ((b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1)) };
-  double num_a{ ((b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1)) };
-  double num_b{ ((a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1)) };
+  double denom{ (b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1) };
+  double num_a{ (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1) };
+  double num_b{ (a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1) };
 
   if (denom == 0) {
     if (num_a == 0 && num_b == 0) {
@@ -75,7 +75,7 @@ void Physics::CheckPaddle(const Paddle& paddle) {
 
 void Physics::CheckBricks(std::vector<Brick> *bricks) {
   hit_brick_ = NULL;
-  
+
   for (size_t i{ 0 }; i < bricks->size(); ++i) {
     if ((*bricks)[i].is_hit()) {
       continue;

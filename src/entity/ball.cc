@@ -27,7 +27,7 @@ void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
   if (x_vel_ == 0 && y_vel_ == 0) {
     CenterOnPaddle(paddle);
     return;
-  } 
+  }
 
   physics_.Update(this, paddle, bricks);
   if (y_pos_ > Renderer::kVirtualHeight) {
