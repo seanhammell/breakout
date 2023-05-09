@@ -22,15 +22,15 @@ class Brick {
 
   ~Brick() = default;
 
-  int get_x() const { return x_; }
-  int get_y() const { return y_; }
+  int get_x_pos() const { return x_pos_; }
+  int get_y_pos() const { return y_pos_; }
 
   // Renders the Brick to the screen.
   void Render();
 
  private:
-  int x_{ 0 };
-  int y_{ 0 };
+  int x_pos_{ 0 };
+  int y_pos_{ 0 };
   //BrickType type_{ };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };

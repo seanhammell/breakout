@@ -22,9 +22,14 @@ void Ball::HandleInput(SDL_Event input) {
 }
 
 void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
+  if (x_vel_ == 0 && y_vel_ == 0) {
+    CenterOnPaddle(paddle);
+    return;
+  } 
+
   physics_.Update(this, paddle, bricks);
   if (y_pos_ > Renderer::kVirtualHeight) {
-    Reset();
+    Reset(paddle);
   }
 }
 
@@ -32,9 +37,13 @@ void Ball::Render() {
   texture_->Render(x_pos_, y_pos_, &clip_);
 }
 
-void Ball::Reset() {
-  x_pos_ = (Renderer::kVirtualWidth - Ball::kBallWidth) / 2;
+void Ball::Reset(const Paddle& paddle) {
+  CenterOnPaddle(paddle);
   y_pos_ = Paddle::kPaddleYPos - kBallHeight;
   x_vel_ = 0;
   y_vel_ = 0;
+}
+
+void Ball::CenterOnPaddle(const Paddle& paddle) {
+  x_pos_ = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2) - (kBallWidth / 2);
 }

@@ -13,7 +13,7 @@ PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
       paddle_{ &blocks_texture_ } {
   score_display_.AlignRightHorizontal();
-  // LoadLevel();
+  LoadLevel();
 }
 
 bool PlayState::Load() {
@@ -38,9 +38,9 @@ void PlayState::Render() {
   score_display_.Render();
   paddle_.Render();
   ball_.Render();
-  // for (Brick brick : bricks_) {
-  //   brick.Render();
-  // }
+  for (auto brick : bricks_) {
+    brick.Render();
+  }
 }
 
 void PlayState::LoadLevel() {

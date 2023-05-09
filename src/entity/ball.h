@@ -32,7 +32,11 @@ class Ball {
  private:
   friend class Physics;
 
-  void Reset();
+  // Resets the Ball to the starting position.
+  void Reset(const Paddle& paddle);
+
+  // Centers the Ball on the Paddle.
+  void CenterOnPaddle(const Paddle& paddle);
 
   int x_pos_{ (Renderer::kVirtualWidth - Ball::kBallWidth) / 2 };
   int y_pos_{ Paddle::kPaddleYPos - kBallHeight };

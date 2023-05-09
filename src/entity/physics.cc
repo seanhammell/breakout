@@ -60,19 +60,34 @@ void Physics::CheckCollision(const Line& bound, Collision type) {
 }
 
 void Physics::CheckPaddle(const Paddle& paddle) {
-  const Line paddle_bound{ paddle.get_x_pos(),
-                           Paddle::kPaddleYPos,
-                           paddle.get_x_pos() + Paddle::kPaddleWidth,
-                           Paddle::kPaddleYPos };
+  const int left{ paddle.get_x_pos() };
+  const int right{ left + Paddle::kPaddleWidth };
+  const int top{ Paddle::kPaddleYPos };
+
+  const Line paddle_bound{ left, top, right, top };
+
   CheckCollision(paddle_bound, kPaddle);
 }
 
 void Physics::CheckBricks(std::vector<Brick> *bricks) {
   for (auto brick : *bricks) {
-    int i{ brick.get_x() };
-    i++;
+    const int left{ brick.get_x_pos() };
+    const int right{ left + Brick::kBrickWidth };
+    const int top{ brick.get_y_pos() };
+    const int bottom{ top + Brick::kBrickHeight };
+
+    const Line left_bound{ left, top, left, bottom };
+    const Line right_bound{ right, top, right, bottom };
+    const Line top_bound{ left, top, right, top };
+    const Line bottom_bound{ left, bottom, right, bottom };
+
+    CheckCollision(top_bound, kAxisX);
+    CheckCollision(bottom_bound, kAxisX);
+    if (path_.x1 != path_.x2) {
+      CheckCollision(left_bound, kAxisY);
+      CheckCollision(right_bound, kAxisY);
+    }
   }
-  return;
 }
 
 void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
@@ -82,6 +97,9 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   }
 
   origin_.x = x_velocity < 0 ? ball->x_pos_ : ball->x_pos_ + Ball::kBallWidth;
+  if (x_velocity == 0) {
+    origin_.x = ball->x_pos_ + (Ball::kBallWidth / 2);
+  }
   origin_.y = y_velocity < 0 ? ball->y_pos_ : ball->y_pos_ + Ball::kBallHeight;
   vertex_.x = origin_.x + x_velocity;
   vertex_.y = origin_.y + y_velocity;
