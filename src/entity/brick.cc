@@ -5,8 +5,7 @@
 #include "src/graphic/texture.h"
 
 Brick::Brick(int x, int y, BrickType type, Texture *texture)
-    : x_pos_{ x }, y_pos_{ y }, //type_{ type },
-      texture_{ texture },
+    : x_pos_{ x }, y_pos_{ y }, type_{ type }, texture_{ texture },
       clip_{ type * kClipWidth - 8, 0, kClipWidth, kClipHeight } {}
 
 void Brick::Render() {

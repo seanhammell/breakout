@@ -16,10 +16,14 @@ class UIElement {
   void AlignCenterHorizontal();
   void AlignRightHorizontal();
 
+  // Updates the texture clip to account for changing UI Elements.
+  void UpdateClip(SDL_Rect clip = { });
+
   // Renders the UIElement to the screen.
   void Render();
 
  private:
+
   Texture *texture_{ NULL };
   int x_{ 0 };
   int y_{ 0 };

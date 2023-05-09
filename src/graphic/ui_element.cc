@@ -8,10 +8,7 @@
 UIElement::UIElement(Texture *texture, int x, int y, SDL_Rect clip)
     : texture_{ texture }, x_{ x }, y_{ y }, clip_{ clip } {
   // If the width of the clip is 0, assume the element is the entire texture.
-  if (clip.w == 0) {
-    clip_.w = texture->get_width();
-    clip_.h = texture_->get_height();
-  }
+  UpdateClip();
 }
 
 void UIElement::AlignCenterHorizontal() {
@@ -24,4 +21,11 @@ void UIElement::AlignRightHorizontal() {
 
 void UIElement::Render() {
   texture_->Render(x_, y_, &clip_);
+}
+
+void UIElement::UpdateClip(SDL_Rect clip) {
+  if (clip.w == 0) {
+    clip_.w = texture_->get_width();
+    clip_.h = texture_->get_height();
+  }
 }

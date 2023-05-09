@@ -44,10 +44,20 @@ void PlayState::Render() {
   score_display_.Render();
   paddle_.Render();
   ball_.Render();
+  
+  int broken_bricks{ 0 };
   for (auto brick : bricks_) {
-    if (!brick.is_hit()) {
-      brick.Render();
+    if (brick.is_hit()) {
+      ++broken_bricks;
+      continue;
     }
+
+    brick.Render();
+  }
+
+  if (broken_bricks > n_bricks_hit_) {
+    n_bricks_hit_ = broken_bricks;
+    UpdateScore();
   }
 }
 
@@ -92,4 +102,19 @@ bool PlayState::LoadLevel() {
 
   map.close();
   return true;
+}
+
+void PlayState::UpdateScore() {
+  int score{ 0 };
+  for (auto brick : bricks_) {
+    if (brick.is_hit()) {
+      score += brick.value();
+    }
+  }
+  
+  char score_buffer[20];
+  sprintf(score_buffer, "SCORE: %d", score);
+  score_texture_.LoadFromText(font_, score_buffer);
+  score_display_.UpdateClip();
+  score_display_.AlignRightHorizontal();
 }

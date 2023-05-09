@@ -35,6 +35,8 @@ class PlayState : public StateMachine {
   // Loads the starting Bricks for a given level.
   bool LoadLevel();
 
+  void UpdateScore();
+
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };
@@ -43,6 +45,7 @@ class PlayState : public StateMachine {
   Ball ball_{ };
   Paddle paddle_{ };
   std::vector<Brick> bricks_{ };
+  int n_bricks_hit_{ };
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_

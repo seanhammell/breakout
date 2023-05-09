@@ -30,6 +30,7 @@ class Brick {
   int get_x_pos() const { return x_pos_; }
   int get_y_pos() const { return y_pos_; }
   bool is_hit() const { return hit_; }
+  int value() const { return type_ * 2 + 1; }
 
   void hit() { hit_ = true; }
 
@@ -40,7 +41,7 @@ class Brick {
   int x_pos_{ 0 };
   int y_pos_{ 0 };
   bool hit_{ false };
-  //BrickType type_{ };
+  BrickType type_{ };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };
