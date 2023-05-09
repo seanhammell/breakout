@@ -15,9 +15,11 @@ Ball::Ball(Texture *texture, SDL_Rect clip)
     : texture_{ texture }, clip_{ clip } {}
 
 void Ball::HandleInput(SDL_Event input) {
-  if (input.key.keysym.sym == SDLK_SPACE && x_vel_ == 0 && y_vel_ == 0) {
-    x_vel_ = (std::rand() % 7) - 3;
-    y_vel_ = -1;
+  if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
+    if (input.key.keysym.sym == SDLK_SPACE && x_vel_ == 0 && y_vel_ == 0) {
+      x_vel_ = (std::rand() % 7) - 3;
+      y_vel_ = -1;
+    }
   }
 }
 
