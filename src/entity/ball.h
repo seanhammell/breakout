@@ -21,6 +21,8 @@ class Ball {
 
   ~Ball() = default;
 
+  void set_speed(int y_vel) { y_vel_ = y_vel_ > 0 ? y_vel : -y_vel; }
+
   // Serves the Ball if it isn't live.
   void HandleInput(SDL_Event input);
 
@@ -33,9 +35,6 @@ class Ball {
  private:
   friend class Physics;
 
-  // Resets the Ball to the starting position.
-  void Reset(const Paddle& paddle);
-
   // Centers the Ball on the Paddle.
   void CenterOnPaddle(const Paddle& paddle);
 
@@ -43,6 +42,7 @@ class Ball {
   int y_pos_{ Paddle::kPaddleYPos - kBallHeight };
   int x_vel_{ (std::rand() % 7) - 3 };
   int y_vel_{ -1 };
+  bool live_{ true };
   Physics physics_{ };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };

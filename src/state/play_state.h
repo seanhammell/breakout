@@ -1,6 +1,7 @@
 #ifndef SRC_STATE_PLAY_STATE_H_
 #define SRC_STATE_PLAY_STATE_H_
 
+#include <cstddef>
 #include <vector>
 
 #include "SDL2/SDL.h"
@@ -48,7 +49,8 @@ class PlayState : public StateMachine {
   Ball ball_{ };
   Paddle paddle_{ };
   std::vector<Brick> bricks_{ };
-  int n_bricks_hit_{ };
+  size_t n_bricks_hit_{ };
+  int milestone_{ 1 };
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_

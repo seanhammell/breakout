@@ -55,7 +55,7 @@ void PlayState::Render() {
   paddle_.Render();
   ball_.Render();
 
-  int broken_bricks{ 0 };
+  size_t broken_bricks{ 0 };
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
       ++broken_bricks;
@@ -72,6 +72,10 @@ void PlayState::Render() {
 
   if (broken_bricks > n_bricks_hit_) {
     n_bricks_hit_ = broken_bricks;
+    if (n_bricks_hit_ > (bricks_.size() / (4 / milestone_))) {
+      ++milestone_;
+      ball_.set_speed(milestone_);
+    }
     UpdateScore();
   }
 }

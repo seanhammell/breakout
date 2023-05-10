@@ -16,34 +16,27 @@ Ball::Ball(Texture *texture, SDL_Rect clip)
 
 void Ball::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
-    if (input.key.keysym.sym == SDLK_SPACE && x_vel_ == 0 && y_vel_ == 0) {
-      x_vel_ = (std::rand() % 7) - 3;
-      y_vel_ = -1;
+    if (input.key.keysym.sym == SDLK_SPACE && !live_) {
+      live_ = true;
     }
   }
 }
 
 void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
-  if (x_vel_ == 0 && y_vel_ == 0) {
+  if (live_) {
+    physics_.Update(this, paddle, bricks);
+    if (y_pos_ > Renderer::kVirtualHeight) {
+      y_pos_ = Paddle::kPaddleYPos - kBallHeight;
+      CenterOnPaddle(paddle);
+      live_ = false;
+    }
+  } else {
     CenterOnPaddle(paddle);
-    return;
-  }
-
-  physics_.Update(this, paddle, bricks);
-  if (y_pos_ > Renderer::kVirtualHeight) {
-    Reset(paddle);
   }
 }
 
 void Ball::Render() {
   texture_->Render(x_pos_, y_pos_, &clip_);
-}
-
-void Ball::Reset(const Paddle& paddle) {
-  CenterOnPaddle(paddle);
-  y_pos_ = Paddle::kPaddleYPos - kBallHeight;
-  x_vel_ = 0;
-  y_vel_ = 0;
 }
 
 void Ball::CenterOnPaddle(const Paddle& paddle) {
