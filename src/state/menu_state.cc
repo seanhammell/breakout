@@ -29,13 +29,13 @@ bool MenuState::Load() {
 void MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     if (input.key.keysym.sym == SDLK_SPACE) {
-      play_ = true;
+      next_state(kPlayState);
     }
   }
 }
 
 StateMachine *MenuState::Update() {
-  if (play_) {
+  if (get_next_state() == kPlayState) {
     return new PlayState();
   }
 

@@ -33,7 +33,6 @@ class MenuState : public StateMachine {
 
   UIElement title_{ };
   UIElement prompt_{ };
-  bool play_{ false };
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_
