@@ -14,11 +14,10 @@
 #include "src/graphic/ui_element.h"
 
 PlayState::PlayState()
-    : score_display_{ &score_texture_, 0, 5 }, ball_{ &blocks_texture_ },
+    : score_display_{ &score_texture_, 0, 5 },
+      pause_screen_{ &pause_texture_, 0, 0 }, ball_{ &blocks_texture_ },
       paddle_{ &blocks_texture_ } {
-  if (LoadLevel()) {
-    valid();
-  }
+  if (LoadLevel()) { valid(); }
   score_display_.AlignRightHorizontal();
 }
 
@@ -26,18 +25,29 @@ bool PlayState::Load() {
   if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
   if (!score_texture_.LoadFromText(font_, "SCORE: 0")) { return false; }
   if (!blocks_texture_.LoadFromFile("./img/blocks.png")) { return false; }
+  if (!pause_texture_.LoadFromFile("./img/pause.png")) { return false; }
   return true;
 }
 
 StateMachine *PlayState::HandleInput(SDL_Event input) {
-  ball_.HandleInput(input);
-  paddle_.HandleInput(input);
+  if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
+    if (input.key.keysym.sym == SDLK_p) {
+      paused_ = !paused_;
+    }
+  }
+
+  if (!paused_) {
+    ball_.HandleInput(input);
+    paddle_.HandleInput(input);
+  }
   return NULL;
 }
 
 void PlayState::Update() {
-  paddle_.Update();
-  ball_.Update(paddle_, &bricks_);
+  if (!paused_) {
+    paddle_.Update();
+    ball_.Update(paddle_, &bricks_);
+  }
 }
 
 void PlayState::Render() {
@@ -55,6 +65,11 @@ void PlayState::Render() {
     brick.Render();
   }
 
+  if (paused_) {
+    pause_screen_.Render();
+    return;
+  }
+
   if (broken_bricks > n_bricks_hit_) {
     n_bricks_hit_ = broken_bricks;
     UpdateScore();
@@ -67,7 +82,7 @@ bool PlayState::LoadLevel() {
   int x{ 1 };
   int y{ 20 };
 
-  std::ifstream map{ "./meta/level_01.txt" };
+  std::ifstream map{ "./res/level_01.txt" };
 
   if (map.fail()) {
     fprintf(stderr, "Error loading map file\n");
