@@ -41,10 +41,12 @@ class PlayState : public StateMachine {
   static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture blocks_texture_{ };
+  static inline Texture heart_texture_{ };
   static inline Texture pause_texture_{ };
 
   UIElement score_display_{ };
   UIElement pause_screen_{ };
+  std::vector<UIElement> heart_icons_{ };
   bool paused_{ false };
   Ball ball_{ };
   Paddle paddle_{ };

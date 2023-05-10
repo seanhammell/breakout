@@ -20,12 +20,17 @@ PlayState::PlayState()
       paddle_{ &blocks_texture_ } {
   if (LoadLevel()) { valid(); }
   score_display_.AlignRightHorizontal();
+  for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
+    int x{ (heart_texture_.get_width() + 2) * i + 2 };
+    heart_icons_.push_back({&heart_texture_, x, 5});
+  }
 }
 
 bool PlayState::Load() {
   if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
   if (!score_texture_.LoadFromText(font_, "SCORE: 0")) { return false; }
   if (!blocks_texture_.LoadFromFile("./img/blocks.png")) { return false; }
+  if (!heart_texture_.LoadFromFile("./img/heart.png")) { return false; }
   if (!pause_texture_.LoadFromFile("./img/pause.png")) { return false; }
   return true;
 }
@@ -68,6 +73,10 @@ void PlayState::Render() {
     }
 
     brick.Render();
+  }
+
+  for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
+    heart_icons_[i].Render();
   }
 
   if (paused_) {
