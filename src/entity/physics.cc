@@ -27,8 +27,8 @@ bool Physics::Intersection(const Line& a, const Line& b) {
   double num_a{ (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1) };
   double num_b{ (a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1) };
 
-  if (denom == 0) {
-    if (num_a == 0 && num_b == 0) {
+  if (std::abs(denom) < kEpsilon) {
+    if (std::abs(num_a) < kEpsilon && std::abs(num_b) < kEpsilon) {
       vertex_.x = (a.x1 + a.x2) / 2;
       vertex_.y = (a.y1 + a.y2) / 2;
       return true;
@@ -91,17 +91,36 @@ void Physics::CheckBricks(std::vector<Brick> *bricks) {
     const Line top_bound{ left, top, right, top };
     const Line bottom_bound{ left, bottom, right, bottom };
 
-    if (path_.y1 != path_.y2) {
-      if (CheckCollision(top_bound, kAxisX) ||
-          CheckCollision(bottom_bound, kAxisX)) {
-        hit_brick_ = &(*bricks)[i];
-      }
-    }
+    double x_magnitude{ std::abs(path_.x2 - path_.x1) };
+    double y_magnitude{ std::abs(path_.y2 - path_.y1) };
 
-    if (path_.x1 != path_.x2) {
-      if (CheckCollision(left_bound, kAxisY) ||
-          CheckCollision(right_bound, kAxisY)) {
-        hit_brick_ = &(*bricks)[i];
+    if (x_magnitude > y_magnitude) {
+      if (x_magnitude > kEpsilon) {
+        if (CheckCollision(left_bound, kAxisY) ||
+            CheckCollision(right_bound, kAxisY)) {
+          hit_brick_ = &(*bricks)[i];
+        }
+      }
+
+      if (y_magnitude > kEpsilon) {
+        if (CheckCollision(top_bound, kAxisX) ||
+            CheckCollision(bottom_bound, kAxisX)) {
+          hit_brick_ = &(*bricks)[i];
+        }
+      }
+    } else {
+      if (y_magnitude > kEpsilon) {
+        if (CheckCollision(top_bound, kAxisX) ||
+            CheckCollision(bottom_bound, kAxisX)) {
+          hit_brick_ = &(*bricks)[i];
+        }
+      }
+
+      if (x_magnitude > kEpsilon) {
+        if (CheckCollision(left_bound, kAxisY) ||
+            CheckCollision(right_bound, kAxisY)) {
+          hit_brick_ = &(*bricks)[i];
+        }
       }
     }
   }
@@ -140,8 +159,8 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   ball->x_pos_ += dx;
   ball->y_pos_ += dy;
 
-  x_velocity = abs(dx) > abs(x_velocity) ? 0 : x_velocity - dx;
-  y_velocity = abs(dy) > abs(y_velocity) ? 0 : y_velocity - dy;
+  x_velocity = std::abs(dx) > std::abs(x_velocity) ? 0 : x_velocity - dx;
+  y_velocity = std::abs(dy) > std::abs(y_velocity) ? 0 : y_velocity - dy;
 
   int ball_center{ };
   int paddle_center{ };
@@ -159,7 +178,8 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
       paddle_center = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2);
       ball->x_vel_ = (ball_center - paddle_center) / 4;
       ball->y_vel_ = -ball->y_vel_;
-      y_velocity = -y_velocity;
+      x_velocity = ball->x_vel_;
+      y_velocity = ball->y_vel_;
       break;
     default:
       break;

@@ -37,6 +37,7 @@ class Physics {
   void Update(Ball *ball, const Paddle& paddle, std::vector<Brick> *bricks);
 
  private:
+  static constexpr double kEpsilon{ 0.0001 };
   // Returns the distance between two points.
   double Distance(const Point& a, const Point& b);
 
