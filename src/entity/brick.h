@@ -30,7 +30,7 @@ class Brick {
   int get_x_pos() const { return x_pos_; }
   int get_y_pos() const { return y_pos_; }
   bool is_hit() const { return hit_; }
-  int value() const { return type_ * 2 + 1; }
+  int value() const { return type_ * 2 - 1; }
 
   void hit() { hit_ = true; }
 
