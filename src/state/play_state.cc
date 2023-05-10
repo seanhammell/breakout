@@ -12,6 +12,7 @@
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
+#include "src/state/menu_state.h"
 
 PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 },
@@ -29,7 +30,7 @@ bool PlayState::Load() {
   return true;
 }
 
-StateMachine *PlayState::HandleInput(SDL_Event input) {
+void PlayState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     if (input.key.keysym.sym == SDLK_p) {
       paused_ = !paused_;
@@ -40,14 +41,18 @@ StateMachine *PlayState::HandleInput(SDL_Event input) {
     ball_.HandleInput(input);
     paddle_.HandleInput(input);
   }
-  return NULL;
 }
 
-void PlayState::Update() {
+StateMachine *PlayState::Update() {
   if (!paused_) {
     paddle_.Update();
     ball_.Update(paddle_, &bricks_);
+    if (ball_.remaining_lives() == 0) {
+      return new MenuState();
+    }
   }
+
+  return NULL;
 }
 
 void PlayState::Render() {

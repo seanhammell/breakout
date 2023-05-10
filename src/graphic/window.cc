@@ -50,18 +50,18 @@ void Window::Loop() {
         return;
       }
 
-      StateMachine *new_state = kGame.game_state->HandleInput(e);
-      if (new_state != NULL) {
-        if (!new_state->is_valid()) {
-          fprintf(stderr, "Invalid state\n");
-          return;
-        }
-        delete kGame.game_state;
-        kGame.game_state = new_state;
-      }
+      kGame.game_state->HandleInput(e);
     }
 
-    kGame.game_state->Update();
+    StateMachine *new_state = kGame.game_state->Update();
+    if (new_state != NULL) {
+      if (!new_state->is_valid()) {
+        fprintf(stderr, "Invalid state\n");
+        return;
+      }
+      delete kGame.game_state;
+      kGame.game_state = new_state;
+    }
 
     kGame.renderer.Clear();
     kGame.game_state->Render();

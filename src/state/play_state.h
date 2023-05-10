@@ -24,10 +24,10 @@ class PlayState : public StateMachine {
   static bool Load();
 
   // Responds to user input during the game.
-  StateMachine *HandleInput(SDL_Event input) override;
+  void HandleInput(SDL_Event input) override;
 
   // Updates the entities and score.
-  void Update() override;
+  StateMachine *Update() override;
 
   // Renders the game objects and score to the screen.
   void Render() override;

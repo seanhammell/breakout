@@ -18,10 +18,10 @@ class MenuState : public StateMachine {
   static bool Load();
 
   // Responds to user input at the main menu.
-  StateMachine *HandleInput(SDL_Event input) override;
+  void HandleInput(SDL_Event input) override;
 
   // There is nothing to update at the main menu.
-  void Update() override {}
+  StateMachine *Update() override;
 
   // Renders the title and prompt.
   void Render() override;
@@ -33,6 +33,7 @@ class MenuState : public StateMachine {
 
   UIElement title_{ };
   UIElement prompt_{ };
+  bool play_{ false };
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_

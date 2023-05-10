@@ -29,6 +29,7 @@ void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
       y_pos_ = Paddle::kPaddleYPos - kBallHeight;
       CenterOnPaddle(paddle);
       live_ = false;
+      --n_lives_;
     }
   } else {
     CenterOnPaddle(paddle);

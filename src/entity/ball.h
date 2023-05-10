@@ -21,6 +21,8 @@ class Ball {
 
   ~Ball() = default;
 
+  int remaining_lives() { return n_lives_; }
+
   void set_speed(int y_vel) { y_vel_ = y_vel_ > 0 ? y_vel : -y_vel; }
 
   // Serves the Ball if it isn't live.
@@ -43,6 +45,7 @@ class Ball {
   int x_vel_{ (std::rand() % 7) - 3 };
   int y_vel_{ -1 };
   bool live_{ true };
+  int n_lives_{ 3 };
   Physics physics_{ };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
