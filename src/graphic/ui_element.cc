@@ -29,3 +29,12 @@ void UIElement::UpdateClip(SDL_Rect clip) {
     clip_.h = texture_->get_height();
   }
 }
+
+void UIElement::UpdateNumeric(Font *font, Texture *texture, const char *s,
+                              int n) {
+  static constexpr int kBufferLength{ 20 };
+  char buffer[kBufferLength];
+  snprintf(buffer, kBufferLength - 1, "%s%d", s, n);
+  texture->LoadFromText(*font, buffer);
+  UpdateClip();
+}

@@ -53,6 +53,7 @@ class PlayState : public StateMachine {
   std::vector<Brick> bricks_{ };
   size_t n_bricks_hit_{ };
   int milestone_{ 1 };
+  int score_{ };
 };
 
 #endif  // SRC_STATE_PLAY_STATE_H_

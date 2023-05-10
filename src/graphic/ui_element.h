@@ -3,6 +3,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 
 class UIElement {
@@ -18,6 +19,9 @@ class UIElement {
 
   // Updates the texture clip to account for changing UI Elements.
   void UpdateClip(SDL_Rect clip = { });
+
+  // Updates the texture by appending the number n to the string s.
+  void UpdateNumeric(Font *font, Texture *texture, const char *s, int n);
 
   // Renders the UIElement to the screen.
   void Render();

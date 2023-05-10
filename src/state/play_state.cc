@@ -53,7 +53,7 @@ StateMachine *PlayState::Update() {
     paddle_.Update();
     ball_.Update(paddle_, &bricks_);
     if (ball_.remaining_lives() == 0) {
-      return new OverState();
+      return new OverState(score_);
     }
   }
 
@@ -138,17 +138,14 @@ bool PlayState::LoadLevel() {
 }
 
 void PlayState::UpdateScore() {
-  int score{ 0 };
+  score_ = 0;
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
-      score += brick.value();
+      score_ += brick.value();
     }
   }
 
-  constexpr int kBufferLength{ 20 };
-  char score_buffer[kBufferLength];
-  snprintf(score_buffer, kBufferLength - 1, "SCORE: %d", score);
-  score_texture_.LoadFromText(font_, score_buffer);
+  score_display_.UpdateNumeric(&font_, &score_texture_, "SCORE: ", score_);
   score_display_.UpdateClip();
   score_display_.AlignRightHorizontal();
 }
