@@ -12,8 +12,9 @@
 #include "src/game.h"
 #include "src/graphic/renderer.h"
 #include "src/state/menu_state.h"
-#include "src/state/play_state.h"
 #include "src/state/over_state.h"
+#include "src/state/play_state.h"
+#include "src/state/select_state.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -107,6 +108,7 @@ bool Window::Create() {
 
 bool Window::LoadMedia() {
   if (!MenuState::Load()) { return false; }
+  if (!SelectState::Load()) { return false; }
   if (!PlayState::Load()) { return false; }
   if (!OverState::Load()) { return false; }
   return true;

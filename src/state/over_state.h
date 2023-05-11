@@ -20,7 +20,7 @@ class OverState : public StateMachine {
   // Responds to user input at the main menu.
   void HandleInput(SDL_Event input) override;
 
-  // There is nothing to update at the main menu.
+  // Returns the new state based on user selection.
   StateMachine *Update() override;
 
   // Renders the title and prompt.

@@ -5,8 +5,9 @@
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
-#include "src/state/state_machine.h"
 #include "src/state/play_state.h"
+#include "src/state/select_state.h"
+#include "src/state/state_machine.h"
 
 MenuState::MenuState()
     : title_{ &title_texture_, 0, 80 - title_texture_.get_height() },
@@ -28,18 +29,28 @@ bool MenuState::Load() {
 
 void MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
-    if (input.key.keysym.sym == SDLK_SPACE) {
-      next_state(kPlayState);
+    switch (input.key.keysym.sym) {
+      case SDLK_SPACE:
+        next_state(kPlayState);
+        break;
+      case SDLK_l:
+        next_state(kSelectState);
+        break;
+      default:
+        break;
     }
   }
 }
 
 StateMachine *MenuState::Update() {
-  if (get_next_state() == kPlayState) {
-    return new PlayState();
+  switch (get_next_state()) {
+    case kPlayState:
+      return new PlayState();
+    case kSelectState:
+      return new SelectState();
+    default:
+      return NULL;
   }
-
-  return NULL;
 }
 
 void MenuState::Render() {

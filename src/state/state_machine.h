@@ -8,7 +8,9 @@ class StateMachine {
   enum States {
     kNoState,
     kMenuState,
+    kSelectState,
     kPlayState,
+    kOverState,
   };
 
   virtual ~StateMachine() = default;
