@@ -5,14 +5,14 @@
 #include "src/graphic/texture.h"
 
 struct Media {
-  Font regular_font;
-  Font large_font;
+  Font regular;
+  Font large;
 
-  Texture title_texture;
-  Texture game_over_texture;
-  Texture blocks_texture;
-  Texture heart_texture;
-  Texture pause_texture;
+  Texture title;
+  Texture game_over;
+  Texture blocks;
+  Texture heart;
+  Texture pause;
 };
 
 extern Media kMedia;

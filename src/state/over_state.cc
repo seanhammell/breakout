@@ -2,6 +2,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/media.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
@@ -10,7 +11,7 @@
 #include "src/state/state_machine.h"
 
 OverState::OverState(int score)
-    : title_{ &title_texture_, 0, 70 - title_texture_.get_height() },
+    : title_{ &kMedia.game_over, 0, 70 - kMedia.game_over.get_height() },
       score_display_{ &score_texture_, 0, 90 - score_texture_.get_height() },
       play_prompt_{ &play_texture_, 0, 130 - play_texture_.get_height() },
       quit_prompt_ { &quit_texture_, 0, 140 - quit_texture_.get_height() } {
@@ -25,7 +26,6 @@ OverState::OverState(int score)
 
 bool OverState::Load() {
   if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
-  if (!title_texture_.LoadFromFile("./img/game_over.png")) { return false; }
   if (!score_texture_.LoadFromText(font_, "SCORE: ")) { return false; }
   if (!play_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY AGAIN")) {
     return false;

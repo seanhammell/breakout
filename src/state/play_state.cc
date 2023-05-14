@@ -6,6 +6,7 @@
 
 #include "SDL2/SDL.h"
 
+#include "src/media.h"
 #include "src/entity/ball.h"
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
@@ -16,22 +17,20 @@
 
 PlayState::PlayState()
     : score_display_{ &score_texture_, 0, 5 },
-      pause_screen_{ &pause_texture_, 0, 0 }, ball_{ &blocks_texture_ },
-      paddle_{ &blocks_texture_ } {
+      pause_screen_{ &kMedia.pause, 0, 0 },
+      ball_{ &kMedia.blocks },
+      paddle_{ &kMedia.blocks } {
   if (LoadLevel()) { valid(); }
   score_display_.AlignRightHorizontal();
   for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
-    int x{ (heart_texture_.get_width() + 2) * i + 2 };
-    heart_icons_.push_back({&heart_texture_, x, 5});
+    int x{ (kMedia.heart.get_width() + 2) * i + 2 };
+    heart_icons_.push_back({&kMedia.heart, x, 5});
   }
 }
 
 bool PlayState::Load() {
   if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
   if (!score_texture_.LoadFromText(font_, "SCORE: 0")) { return false; }
-  if (!blocks_texture_.LoadFromFile("./img/blocks.png")) { return false; }
-  if (!heart_texture_.LoadFromFile("./img/heart.png")) { return false; }
-  if (!pause_texture_.LoadFromFile("./img/pause.png")) { return false; }
   return true;
 }
 
@@ -123,7 +122,7 @@ bool PlayState::LoadLevel() {
     }
 
     if (type > Brick::kNoType && type < Brick::kTotalTypes) {
-      bricks_.push_back(Brick(x, y, type, &blocks_texture_));
+      bricks_.push_back(Brick(x, y, type, &kMedia.blocks));
     }
 
     x += Brick::kBrickWidth;

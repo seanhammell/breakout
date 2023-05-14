@@ -11,8 +11,10 @@ class Texture {
 
   ~Texture();
 
-  int get_width() const;
-  int get_height() const;
+  static bool LoadMediaTextures();
+
+  int get_width() const { return width_; }
+  int get_height() const { return height_; }
 
   // Loads the Texture from the file at the given path.
   bool LoadFromFile(const char *path);

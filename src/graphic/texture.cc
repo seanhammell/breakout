@@ -5,17 +5,19 @@
 #include "SDL2/SDL_ttf.h"
 
 #include "src/game.h"
+#include "src/media.h"
 
 Texture::~Texture() {
   Free();
 }
 
-int Texture::get_width() const {
-  return width_;
-}
-
-int Texture::get_height() const {
-  return height_;
+bool Texture::LoadMediaTextures() {
+  if (!kMedia.title.LoadFromFile("./img/title.png")) { return false; }
+  if (!kMedia.game_over.LoadFromFile("./img/game_over.png")) { return false; }
+  if (!kMedia.blocks.LoadFromFile("./img/blocks.png")) { return false; }
+  if (!kMedia.heart.LoadFromFile("./img/heart.png")) { return false; }
+  if (!kMedia.pause.LoadFromFile("./img/pause.png")) { return false; }
+  return true;
 }
 
 bool Texture::LoadFromFile(const char *path) {

@@ -28,7 +28,6 @@ class OverState : public StateMachine {
 
  private:
   static inline Font font_{ };
-  static inline Texture title_texture_{ };
   static inline Texture score_texture_{ };
   static inline Texture play_texture_{ };
   static inline Texture quit_texture_{ };

@@ -29,7 +29,6 @@ class MenuState : public StateMachine {
 
  private:
   static inline Font font_{ };
-  static inline Texture title_texture_{ };
   static inline Texture prompt_texture_{ };
 
   Widget title_{ };
