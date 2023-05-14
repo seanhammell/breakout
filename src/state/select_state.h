@@ -25,7 +25,6 @@ class SelectState : public StateMachine {
   void Render() override;
 
  private:
-  static inline Font font_{ };
   static inline Texture prompt_texture_{ };
 
   UIElement prompt_{ };

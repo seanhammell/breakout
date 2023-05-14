@@ -28,7 +28,6 @@ class MenuState : public StateMachine {
   void Render() override;
 
  private:
-  static inline Font font_{ };
   static inline Texture prompt_texture_{ };
 
   Widget title_{ };

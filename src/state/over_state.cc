@@ -17,7 +17,8 @@ OverState::OverState(int score)
       quit_prompt_ { &quit_texture_, 0, 140 - quit_texture_.get_height() } {
   valid();
   title_.AlignCenterHorizontal();
-  score_display_.UpdateNumeric(&font_, &score_texture_, "SCORE: ", score);
+  score_display_.UpdateNumeric(&kMedia.regular, &score_texture_, "SCORE: ",
+                               score);
   score_display_.UpdateClip();
   score_display_.AlignCenterHorizontal();
   play_prompt_.AlignCenterHorizontal();
@@ -25,12 +26,13 @@ OverState::OverState(int score)
 }
 
 bool OverState::Load() {
-  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
-  if (!score_texture_.LoadFromText(font_, "SCORE: ")) { return false; }
-  if (!play_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY AGAIN")) {
+  if (!score_texture_.LoadFromText(kMedia.large, "SCORE: ")) { return false; }
+  if (!play_texture_.LoadFromText(kMedia.regular,
+                                  "PRESS SPACEBAR TO PLAY AGAIN")) {
     return false;
   }
-  if (!quit_texture_.LoadFromText(font_, "PRESS Q FOR THE TITLE SCREEN")) {
+  if (!quit_texture_.LoadFromText(kMedia.regular,
+                                  "PRESS Q FOR THE TITLE SCREEN")) {
     return false;
   }
 

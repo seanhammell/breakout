@@ -29,8 +29,9 @@ PlayState::PlayState()
 }
 
 bool PlayState::Load() {
-  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
-  if (!score_texture_.LoadFromText(font_, "SCORE: 0")) { return false; }
+  if (!score_texture_.LoadFromText(kMedia.regular, "SCORE: 0")) {
+    return false;
+  }
   return true;
 }
 
@@ -144,7 +145,8 @@ void PlayState::UpdateScore() {
     }
   }
 
-  score_display_.UpdateNumeric(&font_, &score_texture_, "SCORE: ", score_);
+  score_display_.UpdateNumeric(&kMedia.regular, &score_texture_, "SCORE: ",
+                               score_);
   score_display_.UpdateClip();
   score_display_.AlignRightHorizontal();
 }

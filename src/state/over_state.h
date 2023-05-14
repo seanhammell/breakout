@@ -27,7 +27,6 @@ class OverState : public StateMachine {
   void Render() override;
 
  private:
-  static inline Font font_{ };
   static inline Texture score_texture_{ };
   static inline Texture play_texture_{ };
   static inline Texture quit_texture_{ };

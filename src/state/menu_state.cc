@@ -18,8 +18,7 @@ MenuState::MenuState()
 }
 
 bool MenuState::Load() {
-  if (!font_.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
-  if (!prompt_texture_.LoadFromText(font_, "PRESS SPACEBAR TO PLAY")) {
+  if (!prompt_texture_.LoadFromText(kMedia.regular, "PRESS SPACEBAR TO PLAY")) {
     return false;
   }
 

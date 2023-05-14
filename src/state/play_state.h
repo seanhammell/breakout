@@ -38,7 +38,6 @@ class PlayState : public StateMachine {
 
   void UpdateScore();
 
-  static inline Font font_{ };
   static inline Texture score_texture_{ };
 
   UIElement score_display_{ };

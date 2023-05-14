@@ -5,16 +5,16 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 
+#include "src/media.h"
+
 Font::~Font() {
   Free();
 }
 
-TTF_Font *Font::get_font() const {
-  return font_;
-}
-
-SDL_Color Font::get_color() const {
-  return color_;
+bool Font::LoadMediaFonts() {
+  if (!kMedia.regular.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
+  if (!kMedia.large.LoadFromFile("./font/cs50.ttf", 12)) { return false; }
+  return true;
 }
 
 bool Font::LoadFromFile(const char *path, const int size) {

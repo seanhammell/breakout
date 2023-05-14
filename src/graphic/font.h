@@ -10,8 +10,10 @@ class Font {
 
   ~Font();
 
-  TTF_Font *get_font() const;
-  SDL_Color get_color() const;
+  static bool LoadMediaFonts();
+
+  TTF_Font *get_font() const { return font_; }
+  SDL_Color get_color() const { return color_; }
 
   // Loads the Font from the given path.
   bool LoadFromFile(const char *path, const int size);

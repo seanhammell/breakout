@@ -15,7 +15,7 @@ Media kMedia;
 int main() {
   std::srand(std::time(nullptr));
 
-  if (!Texture::LoadMediaTextures()) {
+  if (!Texture::LoadMediaTextures() || !Font::LoadMediaFonts()) {
     return 0;
   }
 
