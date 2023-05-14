@@ -10,10 +10,9 @@
 #include "src/state/state_machine.h"
 
 MenuState::MenuState()
-    : title_{ &title_texture_, 0, 80 - title_texture_.get_height() },
+    : title_{ &title_texture_, {1, 1}, {0, -title_texture_.get_height() / 2} },
       prompt_{ &prompt_texture_, 0, 80 + prompt_texture_.get_height() } {
   valid();
-  title_.AlignCenterHorizontal();
   prompt_.AlignCenterHorizontal();
 }
 

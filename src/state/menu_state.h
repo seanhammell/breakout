@@ -7,6 +7,7 @@
 #include "src/graphic/texture.h"
 #include "src/graphic/ui_element.h"
 #include "src/state/state_machine.h"
+#include "src/ui/widget.h"
 
 class MenuState : public StateMachine {
  public:
@@ -31,7 +32,7 @@ class MenuState : public StateMachine {
   static inline Texture title_texture_{ };
   static inline Texture prompt_texture_{ };
 
-  UIElement title_{ };
+  Widget title_{ };
   UIElement prompt_{ };
 };
 
