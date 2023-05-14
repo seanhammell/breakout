@@ -17,6 +17,8 @@ Ball::Ball(Texture *texture, SDL_Rect clip)
 void Ball::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     if (input.key.keysym.sym == SDLK_SPACE && !live_) {
+      x_vel_ = (std::rand() % 7) - 3;
+      y_vel_ = -y_vel_;
       live_ = true;
     }
   }
@@ -41,5 +43,5 @@ void Ball::Render() {
 }
 
 void Ball::CenterOnPaddle(const Paddle& paddle) {
-  x_pos_ = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2) - (kBallWidth / 2);
+  x_pos_ = paddle.get_x_pos() + (Paddle::kPaddleWidth - kBallWidth) / 2;
 }
