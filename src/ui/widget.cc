@@ -5,7 +5,7 @@
 #include "src/graphic/renderer.h"
 #include "src/graphic/texture.h"
 
-Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip) 
+Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
     : texture_{ texture },
       anchor_{ anchor },
       offset_{ offset },

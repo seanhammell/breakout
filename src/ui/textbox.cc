@@ -1,5 +1,7 @@
 #include "src/ui/textbox.h"
 
+#include <cstdlib>
+
 #include "src/graphic/font.h"
 
 Textbox::Textbox(Font *font, Texture *texture, Point anchor, Point offset,
@@ -8,7 +10,7 @@ Textbox::Textbox(Font *font, Texture *texture, Point anchor, Point offset,
 
 void Textbox::UpdateScore(int score) {
   char buffer[20];
-  snprintf(buffer, 19, "SCORE: %d", score);
+  snprintf(buffer, sizeof(buffer), "SCORE: %d", score);
   Update(buffer);
 }
 

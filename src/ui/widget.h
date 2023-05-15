@@ -29,7 +29,6 @@ class Widget {
   virtual void Render();
 
  private:
-
   // Calculates the x and y positions of the Widget by its anchor and offset.
   int CalculatePosX() const;
   int CalculatePosY() const;

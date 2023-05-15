@@ -9,7 +9,7 @@ class Textbox : public Widget {
   Textbox() = default;
   Textbox(Font *font, Texture *texture, Point anchor, Point offset,
           SDL_Rect clip = { });
-  
+
   ~Textbox() = default;
 
   Font *get_font() const { return font_; }

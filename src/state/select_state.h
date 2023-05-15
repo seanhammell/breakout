@@ -14,7 +14,7 @@ class SelectState : public StateMachine {
 
   // Loads the textures and font nedded by SelectState.
   static bool Load();
-  
+
   // Responds to user input during level selection.
   void HandleInput(SDL_Event) override {}
 
