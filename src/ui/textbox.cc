@@ -13,6 +13,7 @@ void Textbox::UpdateScore(int score) {
 }
 
 void Textbox::Update(const char *text) {
-  get_texture()->LoadFromText(*font_, text);
-  CheckClip();
+  Texture *texture = get_texture();
+  texture->LoadFromText(*font_, text);
+  set_clip({ 0, 0, texture->get_width(), texture->get_height() });
 }

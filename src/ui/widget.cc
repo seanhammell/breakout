@@ -10,10 +10,6 @@ Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
       anchor_{ anchor },
       offset_{ offset },
       clip_{ clip } {
-  CheckClip();
-}
-
-void Widget::CheckClip() {
   // If the width of the clip is 0, assume the element is the entire Texture.
   if (clip_.w == 0) {
     clip_.w = texture_->get_width();

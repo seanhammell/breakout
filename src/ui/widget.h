@@ -23,10 +23,7 @@ class Widget {
   Texture *get_texture() const { return texture_; }
 
   void set_offset(Point offset) { offset_ = offset; }
-
-  // Checks the clip to see if it was explicitly initialized. If it wasn't,
-  // set the clip to the entire Texture.
-  void CheckClip();
+  void set_clip(SDL_Rect clip) { clip_ = clip; }
 
   // Renders the Widget to the screen.
   virtual void Render();
