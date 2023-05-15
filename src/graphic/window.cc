@@ -14,7 +14,6 @@
 #include "src/state/menu_state.h"
 #include "src/state/over_state.h"
 #include "src/state/play_state.h"
-#include "src/state/select_state.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -41,7 +40,6 @@ SDL_Window *Window::get_window() const {
 void Window::Loop() {
   assert(kGame.window.get_instantiated());
   assert(kGame.renderer.get_instantiated());
-  assert(LoadMedia());
   kGame.game_state = new MenuState();
 
   SDL_Event e;
@@ -103,11 +101,6 @@ bool Window::Create() {
     return false;
   }
 
-  return true;
-}
-
-bool Window::LoadMedia() {
-  if (!SelectState::Load()) { return false; }
   return true;
 }
 

@@ -1,7 +1,6 @@
 #ifndef SRC_STATE_PLAY_STATE_H_
 #define SRC_STATE_PLAY_STATE_H_
 
-#include <cstddef>
 #include <vector>
 
 #include "SDL2/SDL.h"
