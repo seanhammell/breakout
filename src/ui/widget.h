@@ -19,13 +19,18 @@ class Widget {
 
   ~Widget() = default;
 
-  // Renders the Widget to the screen.
-  void Render();
+  Texture *get_texture() const { return texture_; }
 
- private:
+  void set_texture(Texture *texture) { texture_ = texture; }
+
   // Checks the clip to see if it was explicitly initialized. If it wasn't,
   // set the clip to the entire Texture.
   void CheckClip();
+
+  // Renders the Widget to the screen.
+  virtual void Render();
+
+ private:
 
   // Calculates the x and y positions of the Widget by its anchor and offset.
   int CalculatePosX() const;

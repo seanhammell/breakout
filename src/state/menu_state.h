@@ -3,20 +3,15 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/graphic/font.h"
-#include "src/graphic/texture.h"
-#include "src/graphic/ui_element.h"
 #include "src/state/state_machine.h"
 #include "src/ui/widget.h"
+#include "src/ui/textbox.h"
 
 class MenuState : public StateMachine {
  public:
   MenuState();
 
-  ~MenuState() = default;
-
-  // Loads the textures and font needed by MenuState.
-  static bool Load();
+  ~MenuState();
 
   // Responds to user input at the main menu.
   void HandleInput(SDL_Event input) override;
@@ -28,10 +23,8 @@ class MenuState : public StateMachine {
   void Render() override;
 
  private:
-  static inline Texture prompt_texture_{ };
-
   Widget title_{ };
-  UIElement prompt_{ };
+  Textbox prompt_{ };
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_

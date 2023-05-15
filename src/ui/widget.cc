@@ -13,16 +13,16 @@ Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
   CheckClip();
 }
 
-void Widget::Render() {
-  texture_->Render(CalculatePosX(), CalculatePosY(), &clip_);
-}
-
 void Widget::CheckClip() {
   // If the width of the clip is 0, assume the element is the entire Texture.
   if (clip_.w == 0) {
     clip_.w = texture_->get_width();
     clip_.h = texture_->get_height();
   }
+}
+
+void Widget::Render() {
+  texture_->Render(CalculatePosX(), CalculatePosY(), &clip_);
 }
 
 int Widget::CalculatePosX() const {

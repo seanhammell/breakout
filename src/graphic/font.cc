@@ -25,6 +25,7 @@ bool Font::LoadFromFile(const char *path, const int size) {
     fprintf(stderr, "Error opening font: %s\n", TTF_GetError());
     return false;
   }
+  size_ = size;
 
   return true;
 }

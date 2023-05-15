@@ -13,6 +13,7 @@ class Font {
   static bool LoadMediaFonts();
 
   TTF_Font *get_font() const { return font_; }
+  int get_size() { return size_; }
   SDL_Color get_color() const { return color_; }
 
   // Loads the Font from the given path.
@@ -23,6 +24,7 @@ class Font {
   void Free();
 
   TTF_Font *font_{ NULL };
+  int size_{ };
   SDL_Color color_{ 0xEC, 0xEF, 0xF4, 0xFF };
 };
 
