@@ -24,7 +24,7 @@ class MenuState : public StateMachine {
 
  private:
   Widget title_{ };
-  Textbox prompt_{ };
+  Textbox play_{ };
 };
 
 #endif  // SRC_STATE_MENU_STATE_H_

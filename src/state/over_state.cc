@@ -1,5 +1,7 @@
 #include "src/state/over_state.h"
 
+#include "stdio.h"
+
 #include "SDL2/SDL.h"
 
 #include "src/media.h"
@@ -11,32 +13,15 @@
 #include "src/state/state_machine.h"
 
 OverState::OverState(int score)
-    : title_{ &kMedia.game_over, 0, 70 - kMedia.game_over.get_height() },
-      score_display_{ &score_texture_, 0, 90 - score_texture_.get_height() },
-      play_prompt_{ &play_texture_, 0, 130 - play_texture_.get_height() },
-      quit_prompt_ { &quit_texture_, 0, 140 - quit_texture_.get_height() } {
-  title_.AlignCenterHorizontal();
-  score_display_.UpdateNumeric(&kMedia.regular, &score_texture_, "SCORE: ",
-                               score);
-  score_display_.UpdateClip();
-  score_display_.AlignCenterHorizontal();
-  play_prompt_.AlignCenterHorizontal();
-  quit_prompt_.AlignCenterHorizontal();
+    : title_{ &kMedia.game_over, { 1, 1 },
+              { 0, -kMedia.game_over.get_height() } },
+      score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
+      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } },
+      quit_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
+  score_.UpdateScore(score);
+  play_.Update("PRESS SPACEBAR TO PLAY AGAIN");
+  quit_.Update("PRESS Q TO QUIT");
   set_valid();
-}
-
-bool OverState::Load() {
-  if (!score_texture_.LoadFromText(kMedia.large, "SCORE: ")) { return false; }
-  if (!play_texture_.LoadFromText(kMedia.regular,
-                                  "PRESS SPACEBAR TO PLAY AGAIN")) {
-    return false;
-  }
-  if (!quit_texture_.LoadFromText(kMedia.regular,
-                                  "PRESS Q FOR THE TITLE SCREEN")) {
-    return false;
-  }
-
-  return true;
 }
 
 void OverState::HandleInput(SDL_Event input) {
@@ -67,7 +52,7 @@ StateMachine *OverState::Update() {
 
 void OverState::Render() {
   title_.Render();
-  score_display_.Render();
-  play_prompt_.Render();
-  quit_prompt_.Render();
+  score_.Render();
+  play_.Render();
+  quit_.Render();
 }

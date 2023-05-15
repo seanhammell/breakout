@@ -8,20 +8,18 @@
 #include "src/state/play_state.h"
 #include "src/state/select_state.h"
 #include "src/state/state_machine.h"
-#include "src/ui/widget.h"
 #include "src/ui/textbox.h"
+#include "src/ui/widget.h"
 
 MenuState::MenuState()
     : title_{ &kMedia.title, { 1, 1 }, { 0, -kMedia.title.get_height() / 2 } },
-      prompt_{ &kMedia.regular, new Texture(), { 1, 1 },
-               { 0, kMedia.regular.get_size() * 2 } } {
-  Texture *prompt{ new Texture() };
-  prompt_.set_texture(prompt);
+      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } } {
+  play_.Update("PRESS SPACEBAR TO PLAY");
   set_valid();
 }
 
 MenuState::~MenuState() {
-  delete prompt_.get_texture();
+  delete play_.get_texture();
 }
 
 void MenuState::HandleInput(SDL_Event input) {
@@ -40,7 +38,6 @@ void MenuState::HandleInput(SDL_Event input) {
 }
 
 StateMachine *MenuState::Update() {
-  prompt_.Update("PRESS SPACEBAR TO PLAY");
   switch (get_next_state()) {
     case kPlayState:
       return new PlayState();
@@ -53,5 +50,5 @@ StateMachine *MenuState::Update() {
 
 void MenuState::Render() {
   title_.Render();
-  prompt_.Render();
+  play_.Render();
 }

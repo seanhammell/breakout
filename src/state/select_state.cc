@@ -9,7 +9,7 @@ SelectState::SelectState()
 }
 
 bool SelectState::Load() {
-  if (!prompt_texture_.LoadFromText(kMedia.regular, "SELECT LEVEL")) {
+  if (!prompt_texture_.LoadFromText(kMedia.font, "SELECT LEVEL")) {
     return false;
   }
   return true;

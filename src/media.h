@@ -5,8 +5,7 @@
 #include "src/graphic/texture.h"
 
 struct Media {
-  Font regular;
-  Font large;
+  Font font;
 
   Texture title;
   Texture game_over;

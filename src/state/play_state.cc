@@ -29,7 +29,7 @@ PlayState::PlayState()
 }
 
 bool PlayState::Load() {
-  if (!score_texture_.LoadFromText(kMedia.regular, "SCORE: 0")) {
+  if (!score_texture_.LoadFromText(kMedia.font, "SCORE: 0")) {
     return false;
   }
   return true;
@@ -145,7 +145,7 @@ void PlayState::UpdateScore() {
     }
   }
 
-  score_display_.UpdateNumeric(&kMedia.regular, &score_texture_, "SCORE: ",
+  score_display_.UpdateNumeric(&kMedia.font, &score_texture_, "SCORE: ",
                                score_);
   score_display_.UpdateClip();
   score_display_.AlignRightHorizontal();

@@ -21,8 +21,6 @@ class Widget {
 
   Texture *get_texture() const { return texture_; }
 
-  void set_texture(Texture *texture) { texture_ = texture; }
-
   // Checks the clip to see if it was explicitly initialized. If it wasn't,
   // set the clip to the entire Texture.
   void CheckClip();

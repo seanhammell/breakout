@@ -109,7 +109,6 @@ bool Window::Create() {
 bool Window::LoadMedia() {
   if (!SelectState::Load()) { return false; }
   if (!PlayState::Load()) { return false; }
-  if (!OverState::Load()) { return false; }
   return true;
 }
 

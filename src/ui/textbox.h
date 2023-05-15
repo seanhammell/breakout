@@ -14,6 +14,8 @@ class Textbox : public Widget {
 
   Font *get_font() const { return font_; }
 
+  void UpdateScore(int score);
+
   void Update(const char *text);
 
  private:
