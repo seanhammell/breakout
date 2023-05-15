@@ -20,7 +20,7 @@ PlayState::PlayState()
       pause_screen_{ &kMedia.pause, 0, 0 },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
-  if (LoadLevel()) { valid(); }
+  if (LoadLevel()) { set_valid(); }
   score_display_.AlignRightHorizontal();
   for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
     int x{ (kMedia.heart.get_width() + 2) * i + 2 };

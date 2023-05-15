@@ -15,7 +15,6 @@ OverState::OverState(int score)
       score_display_{ &score_texture_, 0, 90 - score_texture_.get_height() },
       play_prompt_{ &play_texture_, 0, 130 - play_texture_.get_height() },
       quit_prompt_ { &quit_texture_, 0, 140 - quit_texture_.get_height() } {
-  valid();
   title_.AlignCenterHorizontal();
   score_display_.UpdateNumeric(&kMedia.regular, &score_texture_, "SCORE: ",
                                score);
@@ -23,6 +22,7 @@ OverState::OverState(int score)
   score_display_.AlignCenterHorizontal();
   play_prompt_.AlignCenterHorizontal();
   quit_prompt_.AlignCenterHorizontal();
+  set_valid();
 }
 
 bool OverState::Load() {
@@ -43,10 +43,10 @@ void OverState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
       case SDLK_SPACE:
-        next_state(kPlayState);
+        set_next_state(kPlayState);
         break;
       case SDLK_q:
-        next_state(kMenuState);
+        set_next_state(kMenuState);
         break;
       default:
         break;

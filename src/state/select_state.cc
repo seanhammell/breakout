@@ -4,7 +4,7 @@
 
 SelectState::SelectState()
     : prompt_{ &prompt_texture_, 0, 50 - prompt_texture_.get_height() } {
-  valid();
+  set_valid();
   prompt_.AlignCenterHorizontal();
 }
 

@@ -57,7 +57,7 @@ void Window::Loop() {
 
     StateMachine *new_state = kGame.game_state->Update();
     if (new_state != NULL) {
-      if (!new_state->is_valid()) {
+      if (!new_state->get_valid()) {
         fprintf(stderr, "Invalid state\n");
         return;
       }

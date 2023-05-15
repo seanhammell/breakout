@@ -17,6 +17,7 @@ MenuState::MenuState()
                { 0, kMedia.regular.get_size() * 2 } } {
   Texture *prompt{ new Texture() };
   prompt_.set_texture(prompt);
+  set_valid();
 }
 
 MenuState::~MenuState() {
@@ -27,10 +28,10 @@ void MenuState::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
       case SDLK_SPACE:
-        next_state(kPlayState);
+        set_next_state(kPlayState);
         break;
       case SDLK_l:
-        next_state(kSelectState);
+        set_next_state(kSelectState);
         break;
       default:
         break;
