@@ -9,19 +9,15 @@
 #include "src/entity/ball.h"
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
-#include "src/graphic/font.h"
-#include "src/graphic/texture.h"
-#include "src/graphic/ui_element.h"
 #include "src/state/state_machine.h"
+#include "src/ui/textbox.h"
+#include "src/ui/widget.h"
 
 class PlayState : public StateMachine {
  public:
   PlayState();
 
   ~PlayState() = default;
-
-  // Loads the Textures and Font needed by PlayState.
-  static bool Load();
 
   // Responds to user input during the game.
   void HandleInput(SDL_Event input) override;
@@ -36,18 +32,17 @@ class PlayState : public StateMachine {
   // Loads the starting Bricks for a given level.
   bool LoadLevel();
 
-  void UpdateScore();
+  // Counts the number of live bricks, updating the score and ball speed
+  // accordingly.
+  void CountBricks();
 
-  static inline Texture score_texture_{ };
-
-  UIElement score_display_{ };
-  UIElement pause_screen_{ };
-  std::vector<UIElement> heart_icons_{ };
+  Textbox score_display_{ };
+  Widget hearts_{ };
+  Widget pause_screen_{ };
   bool paused_{ false };
   Ball ball_{ };
   Paddle paddle_{ };
   std::vector<Brick> bricks_{ };
-  size_t n_bricks_hit_{ };
   int milestone_{ 1 };
   int score_{ };
 };

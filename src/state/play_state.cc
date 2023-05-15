@@ -12,27 +12,19 @@
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
-#include "src/graphic/ui_element.h"
 #include "src/state/over_state.h"
+#include "src/ui/textbox.h"
+#include "src/ui/widget.h"
 
 PlayState::PlayState()
-    : score_display_{ &score_texture_, 0, 5 },
-      pause_screen_{ &kMedia.pause, 0, 0 },
+    : score_display_{ &kMedia.font, new Texture(), { 2, 0 }, { 0, 0 } },
+      hearts_{ &kMedia.heart, { 0, 0 }, { 0, 0 } },
+      pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
-  if (LoadLevel()) { set_valid(); }
-  score_display_.AlignRightHorizontal();
-  for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
-    int x{ (kMedia.heart.get_width() + 2) * i + 2 };
-    heart_icons_.push_back({&kMedia.heart, x, 5});
+  if (LoadLevel()) {
+    set_valid();
   }
-}
-
-bool PlayState::Load() {
-  if (!score_texture_.LoadFromText(kMedia.font, "SCORE: 0")) {
-    return false;
-  }
-  return true;
 }
 
 void PlayState::HandleInput(SDL_Event input) {
@@ -52,6 +44,7 @@ StateMachine *PlayState::Update() {
   if (!paused_) {
     paddle_.Update();
     ball_.Update(paddle_, &bricks_);
+    CountBricks();
     if (ball_.remaining_lives() == 0) {
       return new OverState(score_);
     }
@@ -61,36 +54,26 @@ StateMachine *PlayState::Update() {
 }
 
 void PlayState::Render() {
-  score_display_.Render();
   paddle_.Render();
   ball_.Render();
 
-  size_t broken_bricks{ 0 };
   for (auto brick : bricks_) {
-    if (brick.is_hit()) {
-      ++broken_bricks;
-      continue;
+    if (!brick.is_hit()) {
+      brick.Render();
     }
-
-    brick.Render();
   }
+
+  score_display_.Render();
 
   for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
-    heart_icons_[i].Render();
+    hearts_.set_offset({ (hearts_.get_width() + Widget::kPadding) * i, 0 });
+    hearts_.Render();
   }
+  hearts_.set_offset({ 0, 0 });
 
   if (paused_) {
     pause_screen_.Render();
     return;
-  }
-
-  if (broken_bricks > n_bricks_hit_) {
-    n_bricks_hit_ = broken_bricks;
-    if (n_bricks_hit_ > (bricks_.size() / (4 / milestone_))) {
-      ++milestone_;
-      ball_.set_speed(milestone_);
-    }
-    UpdateScore();
   }
 }
 
@@ -137,16 +120,20 @@ bool PlayState::LoadLevel() {
   return true;
 }
 
-void PlayState::UpdateScore() {
+void PlayState::CountBricks() {
   score_ = 0;
+  size_t broken_bricks{ 0 };
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
       score_ += brick.value();
+      ++broken_bricks;
+      continue;
     }
   }
 
-  score_display_.UpdateNumeric(&kMedia.font, &score_texture_, "SCORE: ",
-                               score_);
-  score_display_.UpdateClip();
-  score_display_.AlignRightHorizontal();
+  score_display_.UpdateScore(score_);
+  if (broken_bricks > (bricks_.size() / (4 / milestone_))) {
+    ++milestone_;
+    ball_.set_speed(milestone_);
+  }
 }

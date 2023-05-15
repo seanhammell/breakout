@@ -14,8 +14,10 @@ class Textbox : public Widget {
 
   Font *get_font() const { return font_; }
 
+  // Updates score text with the provided score.
   void UpdateScore(int score);
 
+  // Updates the Textbox with the provided string.
   void Update(const char *text);
 
  private:

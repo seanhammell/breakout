@@ -19,7 +19,10 @@ class Widget {
 
   ~Widget() = default;
 
+  int get_width() const { return clip_.w; }
   Texture *get_texture() const { return texture_; }
+
+  void set_offset(Point offset) { offset_ = offset; }
 
   // Checks the clip to see if it was explicitly initialized. If it wasn't,
   // set the clip to the entire Texture.
