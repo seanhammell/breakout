@@ -15,8 +15,8 @@ class Textbox : public Widget {
 
   Font *get_font() const { return font_; }
 
-  // Updates score text with the provided score.
-  void UpdateScore(int score);
+  // Appends the integer to the string.
+  void AppendNumber(const char *s, int n);
 
   // Updates the Textbox with the provided string.
   void Update(const char *text);

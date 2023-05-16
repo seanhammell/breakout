@@ -17,7 +17,7 @@ GameOver::GameOver(int score)
       score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
       play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } },
       menu_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
-  score_.UpdateScore(score);
+  score_.AppendNumber("SCORE: ", score);
   play_.Update("PLAY AGAIN");
   menu_.Update("MAIN MENU");
   set_valid();

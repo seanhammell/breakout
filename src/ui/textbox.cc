@@ -10,9 +10,9 @@ Textbox::Textbox(Font *font, Texture *texture, Point anchor, Point offset,
                  SDL_Rect clip)
     : Widget{ texture, anchor, offset, clip }, font_{ font } {}
 
-void Textbox::UpdateScore(int score) {
+void Textbox::AppendNumber(const char *s, int n) {
   char buffer[20];
-  snprintf(buffer, sizeof(buffer), "SCORE: %d", score);
+  snprintf(buffer, sizeof(buffer), "%s%d", s, n);
   Update(buffer);
 }
 
