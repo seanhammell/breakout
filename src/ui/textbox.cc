@@ -23,8 +23,9 @@ void Textbox::Update(const char *text) {
 }
 
 void Textbox::RenderSelected() {
-  static Widget selected{ &kMedia.blocks, { 1, 1 }, { 0, 0 }, {24, 3, 2, 2} };
-  int x{ get_x_pos() - (selected.get_width() + Widget::kPadding) };
-  int y{ get_y_pos() + (get_height() / 2) - selected.get_height() };
-  selected.Render(x, y);
+  Widget selected{ &kMedia.blocks, get_anchor(), get_offset(), {24, 3, 2, 2} };
+  Point adjusted_offset{ selected.get_offset() };
+  adjusted_offset.x -= (get_width() / 2) + kPadding;
+  selected.set_offset(adjusted_offset);
+  selected.Render();
 }

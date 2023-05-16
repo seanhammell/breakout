@@ -20,8 +20,8 @@ class Widget {
   ~Widget() = default;
 
   Texture *get_texture() const { return texture_; }
-  int get_x_pos() const { return CalculatePosX(); }
-  int get_y_pos() const { return CalculatePosY(); }
+  Point get_anchor() const { return anchor_; }
+  Point get_offset() const { return offset_; }
   int get_width() const { return clip_.w; }
   int get_height() const { return clip_.h; }
 
@@ -30,7 +30,7 @@ class Widget {
 
   // Renders the Widget to the screen. Widgets use their anchors and offsets by
   // default but true x and y rendering positions may be passed in.
-  virtual void Render(int x = -1, int y = -1);
+  virtual void Render();
 
  private:
   // Calculates the x and y positions of the Widget by its anchor and offset.
