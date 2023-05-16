@@ -12,8 +12,7 @@
 
 Menu::Menu()
     : title_{ &kMedia.title, { 1, 1 }, { 0, -kMedia.title.get_height() / 2 } },
-      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } },
-      select_{ &kMedia.blocks, { 1, 1 }, { 0, 0 }, {24, 3, 2, 2} } {
+      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } } {
   play_.Update("PLAY");
   set_valid();
 }

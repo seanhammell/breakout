@@ -26,7 +26,8 @@ class GameOver : public StateMachine {
   Widget title_{ };
   Textbox score_{ };
   Textbox play_{ };
-  Textbox quit_{ };
+  Textbox menu_{ };
+  StateMachine::States selection_{ kPlayState };
 };
 
 #endif  // SRC_STATE_GAME_OVER_H_

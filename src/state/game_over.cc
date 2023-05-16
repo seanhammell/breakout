@@ -16,21 +16,24 @@ GameOver::GameOver(int score)
               { 0, -kMedia.game_over.get_height() } },
       score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
       play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } },
-      quit_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
+      menu_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
   score_.UpdateScore(score);
-  play_.Update("PRESS SPACEBAR TO PLAY AGAIN");
-  quit_.Update("PRESS Q TO QUIT");
+  play_.Update("PLAY AGAIN");
+  menu_.Update("MAIN MENU");
   set_valid();
 }
 
 void GameOver::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
-      case SDLK_SPACE:
-        set_next_state(kPlayState);
+      case SDLK_UP:
+        selection_ = kPlayState;
         break;
-      case SDLK_q:
-        set_next_state(kMenuState);
+      case SDLK_DOWN:
+        selection_ = kMenuState;
+        break;
+      case SDLK_RETURN:
+        set_next_state(selection_);
         break;
       default:
         break;
@@ -53,5 +56,15 @@ void GameOver::Render() {
   title_.Render();
   score_.Render();
   play_.Render();
-  quit_.Render();
+  menu_.Render();
+  switch (selection_) {
+    case kPlayState:
+      play_.RenderSelected();
+      break;
+    case kMenuState:
+      menu_.RenderSelected();
+      break;
+    default:
+      break;
+  }
 }
