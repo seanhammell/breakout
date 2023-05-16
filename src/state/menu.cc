@@ -5,7 +5,7 @@
 #include "src/media.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
-#include "src/state/play.h"
+#include "src/state/level_select.h"
 #include "src/state/state_machine.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
@@ -42,7 +42,7 @@ void Menu::HandleInput(SDL_Event input) {
 StateMachine *Menu::Update() {
   switch (get_next_state()) {
     case kPlayState:
-      return new Play();
+      return new LevelSelect(kPlayState);
     default:
       return NULL;
   }

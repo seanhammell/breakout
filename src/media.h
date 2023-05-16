@@ -9,10 +9,10 @@ struct Media {
 
   Texture title;
   Texture game_over;
+  Texture select;
   Texture blocks;
   Texture heart;
   Texture pause;
-  Texture arrow;
 };
 
 extern Media kMedia;

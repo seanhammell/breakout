@@ -13,9 +13,9 @@
 
 class Play : public StateMachine {
  public:
-  Play();
+  explicit Play(const char *level);
 
-  ~Play() = default;
+  ~Play();
 
   // Responds to user input during the game.
   void HandleInput(SDL_Event input) override;
@@ -28,7 +28,7 @@ class Play : public StateMachine {
 
  private:
   // Loads the starting Bricks for a given level.
-  bool LoadLevel();
+  bool LoadLevel(const char *level);
 
   // Counts the number of live bricks, updating the score and ball speed
   // accordingly.

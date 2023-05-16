@@ -16,15 +16,19 @@
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
 
-Play::Play()
+Play::Play(const char *level)
     : score_display_{ &kMedia.font, new Texture(), { 2, 0 }, { 0, 0 } },
       hearts_{ &kMedia.heart, { 0, 0 }, { 0, 0 } },
       pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
-  if (LoadLevel()) {
+  if (LoadLevel(level)) {
     set_valid();
   }
+}
+
+Play::~Play() {
+  delete score_display_.get_texture();
 }
 
 void Play::HandleInput(SDL_Event input) {
@@ -77,13 +81,13 @@ void Play::Render() {
   }
 }
 
-bool Play::LoadLevel() {
+bool Play::LoadLevel(const char *level) {
   static const int kMaxBricks{ 176 };
 
   int x{ 1 };
   int y{ 20 };
 
-  std::ifstream map{ "./res/level_01.txt" };
+  std::ifstream map{ level };
 
   if (map.fail()) {
     fprintf(stderr, "Error loading map file\n");
