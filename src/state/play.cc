@@ -1,4 +1,4 @@
-#include "src/state/play_state.h"
+#include "src/state/play.h"
 
 #include <stdio.h>
 
@@ -12,11 +12,11 @@
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
-#include "src/state/over_state.h"
+#include "src/state/game_over.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
 
-PlayState::PlayState()
+Play::Play()
     : score_display_{ &kMedia.font, new Texture(), { 2, 0 }, { 0, 0 } },
       hearts_{ &kMedia.heart, { 0, 0 }, { 0, 0 } },
       pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
@@ -27,7 +27,7 @@ PlayState::PlayState()
   }
 }
 
-void PlayState::HandleInput(SDL_Event input) {
+void Play::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     if (input.key.keysym.sym == SDLK_p) {
       paused_ = !paused_;
@@ -40,20 +40,20 @@ void PlayState::HandleInput(SDL_Event input) {
   }
 }
 
-StateMachine *PlayState::Update() {
+StateMachine *Play::Update() {
   if (!paused_) {
     paddle_.Update();
     ball_.Update(paddle_, &bricks_);
     CountBricks();
     if (ball_.remaining_lives() == 0) {
-      return new OverState(score_);
+      return new GameOver(score_);
     }
   }
 
   return NULL;
 }
 
-void PlayState::Render() {
+void Play::Render() {
   paddle_.Render();
   ball_.Render();
 
@@ -77,7 +77,7 @@ void PlayState::Render() {
   }
 }
 
-bool PlayState::LoadLevel() {
+bool Play::LoadLevel() {
   static const int kMaxBricks{ 176 };
 
   int x{ 1 };
@@ -120,7 +120,7 @@ bool PlayState::LoadLevel() {
   return true;
 }
 
-void PlayState::CountBricks() {
+void Play::CountBricks() {
   score_ = 0;
   size_t broken_bricks{ 0 };
   for (auto brick : bricks_) {

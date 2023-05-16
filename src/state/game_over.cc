@@ -1,4 +1,4 @@
-#include "src/state/over_state.h"
+#include "src/state/game_over.h"
 
 #include <stdio.h>
 
@@ -7,11 +7,11 @@
 #include "src/media.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
-#include "src/state/menu_state.h"
-#include "src/state/play_state.h"
+#include "src/state/menu.h"
+#include "src/state/play.h"
 #include "src/state/state_machine.h"
 
-OverState::OverState(int score)
+GameOver::GameOver(int score)
     : title_{ &kMedia.game_over, { 1, 1 },
               { 0, -kMedia.game_over.get_height() } },
       score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
@@ -23,7 +23,7 @@ OverState::OverState(int score)
   set_valid();
 }
 
-void OverState::HandleInput(SDL_Event input) {
+void GameOver::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
       case SDLK_SPACE:
@@ -38,18 +38,18 @@ void OverState::HandleInput(SDL_Event input) {
   }
 }
 
-StateMachine *OverState::Update() {
+StateMachine *GameOver::Update() {
   switch (get_next_state()) {
     case kPlayState:
-      return new PlayState();
+      return new Play();
     case kMenuState:
-      return new MenuState();
+      return new Menu();
     default:
       return NULL;
   }
 }
 
-void OverState::Render() {
+void GameOver::Render() {
   title_.Render();
   score_.Render();
   play_.Render();

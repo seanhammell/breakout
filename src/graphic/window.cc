@@ -11,9 +11,9 @@
 
 #include "src/game.h"
 #include "src/graphic/renderer.h"
-#include "src/state/menu_state.h"
-#include "src/state/over_state.h"
-#include "src/state/play_state.h"
+#include "src/state/menu.h"
+#include "src/state/game_over.h"
+#include "src/state/play.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.
@@ -40,7 +40,7 @@ SDL_Window *Window::get_window() const {
 void Window::Loop() {
   assert(kGame.window.get_instantiated());
   assert(kGame.renderer.get_instantiated());
-  kGame.game_state = new MenuState();
+  kGame.game_state = new Menu();
 
   SDL_Event e;
   while (true) {

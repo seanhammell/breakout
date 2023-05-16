@@ -1,6 +1,5 @@
-#ifndef SRC_STATE_PLAY_STATE_H_
-#define SRC_STATE_PLAY_STATE_H_
-
+#ifndef SRC_STATE_PLAY_H_
+#define SRC_STATE_PLAY_H_
 #include <vector>
 
 #include "SDL2/SDL.h"
@@ -12,11 +11,11 @@
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
 
-class PlayState : public StateMachine {
+class Play : public StateMachine {
  public:
-  PlayState();
+  Play();
 
-  ~PlayState() = default;
+  ~Play() = default;
 
   // Responds to user input during the game.
   void HandleInput(SDL_Event input) override;
@@ -46,4 +45,4 @@ class PlayState : public StateMachine {
   int score_{ };
 };
 
-#endif  // SRC_STATE_PLAY_STATE_H_
+#endif  // SRC_STATE_PLAY_H_
