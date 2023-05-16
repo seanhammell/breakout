@@ -6,8 +6,16 @@
 
 LevelSelect::LevelSelect(StateMachine::States next)
     : title_{ &kMedia.select, { 1, 1 }, { 0, -kMedia.select.get_height() } },
+      mode_{ &kMedia.font, new Texture(), { 0, 0 }, { 0, 0 } },
       levels_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
       next_{ next } {
+  switch (next_) {
+    case kPlayState:
+      mode_.Update("PLAY");
+      break;
+    default:
+      break;
+  }
   set_valid();
 }
 
@@ -48,6 +56,7 @@ StateMachine *LevelSelect::Update() {
 
 void LevelSelect::Render() {
   title_.Render();
+  mode_.Render();
   for (int i{ 1 }; i < 5; ++i) {
     levels_.AppendNumber("LEVEL ", i);
     levels_.set_offset({ 0, (levels_.get_height() + Widget::kPadding) * i });

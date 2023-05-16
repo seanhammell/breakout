@@ -25,6 +25,7 @@ class LevelSelect : public StateMachine {
 
  private:
   Widget title_{ };
+  Textbox mode_{ };
   Textbox levels_{ };
   StateMachine::States next_{ kNoState };
   int selection_{ 1 };
