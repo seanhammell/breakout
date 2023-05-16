@@ -11,7 +11,7 @@ class GameOver : public StateMachine {
  public:
   explicit GameOver(int score);
 
-  ~GameOver() = default;
+  ~GameOver();
 
   // Responds to user input at the main menu.
   void HandleInput(SDL_Event input) override;

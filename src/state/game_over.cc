@@ -23,6 +23,12 @@ GameOver::GameOver(int score)
   set_valid();
 }
 
+GameOver::~GameOver() {
+  delete score_.get_texture();
+  delete play_.get_texture();
+  delete menu_.get_texture();
+}
+
 void GameOver::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
