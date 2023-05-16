@@ -18,6 +18,12 @@ LevelSelect::~LevelSelect() {
 void LevelSelect::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
+      case SDLK_UP:
+        selection_ -= selection_ > 1 ? 1 : 0;
+        break;
+      case SDLK_DOWN:
+        selection_ += selection_ < 4 ? 1 : 0;
+        break;
       case SDLK_RETURN:
         trigger_ = true;
         break;
@@ -42,4 +48,13 @@ StateMachine *LevelSelect::Update() {
 
 void LevelSelect::Render() {
   title_.Render();
+  for (int i{ 1 }; i < 5; ++i) {
+    levels_.AppendNumber("LEVEL ", i);
+    levels_.set_offset({ 0, (levels_.get_height() + Widget::kPadding) * i });
+    levels_.Render();
+    if (i == selection_) {
+      levels_.RenderSelected();
+    }
+  }
+  levels_.set_offset({ 0, 0 });
 }

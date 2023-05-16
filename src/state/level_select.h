@@ -27,7 +27,7 @@ class LevelSelect : public StateMachine {
   Widget title_{ };
   Textbox levels_{ };
   StateMachine::States next_{ kNoState };
-  // int selection_{ };
+  int selection_{ 1 };
   bool trigger_{ false };
 };
 
