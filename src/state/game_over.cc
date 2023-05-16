@@ -65,10 +65,10 @@ void GameOver::Render() {
   menu_.Render();
   switch (selection_) {
     case kPlayState:
-      play_.RenderSelected();
+      play_.ShowSelected();
       break;
     case kMenuState:
-      menu_.RenderSelected();
+      menu_.ShowSelected();
       break;
     default:
       break;

@@ -62,7 +62,7 @@ void LevelSelect::Render() {
     levels_.set_offset({ 0, (levels_.get_height() + Widget::kPadding) * i });
     levels_.Render();
     if (i == selection_) {
-      levels_.RenderSelected();
+      levels_.ShowSelected();
     }
   }
   levels_.set_offset({ 0, 0 });

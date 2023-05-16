@@ -16,16 +16,16 @@ void Textbox::AppendNumber(const char *s, int n) {
   Update(buffer);
 }
 
-void Textbox::Update(const char *text) {
-  Texture *texture = get_texture();
-  texture->LoadFromText(*font_, text);
-  set_clip({ 0, 0, texture->get_width(), texture->get_height() });
-}
-
-void Textbox::RenderSelected() {
+void Textbox::ShowSelected() {
   Widget selected{ &kMedia.blocks, get_anchor(), get_offset(), {24, 3, 2, 2} };
   Point adjusted_offset{ selected.get_offset() };
   adjusted_offset.x -= (get_width() / 2) + kPadding;
   selected.set_offset(adjusted_offset);
   selected.Render();
+}
+
+void Textbox::Update(const char *text) {
+  Texture *texture = get_texture();
+  texture->LoadFromText(*font_, text);
+  set_clip({ 0, 0, texture->get_width(), texture->get_height() });
 }

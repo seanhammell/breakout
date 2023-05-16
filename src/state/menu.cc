@@ -53,7 +53,7 @@ void Menu::Render() {
   play_.Render();
   switch (selection_) {
     case kPlayState:
-      play_.RenderSelected();
+      play_.ShowSelected();
       break;
     default:
       break;

@@ -18,10 +18,11 @@ class Textbox : public Widget {
   // Appends the integer to the string.
   void AppendNumber(const char *s, int n);
 
+  // Renders a dot next to the Textbox.
+  void ShowSelected();
+
   // Updates the Textbox with the provided string.
   void Update(const char *text);
-
-  void RenderSelected();
 
  private:
   Font *font_{ NULL };
