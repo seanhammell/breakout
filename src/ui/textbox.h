@@ -20,6 +20,8 @@ class Textbox : public Widget {
   // Updates the Textbox with the provided string.
   void Update(const char *text);
 
+  void RenderSelected(Widget *selected);
+
  private:
   Font *font_{ NULL };
 };

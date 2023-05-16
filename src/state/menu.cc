@@ -12,8 +12,9 @@
 
 Menu::Menu()
     : title_{ &kMedia.title, { 1, 1 }, { 0, -kMedia.title.get_height() / 2 } },
-      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } } {
-  play_.Update("PRESS SPACEBAR TO PLAY");
+      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } },
+      select_{ &kMedia.blocks, { 1, 1 }, { 0, 0 }, {24, 3, 2, 2} } {
+  play_.Update("PLAY");
   set_valid();
 }
 
@@ -24,8 +25,14 @@ Menu::~Menu() {
 void Menu::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
-      case SDLK_SPACE:
-        set_next_state(kPlayState);
+      case SDLK_UP:
+        selection_ = kPlayState;
+        break;
+      // case SDLK_DOWN:
+      //   selection_ = kSelectState;
+      //   break;
+      case SDLK_RETURN:
+        set_next_state(selection_);
         break;
       default:
         break;
@@ -45,4 +52,11 @@ StateMachine *Menu::Update() {
 void Menu::Render() {
   title_.Render();
   play_.Render();
+  switch (selection_) {
+    case kPlayState:
+      play_.RenderSelected(&select_);
+      break;
+    default:
+      break;
+  }
 }

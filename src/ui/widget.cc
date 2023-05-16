@@ -17,8 +17,12 @@ Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
   }
 }
 
-void Widget::Render() {
-  texture_->Render(CalculatePosX(), CalculatePosY(), &clip_);
+void Widget::Render(int x, int y) {
+  if (x == -1 && y == -1) {
+    texture_->Render(CalculatePosX(), CalculatePosY(), &clip_);
+  } else {
+    texture_->Render(x, y, &clip_);
+  }
 }
 
 int Widget::CalculatePosX() const {

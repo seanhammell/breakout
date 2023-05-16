@@ -12,6 +12,7 @@ struct Media {
   Texture blocks;
   Texture heart;
   Texture pause;
+  Texture arrow;
 };
 
 extern Media kMedia;
