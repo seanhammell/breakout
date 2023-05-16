@@ -17,7 +17,6 @@ bool Texture::LoadMediaTextures() {
   if (!kMedia.blocks.LoadFromFile("./img/blocks.png")) { return false; }
   if (!kMedia.heart.LoadFromFile("./img/heart.png")) { return false; }
   if (!kMedia.pause.LoadFromFile("./img/pause.png")) { return false; }
-  if (!kMedia.arrow.LoadFromFile("./img/arrow.png")) { return false; }
   return true;
 }
 

@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 
+#include "src/media.h"
 #include "src/graphic/font.h"
 #include "src/ui/widget.h"
 
@@ -21,8 +22,9 @@ void Textbox::Update(const char *text) {
   set_clip({ 0, 0, texture->get_width(), texture->get_height() });
 }
 
-void Textbox::RenderSelected(Widget *selected) {
-  int x{ get_x_pos() - (selected->get_width() + Widget::kPadding) };
-  int y{ get_y_pos() + (get_height() / 2) - selected->get_height() };
-  selected->Render(x, y);
+void Textbox::RenderSelected() {
+  static Widget selected{ &kMedia.blocks, { 1, 1 }, { 0, 0 }, {24, 3, 2, 2} };
+  int x{ get_x_pos() - (selected.get_width() + Widget::kPadding) };
+  int y{ get_y_pos() + (get_height() / 2) - selected.get_height() };
+  selected.Render(x, y);
 }
