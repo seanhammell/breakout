@@ -41,7 +41,6 @@ class Play : public StateMachine {
   Ball ball_{ };
   Paddle paddle_{ };
   std::vector<Brick> bricks_{ };
-  int milestone_{ 1 };
   int score_{ };
 };
 

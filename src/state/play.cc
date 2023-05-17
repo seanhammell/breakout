@@ -136,8 +136,4 @@ void Play::CountBricks() {
   }
 
   score_display_.AppendNumber("SCORE: ", score_);
-  if (broken_bricks > (bricks_.size() / (4 / milestone_))) {
-    ++milestone_;
-    ball_.set_speed(milestone_);
-  }
 }

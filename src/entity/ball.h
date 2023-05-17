@@ -23,8 +23,6 @@ class Ball {
 
   int remaining_lives() { return n_lives_; }
 
-  void set_speed(int y_vel) { y_vel_ = y_vel_ > 0 ? y_vel : -y_vel; }
-
   // Serves the Ball if it isn't live.
   void HandleInput(SDL_Event input);
 
