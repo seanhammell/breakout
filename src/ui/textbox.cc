@@ -1,5 +1,7 @@
 #include "src/ui/textbox.h"
 
+#include <stdio.h>
+
 #include <cstdlib>
 
 #include "src/media.h"

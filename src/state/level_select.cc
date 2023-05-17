@@ -1,5 +1,9 @@
 #include "src/state/level_select.h"
 
+#include <stdio.h>
+
+#include <cstdlib>
+
 #include "src/media.h"
 #include "src/graphic/texture.h"
 #include "src/state/play.h"
@@ -44,9 +48,11 @@ void LevelSelect::HandleInput(SDL_Event input) {
 
 StateMachine *LevelSelect::Update() {
   if (trigger_) {
+    char buffer[20];
+    snprintf(buffer, sizeof(buffer), "./res/level_0%d.txt", selection_);
     switch (next_) {
       case kPlayState:
-        return new Play("./res/level_01.txt");
+        return new Play(buffer);
       default:
         return NULL;
     }
