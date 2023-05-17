@@ -1,6 +1,8 @@
 #ifndef SRC_ENTITY_BRICK_H_
 #define SRC_ENTITY_BRICK_H_
 
+#include <vector>
+
 #include "SDL2/SDL.h"
 
 #include "src/graphic/texture.h"
@@ -22,10 +24,15 @@ class Brick {
   static const int kBrickWidth{ 9 };
   static const int kBrickHeight{ 4 };
 
+  static const int kMaxBricks{ 176 };
+
   Brick() = default;
   Brick(int x, int y, BrickType type, Texture *texture);
 
   ~Brick() = default;
+
+  // Loads a set of bricks from the given file into a vector.
+  static bool LoadBricks(std::vector<Brick> *bricks, const char *file);
 
   int get_x_pos() const { return x_pos_; }
   int get_y_pos() const { return y_pos_; }

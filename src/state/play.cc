@@ -22,7 +22,7 @@ Play::Play(const char *level)
       pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
-  if (LoadLevel(level)) {
+  if (Brick::LoadBricks(&bricks_, level)) {
     set_valid();
   }
 }
@@ -79,49 +79,6 @@ void Play::Render() {
     pause_screen_.Render();
     return;
   }
-}
-
-bool Play::LoadLevel(const char *level) {
-  static const int kMaxBricks{ 176 };
-
-  int x{ 1 };
-  int y{ 20 };
-
-  std::ifstream map{ level };
-
-  if (map.fail()) {
-    fprintf(stderr, "Error loading map file\n");
-    return false;
-  }
-
-  for (int i{ 0 }; i < kMaxBricks; ++i) {
-    int tile{ -1 };
-    map >> tile;
-    Brick::BrickType type{ static_cast<Brick::BrickType>(tile) };
-
-    if (map.fail()) {
-      fprintf(stderr, "Unexpected EOF\n");
-      return false;
-    }
-
-    if (type < Brick::kNoType || type > Brick::kTotalTypes) {
-      fprintf(stderr, "Invalid brick type\n");
-      return false;
-    }
-
-    if (type > Brick::kNoType && type < Brick::kTotalTypes) {
-      bricks_.push_back(Brick(x, y, type, &kMedia.blocks));
-    }
-
-    x += Brick::kBrickWidth;
-    if (x >= Renderer::kVirtualWidth) {
-      x = 1;
-      y += Brick::kBrickHeight;
-    }
-  }
-
-  map.close();
-  return true;
 }
 
 void Play::CountBricks() {

@@ -1,5 +1,6 @@
 #ifndef SRC_STATE_PLAY_H_
 #define SRC_STATE_PLAY_H_
+
 #include <vector>
 
 #include "SDL2/SDL.h"
@@ -27,9 +28,6 @@ class Play : public StateMachine {
   void Render() override;
 
  private:
-  // Loads the starting Bricks for a given level.
-  bool LoadLevel(const char *level);
-
   // Counts the number of live bricks, updating the score and ball speed
   // accordingly.
   void CountBricks();
