@@ -25,6 +25,7 @@ class Menu : public StateMachine {
  private:
   Widget title_{ };
   Textbox play_{ };
+  Textbox edit_{ };
   StateMachine::States selection_{ kPlayState };
 };
 

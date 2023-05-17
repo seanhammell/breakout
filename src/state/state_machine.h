@@ -11,6 +11,7 @@ class StateMachine {
     kSelectState,
     kPlayState,
     kOverState,
+    kEditState,
   };
 
   virtual ~StateMachine() = default;

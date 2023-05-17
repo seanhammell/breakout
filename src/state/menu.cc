@@ -12,13 +12,17 @@
 
 Menu::Menu()
     : title_{ &kMedia.title, { 1, 1 }, { 0, -kMedia.title.get_height() / 2 } },
-      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } } {
+      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } },
+      edit_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } } {
   play_.Update("PLAY");
+  edit_.Update("LEVEL EDITOR");
+  play_.set_width(edit_.get_width());
   set_valid();
 }
 
 Menu::~Menu() {
   delete play_.get_texture();
+  delete edit_.get_texture();
 }
 
 void Menu::HandleInput(SDL_Event input) {
@@ -27,9 +31,9 @@ void Menu::HandleInput(SDL_Event input) {
       case SDLK_UP:
         selection_ = kPlayState;
         break;
-      // case SDLK_DOWN:
-      //   selection_ = kSelectState;
-      //   break;
+      case SDLK_DOWN:
+        selection_ = kEditState;
+        break;
       case SDLK_RETURN:
         set_next_state(selection_);
         break;
@@ -43,6 +47,8 @@ StateMachine *Menu::Update() {
   switch (get_next_state()) {
     case kPlayState:
       return new LevelSelect(kPlayState);
+    case kEditState:
+      return new LevelSelect(kEditState);
     default:
       return NULL;
   }
@@ -51,9 +57,13 @@ StateMachine *Menu::Update() {
 void Menu::Render() {
   title_.Render();
   play_.Render();
+  edit_.Render();
   switch (selection_) {
     case kPlayState:
       play_.ShowSelected();
+      break;
+    case kEditState:
+      edit_.ShowSelected();
       break;
     default:
       break;

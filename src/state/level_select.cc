@@ -17,6 +17,9 @@ LevelSelect::LevelSelect(StateMachine::States next)
     case kPlayState:
       mode_.Update("PLAY");
       break;
+    case kEditState:
+      mode_.Update("EDIT");
+      break;
     default:
       break;
   }
@@ -25,6 +28,7 @@ LevelSelect::LevelSelect(StateMachine::States next)
 }
 
 LevelSelect::~LevelSelect() {
+  delete mode_.get_texture();
   delete levels_.get_texture();
 }
 
