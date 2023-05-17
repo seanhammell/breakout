@@ -6,6 +6,7 @@
 
 #include "src/media.h"
 #include "src/graphic/texture.h"
+#include "src/state/edit.h"
 #include "src/state/play.h"
 
 LevelSelect::LevelSelect(StateMachine::States next)
@@ -57,6 +58,8 @@ StateMachine *LevelSelect::Update() {
     switch (next_) {
       case kPlayState:
         return new Play(buffer);
+      case kEditState:
+        return new Edit(buffer);
       default:
         return NULL;
     }
