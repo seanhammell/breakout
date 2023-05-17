@@ -16,6 +16,7 @@ LevelSelect::LevelSelect(StateMachine::States next)
     default:
       break;
   }
+  levels_.AppendNumber("LEVEL: ", 1);
   set_valid();
 }
 
@@ -58,7 +59,7 @@ void LevelSelect::Render() {
   title_.Render();
   mode_.Render();
   for (int i{ 1 }; i < 5; ++i) {
-    levels_.AppendNumber("LEVEL ", i);
+    levels_.AppendNumber("LEVEL ", i, false);
     levels_.set_offset({ 0, (levels_.get_height() + Widget::kPadding) * i });
     levels_.Render();
     if (i == selection_) {

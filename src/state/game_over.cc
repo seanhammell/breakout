@@ -20,6 +20,8 @@ GameOver::GameOver(int score)
   score_.AppendNumber("SCORE: ", score);
   play_.Update("PLAY AGAIN");
   menu_.Update("MAIN MENU");
+  menu_.set_width(play_.get_width());
+  menu_.set_height(play_.get_height());
   set_valid();
 }
 

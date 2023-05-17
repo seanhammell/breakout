@@ -22,11 +22,15 @@ class Widget {
   Texture *get_texture() const { return texture_; }
   Point get_anchor() const { return anchor_; }
   Point get_offset() const { return offset_; }
-  int get_width() const { return clip_.w; }
-  int get_height() const { return clip_.h; }
+  int get_clip_width() const { return clip_.w; }
+  int get_clip_height() const { return clip_.h; }
+  int get_width() const { return width_; }
+  int get_height() const { return height_; }
 
   void set_offset(Point offset) { offset_ = offset; }
   void set_clip(SDL_Rect clip) { clip_ = clip; }
+  void set_width(int width) { width_ = width; }
+  void set_height(int height) { height_ = height; }
 
   // Renders the Widget to the screen. Widgets use their anchors and offsets by
   // default but true x and y rendering positions may be passed in.
@@ -41,6 +45,11 @@ class Widget {
   Point anchor_{ };
   Point offset_{ };
   SDL_Rect clip_{ };
+
+  // The width and height below are used to align groups of Widgets, they do
+  // not necessarily reflect the width and height of the Widget itself.
+  int width_{ };
+  int height_{ };
 };
 
 #endif  // SRC_UI_WIDGET_H_

@@ -16,15 +16,18 @@ class Textbox : public Widget {
   Font *get_font() const { return font_; }
 
   // Appends the integer to the string.
-  void AppendNumber(const char *s, int n);
+  void AppendNumber(const char *s, int n, bool fit = true);
 
   // Renders a dot next to the Textbox.
   void ShowSelected();
 
   // Updates the Textbox with the provided string.
-  void Update(const char *text);
+  void Update(const char *text, bool fit = true);
 
  private:
+  // Updates the Textbox's width and height to fit the text.
+  void FitToText();
+
   Font *font_{ NULL };
 };
 

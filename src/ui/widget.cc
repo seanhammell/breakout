@@ -15,6 +15,8 @@ Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
     clip_.w = texture_->get_width();
     clip_.h = texture_->get_height();
   }
+  width_ = clip_.w;
+  height_ = clip_.h;
 }
 
 void Widget::Render() {
@@ -28,10 +30,10 @@ int Widget::CalculatePosX() const {
       anchor = 0 + kPadding;
       break;
     case 1:
-      anchor = (Renderer::kVirtualWidth - clip_.w) / 2;
+      anchor = (Renderer::kVirtualWidth - width_) / 2;
       break;
     case 2:
-      anchor = (Renderer::kVirtualWidth - clip_.w) - kPadding;
+      anchor = (Renderer::kVirtualWidth - width_) - kPadding;
       break;
     default:
       SDL_Log("Invalid anchor x coordinate: %d\n", anchor_.x);
@@ -48,10 +50,10 @@ int Widget::CalculatePosY() const {
       anchor = 0 + kPadding;
       break;
     case 1:
-      anchor = (Renderer::kVirtualHeight - clip_.h) / 2;
+      anchor = (Renderer::kVirtualHeight - height_) / 2;
       break;
     case 2:
-      anchor = (Renderer::kVirtualHeight - clip_.h) - kPadding;
+      anchor = (Renderer::kVirtualHeight - height_) - kPadding;
       break;
     default:
       SDL_Log("Invalid anchor y coordinate: %d\n", anchor_.y);
