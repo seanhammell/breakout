@@ -7,7 +7,7 @@
 #include "src/graphic/renderer.h"
 
 Edit::Edit(const char *level) {
-  if (Brick::LoadBricks(&bricks_, level)) {
+  if (Brick::Load(&bricks_, level)) {
     set_valid();
   }
 }
@@ -19,6 +19,8 @@ void Edit::Render() {
   SDL_RenderDrawRect(kGame.renderer.get_renderer(), &zone);
 
   for (auto brick : bricks_) {
-    brick.Render();
+    if (brick.get_type() != Brick::kNoType) {
+      brick.Render();
+    }
   }
 }

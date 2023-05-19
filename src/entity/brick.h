@@ -1,7 +1,7 @@
 #ifndef SRC_ENTITY_BRICK_H_
 #define SRC_ENTITY_BRICK_H_
 
-#include <vector>
+#include <array>
 
 #include "SDL2/SDL.h"
 
@@ -24,7 +24,7 @@ class Brick {
   static const int kBrickWidth{ 9 };
   static const int kBrickHeight{ 4 };
 
-  static const int kMaxBricks{ 176 };
+  static constexpr size_t kMaxBricks{ 176 };
 
   Brick() = default;
   Brick(int x, int y, BrickType type, Texture *texture);
@@ -32,11 +32,12 @@ class Brick {
   ~Brick() = default;
 
   // Loads a set of bricks from the given file into a vector.
-  static bool LoadBricks(std::vector<Brick> *bricks, const char *file);
+  static bool Load(std::array<Brick, kMaxBricks> *bricks, const char *file);
 
   int get_x_pos() const { return x_pos_; }
   int get_y_pos() const { return y_pos_; }
   bool is_hit() const { return hit_; }
+  BrickType get_type() const { return type_; }
   int value() const { return type_ * 2 - 1; }
 
   void hit() { hit_ = true; }
@@ -48,7 +49,7 @@ class Brick {
   int x_pos_{ 0 };
   int y_pos_{ 0 };
   bool hit_{ false };
-  BrickType type_{ };
+  BrickType type_{ kNoType };
   Texture *texture_{ NULL };
   SDL_Rect clip_{ };
 };

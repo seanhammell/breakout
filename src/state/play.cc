@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+#include <array>
 #include <fstream>
 
 #include "SDL2/SDL.h"
@@ -22,7 +23,7 @@ Play::Play(const char *level)
       pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
-  if (Brick::LoadBricks(&bricks_, level)) {
+  if (Brick::Load(&bricks_, level)) {
     set_valid();
   }
 }
@@ -62,7 +63,7 @@ void Play::Render() {
   ball_.Render();
 
   for (auto brick : bricks_) {
-    if (!brick.is_hit()) {
+    if (!brick.is_hit() && brick.get_type() != Brick::kNoType) {
       brick.Render();
     }
   }

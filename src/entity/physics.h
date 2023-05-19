@@ -1,7 +1,7 @@
 #ifndef SRC_ENTITY_PHYSICS_H_
 #define SRC_ENTITY_PHYSICS_H_
 
-#include <vector>
+#include <array>
 
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
@@ -34,7 +34,8 @@ class Physics {
   ~Physics() = default;
 
   // Updates the Ball's position.
-  void Update(Ball *ball, const Paddle& paddle, std::vector<Brick> *bricks);
+  void Update(Ball *ball, const Paddle& paddle,
+              std::array<Brick, Brick::kMaxBricks> *bricks);
 
  private:
   static constexpr double kEpsilon{ 0.0001 };
@@ -50,11 +51,12 @@ class Physics {
 
   // Creates the bounds for the Paddle and Bricks to check for collisions.
   void CheckPaddle(const Paddle& paddle);
-  void CheckBricks(std::vector<Brick> *bricks);
+  void CheckBricks(std::array<Brick, Brick::kMaxBricks> *bricks);
 
   // Moves the Ball along it's path, adjusting for collisions.
   void ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
-                     const Paddle& paddle, std::vector<Brick> *bricks);
+                     const Paddle& paddle,
+                     std::array<Brick, Brick::kMaxBricks> *bricks);
 
   Point origin_{ };
   Point vertex_{ };

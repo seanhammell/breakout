@@ -1,7 +1,7 @@
 #ifndef SRC_STATE_EDIT_H_
 #define SRC_STATE_EDIT_H_
 
-#include <vector>
+#include <array>
 
 #include "SDL2/SDL.h"
 
@@ -24,7 +24,7 @@ class Edit : public StateMachine {
   void Render() override;
 
  private:
-  std::vector<Brick> bricks_{ };
+  std::array<Brick, Brick::kMaxBricks> bricks_{ };
 };
 
 #endif  // SRC_STATE_EDIT_H_

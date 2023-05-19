@@ -1,7 +1,7 @@
 #include "src/entity/brick.h"
 
+#include <array>
 #include <fstream>
-#include <vector>
 
 #include "SDL2/SDL.h"
 
@@ -13,7 +13,7 @@ Brick::Brick(int x, int y, BrickType type, Texture *texture)
     : x_pos_{ x }, y_pos_{ y }, type_{ type }, texture_{ texture },
       clip_{ type * kClipWidth - 8, 0, kClipWidth, kClipHeight } {}
 
-bool Brick::LoadBricks(std::vector<Brick> *bricks, const char *file) {
+bool Brick::Load(std::array<Brick, kMaxBricks> *bricks, const char *file) {
   int x{ 1 };
   int y{ 20 };
 
@@ -24,7 +24,7 @@ bool Brick::LoadBricks(std::vector<Brick> *bricks, const char *file) {
     return false;
   }
 
-  for (int i{ 0 }; i < kMaxBricks; ++i) {
+  for (size_t i{ 0 }; i < kMaxBricks; ++i) {
     int tile{ -1 };
     map >> tile;
     Brick::BrickType type{ static_cast<Brick::BrickType>(tile) };
@@ -40,7 +40,7 @@ bool Brick::LoadBricks(std::vector<Brick> *bricks, const char *file) {
     }
 
     if (type > Brick::kNoType && type < Brick::kTotalTypes) {
-      bricks->push_back(Brick(x, y, type, &kMedia.blocks));
+      (*bricks)[i] = Brick(x, y, type, &kMedia.blocks);
     }
 
     x += Brick::kBrickWidth;

@@ -1,7 +1,7 @@
 #ifndef SRC_STATE_PLAY_H_
 #define SRC_STATE_PLAY_H_
 
-#include <vector>
+#include <array>
 
 #include "SDL2/SDL.h"
 
@@ -38,7 +38,7 @@ class Play : public StateMachine {
   bool paused_{ false };
   Ball ball_{ };
   Paddle paddle_{ };
-  std::vector<Brick> bricks_{ };
+  std::array<Brick, Brick::kMaxBricks> bricks_{ };
   int score_{ };
 };
 

@@ -1,8 +1,8 @@
 #ifndef SRC_ENTITY_BALL_H_
 #define SRC_ENTITY_BALL_H_
 
+#include <array>
 #include <cstdlib>
-#include <vector>
 
 #include "SDL2/SDL.h"
 
@@ -27,7 +27,8 @@ class Ball {
   void HandleInput(SDL_Event input);
 
   // Updates the Ball with one frame of behavior.
-  void Update(const Paddle& paddle, std::vector<Brick> *bricks);
+  void Update(const Paddle& paddle,
+              std::array<Brick, Brick::kMaxBricks> *bricks);
 
   // Renders the Ball to the screen.
   void Render();

@@ -1,7 +1,7 @@
 #include "src/entity/ball.h"
 
+#include <array>
 #include <cstdlib>
-#include <vector>
 
 #include "SDL2/SDL.h"
 
@@ -24,7 +24,8 @@ void Ball::HandleInput(SDL_Event input) {
   }
 }
 
-void Ball::Update(const Paddle& paddle, std::vector<Brick> *bricks) {
+void Ball::Update(const Paddle& paddle,
+                  std::array<Brick, Brick::kMaxBricks> *bricks) {
   if (live_) {
     physics_.Update(this, paddle, bricks);
     if (y_pos_ > Renderer::kVirtualHeight) {

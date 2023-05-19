@@ -1,5 +1,6 @@
 #include "src/entity/physics.h"
 
+#include <array>
 #include <cmath>
 #include <cstddef>
 
@@ -14,7 +15,7 @@ static const Physics::Line kScreenRight{ Renderer::kVirtualWidth, 0,
                                          Renderer::kVirtualHeight };
 
 void Physics::Update(Ball *ball, const Paddle& paddle,
-                     std::vector<Brick> *bricks) {
+                     std::array<Brick, Brick::kMaxBricks> *bricks) {
   ApplyVelocity(ball, ball->x_vel_, ball->y_vel_, paddle, bricks);
 }
 
@@ -73,11 +74,11 @@ void Physics::CheckPaddle(const Paddle& paddle) {
   CheckCollision(paddle_bound, kPaddle);
 }
 
-void Physics::CheckBricks(std::vector<Brick> *bricks) {
+void Physics::CheckBricks(std::array<Brick, Brick::kMaxBricks> *bricks) {
   hit_brick_ = NULL;
 
   for (size_t i{ 0 }; i < bricks->size(); ++i) {
-    if ((*bricks)[i].is_hit()) {
+    if ((*bricks)[i].is_hit() || (*bricks)[i].get_type() == Brick::kNoType) {
       continue;
     }
 
@@ -127,7 +128,8 @@ void Physics::CheckBricks(std::vector<Brick> *bricks) {
 }
 
 void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
-                            const Paddle& paddle, std::vector<Brick> *bricks) {
+                            const Paddle& paddle,
+                            std::array<Brick, Brick::kMaxBricks> *bricks) {
   if (x_velocity == 0 && y_velocity == 0) {
     return;
   }
