@@ -25,7 +25,7 @@ void Edit::HandleInput(SDL_Event input) {
   x /= 4;
   y /= 4;
 
-  int index{ };
+  int index{ (x / Brick::kBrickWidth) + ((y - 20) / Brick::kBrickHeight * 22) };
   switch (input.type) {
     case SDL_MOUSEMOTION:
 
@@ -48,11 +48,11 @@ void Edit::HandleInput(SDL_Event input) {
       break;
     case SDL_MOUSEBUTTONDOWN:
       if (input.button.button == SDL_BUTTON_LEFT) {
-        index = (x / Brick::kBrickWidth) +
-                (((y - 20) / Brick::kBrickHeight) * 22);
         bricks_[index] = hover_;
-        break;
+      } else if (input.button.button == SDL_BUTTON_RIGHT) {
+        bricks_[index].set_type(+Brick::kNoType);
       }
+      break;
     default:
       break;
   }
