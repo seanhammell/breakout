@@ -29,6 +29,9 @@ class Brick {
   Brick() = default;
   Brick(int x, int y, BrickType type, Texture *texture);
 
+  // Easy conversion from BrickType to int.
+  constexpr int operator+(BrickType type);
+
   ~Brick() = default;
 
   // Loads a set of bricks from the given file into a vector.
@@ -42,6 +45,7 @@ class Brick {
 
   void set_x_pos(int x_pos) { x_pos_ = x_pos; }
   void set_y_pos(int y_pos) { y_pos_ = y_pos; }
+  void set_type(int type);
   void hit() { hit_ = true; }
 
   // Renders the Brick to the screen.

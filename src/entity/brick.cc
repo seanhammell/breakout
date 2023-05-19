@@ -11,7 +11,16 @@
 
 Brick::Brick(int x, int y, BrickType type, Texture *texture)
     : x_pos_{ x }, y_pos_{ y }, type_{ type }, texture_{ texture },
-      clip_{ type * kClipWidth - 8, 0, kClipWidth, kClipHeight } {}
+      clip_{ type * kClipWidth - kClipWidth, 0, kClipWidth, kClipHeight } {}
+
+constexpr int Brick::operator+(BrickType type) {
+  return static_cast<int>(type);
+}
+
+void Brick::set_type(int type) {
+  type_ = static_cast<BrickType>(type);
+  clip_.x = type * kClipWidth - kClipWidth;
+}
 
 bool Brick::Load(std::array<Brick, kMaxBricks> *bricks, const char *file) {
   int x{ 1 };

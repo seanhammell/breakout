@@ -29,7 +29,7 @@ class Edit : public StateMachine {
 
  private:
   std::array<Brick, Brick::kMaxBricks> bricks_{ };
-  Brick hover_brick_{ };
+  Brick hover_{ };
   bool in_zone_{ false };
 };
 

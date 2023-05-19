@@ -1,5 +1,7 @@
 #include "src/state/edit.h"
 
+#include <algorithm>
+
 #include "SDL2/SDL.h"
 
 #include "src/game.h"
@@ -8,7 +10,7 @@
 #include "src/graphic/renderer.h"
 
 Edit::Edit(const char *level)
-    : hover_brick_{ 0, 0, Brick::kYellow, &kMedia.blocks } {
+    : hover_{ 0, 0, Brick::kYellow, &kMedia.blocks } {
   if (Brick::Load(&bricks_, level)) {
     set_valid();
   }
@@ -28,8 +30,14 @@ void Edit::HandleInput(SDL_Event input) {
     }
 
     in_zone_ = true;
-    hover_brick_.set_x_pos(x - (x % Brick::kBrickWidth) + 1);
-    hover_brick_.set_y_pos(y - (y % Brick::kBrickHeight));
+    hover_.set_x_pos(x - (x % Brick::kBrickWidth) + 1);
+    hover_.set_y_pos(y - (y % Brick::kBrickHeight));
+  } else if (input.type == SDL_MOUSEWHEEL) {
+    if (input.wheel.y > 0) {
+      hover_.set_type(std::min(hover_.get_type() + 1, +Brick::kRed));
+    } else if (input.wheel.y < 0) {
+      hover_.set_type(std::max(hover_.get_type() - 1, +Brick::kYellow));
+    }
   }
 }
 
@@ -44,6 +52,6 @@ void Edit::Render() {
   }
 
   if (in_zone_) {
-    hover_brick_.Render();
+    hover_.Render();
   }
 }
