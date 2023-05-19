@@ -40,6 +40,8 @@ class Brick {
   BrickType get_type() const { return type_; }
   int value() const { return type_ * 2 - 1; }
 
+  void set_x_pos(int x_pos) { x_pos_ = x_pos; }
+  void set_y_pos(int y_pos) { y_pos_ = y_pos; }
   void hit() { hit_ = true; }
 
   // Renders the Brick to the screen.
