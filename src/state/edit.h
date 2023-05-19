@@ -22,12 +22,16 @@ class Edit : public StateMachine {
   void HandleInput(SDL_Event input) override;
 
   // Updates the bricks with any edits.
-  StateMachine *Update() override { return NULL; }
+  StateMachine *Update() override;
 
   // Renders the level to the screen.
   void Render() override;
 
  private:
+  // Write the brick data to the level file.
+  void SaveLevel();
+
+  const char *file_{ };
   std::array<Brick, Brick::kMaxBricks> bricks_{ };
   Brick hover_{ };
   bool in_zone_{ false };

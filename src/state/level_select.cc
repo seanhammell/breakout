@@ -53,7 +53,9 @@ void LevelSelect::HandleInput(SDL_Event input) {
 
 StateMachine *LevelSelect::Update() {
   if (trigger_) {
-    char buffer[20];
+    // It is important that the buffer is static because Edit needs
+    // the name of the file when it is time to save.
+    static char buffer[19];
     snprintf(buffer, sizeof(buffer), "./res/level_0%d.txt", selection_);
     switch (next_) {
       case kPlayState:
