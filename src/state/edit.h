@@ -12,6 +12,12 @@
 
 class Edit : public StateMachine {
  public:
+  enum BrickEvent {
+    kNoEvent,
+    kPlace,
+    kRemove,
+  };
+
   static constexpr SDL_Rect kZone{ 0, 19, Renderer::kVirtualWidth,
                                    Brick::kBrickHeight * 8 + 1 };
 
@@ -37,6 +43,7 @@ class Edit : public StateMachine {
   std::array<Brick, Brick::kMaxBricks> bricks_{ };
   Brick hover_{ };
   bool in_zone_{ false };
+  BrickEvent drag_{ kNoEvent };
 };
 
 #endif  // SRC_STATE_EDIT_H_

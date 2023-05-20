@@ -39,6 +39,18 @@ void Edit::HandleInput(SDL_Event input) {
   y /= 4;
 
   int index{ (x / Brick::kBrickWidth) + ((y - 20) / Brick::kBrickHeight * 22) };
+
+  switch (drag_) {
+    case kPlace:
+      bricks_[index] = hover_;
+      break;
+    case kRemove:
+      bricks_[index].set_type(+Brick::kNoType);
+      break;
+    default:
+      break;
+  }
+
   switch (input.type) {
     case SDL_MOUSEMOTION:
       if (x <= kZone.x || x >= kZone.x + kZone.w ||
@@ -60,9 +72,14 @@ void Edit::HandleInput(SDL_Event input) {
     case SDL_MOUSEBUTTONDOWN:
       if (input.button.button == SDL_BUTTON_LEFT) {
         bricks_[index] = hover_;
+        drag_ = kPlace;
       } else if (input.button.button == SDL_BUTTON_RIGHT) {
         bricks_[index].set_type(+Brick::kNoType);
+        drag_ = kRemove;
       }
+      break;
+    case SDL_MOUSEBUTTONUP:
+      drag_ = kNoEvent;
       break;
     case SDL_KEYDOWN:
       if (input.key.keysym.sym == SDLK_RETURN) {
