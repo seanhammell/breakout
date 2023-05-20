@@ -29,8 +29,8 @@ class Play : public StateMachine {
 
  private:
   // Counts the number of live bricks, updating the score and ball speed
-  // accordingly.
-  void CountBricks();
+  // and returning if the level is cleared.
+  bool ClearBricks();
 
   Textbox score_display_{ };
   Widget hearts_{ };

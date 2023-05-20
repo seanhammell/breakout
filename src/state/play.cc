@@ -13,7 +13,7 @@
 #include "src/entity/paddle.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
-#include "src/state/game_over.h"
+#include "src/state/end.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
 
@@ -49,9 +49,13 @@ StateMachine *Play::Update() {
   if (!paused_) {
     paddle_.Update();
     ball_.Update(paddle_, &bricks_);
-    CountBricks();
+
+    if (ClearBricks()) {
+      return new End(score_, true);
+    }
+
     if (ball_.remaining_lives() == 0) {
-      return new GameOver(score_);
+      return new End(score_, false);
     }
   }
 
@@ -82,16 +86,20 @@ void Play::Render() {
   }
 }
 
-void Play::CountBricks() {
+bool Play::ClearBricks() {
   score_ = 0;
   size_t broken_bricks{ 0 };
+  bool cleared{ true };
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
       score_ += brick.value();
       ++broken_bricks;
       continue;
+    } else if (brick.get_type() != Brick::kNoType) {
+      cleared = false;
     }
   }
 
   score_display_.AppendNumber("SCORE: ", score_);
+  return cleared;
 }

@@ -1,5 +1,5 @@
-#ifndef SRC_STATE_GAME_OVER_H_
-#define SRC_STATE_GAME_OVER_H_
+#ifndef SRC_STATE_END_H_
+#define SRC_STATE_END_H_
 
 #include "SDL2/SDL.h"
 
@@ -7,11 +7,11 @@
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
 
-class GameOver : public StateMachine {
+class End : public StateMachine {
  public:
-  explicit GameOver(int score);
+  explicit End(int score, bool victory);
 
-  ~GameOver();
+  ~End();
 
   // Responds to user input at the main menu.
   void HandleInput(SDL_Event input) override;
@@ -30,4 +30,4 @@ class GameOver : public StateMachine {
   StateMachine::States selection_{ kPlayState };
 };
 
-#endif  // SRC_STATE_GAME_OVER_H_
+#endif  // SRC_STATE_END_H_

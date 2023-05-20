@@ -8,7 +8,7 @@ struct Media {
   Font font;
 
   Texture title;
-  Texture game_over;
+  Texture end;
   Texture select;
   Texture blocks;
   Texture heart;

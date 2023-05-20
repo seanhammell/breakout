@@ -1,4 +1,4 @@
-#include "src/state/game_over.h"
+#include "src/state/end.h"
 
 #include <stdio.h>
 
@@ -11,9 +11,11 @@
 #include "src/state/level_select.h"
 #include "src/state/state_machine.h"
 
-GameOver::GameOver(int score)
-    : title_{ &kMedia.game_over, { 1, 1 },
-              { 0, -kMedia.game_over.get_height() } },
+End::End(int score, bool victory)
+    : title_{ &kMedia.end,
+              { 1, 1 },
+              { 0, -kMedia.end.get_height() },
+              { 0, victory ? 16 : 0, 144, 16} },
       score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
       play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } },
       menu_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
@@ -24,13 +26,13 @@ GameOver::GameOver(int score)
   set_valid();
 }
 
-GameOver::~GameOver() {
+End::~End() {
   delete score_.get_texture();
   delete play_.get_texture();
   delete menu_.get_texture();
 }
 
-void GameOver::HandleInput(SDL_Event input) {
+void End::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     switch (input.key.keysym.sym) {
       case SDLK_UP:
@@ -48,7 +50,7 @@ void GameOver::HandleInput(SDL_Event input) {
   }
 }
 
-StateMachine *GameOver::Update() {
+StateMachine *End::Update() {
   switch (get_next_state()) {
     case kPlayState:
       return new LevelSelect(kPlayState);
@@ -59,7 +61,7 @@ StateMachine *GameOver::Update() {
   }
 }
 
-void GameOver::Render() {
+void End::Render() {
   title_.Render();
   score_.Render();
   play_.Render();

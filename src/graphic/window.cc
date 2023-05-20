@@ -12,8 +12,6 @@
 #include "src/game.h"
 #include "src/graphic/renderer.h"
 #include "src/state/menu.h"
-#include "src/state/game_over.h"
-#include "src/state/play.h"
 
 Window::Window() {
   assert(!instantiated_);  // ensures there is only one Window instance.

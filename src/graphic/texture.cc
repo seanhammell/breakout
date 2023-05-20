@@ -13,7 +13,7 @@ Texture::~Texture() {
 
 bool Texture::LoadMediaTextures() {
   if (!kMedia.title.LoadFromFile("./img/title.png")) { return false; }
-  if (!kMedia.game_over.LoadFromFile("./img/game_over.png")) { return false; }
+  if (!kMedia.end.LoadFromFile("./img/end.png")) { return false; }
   if (!kMedia.select.LoadFromFile("./img/select.png")) { return false; }
   if (!kMedia.blocks.LoadFromFile("./img/blocks.png")) { return false; }
   if (!kMedia.heart.LoadFromFile("./img/heart.png")) { return false; }
