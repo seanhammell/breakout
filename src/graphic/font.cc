@@ -12,7 +12,7 @@ Font::~Font() {
 }
 
 bool Font::LoadMediaFonts() {
-  if (!kMedia.font.LoadFromFile("./font/cs50.ttf", 8)) { return false; }
+  if (!kMedia.font.LoadFromFile("./font/font.ttf", 8)) { return false; }
   return true;
 }
 

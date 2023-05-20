@@ -49,8 +49,10 @@ bool Texture::LoadFromFile(const char *path) {
 bool Texture::LoadFromText(const Font& font, const char *text) {
   Free();
 
-  SDL_Surface *surface{ TTF_RenderText_Solid(font.get_font(), text,
-                                             font.get_color()) };
+  SDL_Surface *surface{ TTF_RenderText_Solid_Wrapped(font.get_font(),
+                                                     text,
+                                                     font.get_color(),
+                                                     Renderer::kVirtualWidth) };
   if (surface == NULL) {
     fprintf(stderr, "Error rendering text surface: %s\n", TTF_GetError());
     return false;

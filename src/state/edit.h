@@ -8,6 +8,7 @@
 #include "src/entity/brick.h"
 #include "src/graphic/renderer.h"
 #include "src/state/state_machine.h"
+#include "src/ui/textbox.h"
 
 class Edit : public StateMachine {
  public:
@@ -16,7 +17,7 @@ class Edit : public StateMachine {
 
   explicit Edit(const char *level);
 
-  ~Edit() = default;
+  ~Edit();
 
   // Allows the user to edit the level and save when finished.
   void HandleInput(SDL_Event input) override;
@@ -32,6 +33,7 @@ class Edit : public StateMachine {
   void SaveLevel();
 
   const char *file_{ };
+  Textbox controls_{ };
   std::array<Brick, Brick::kMaxBricks> bricks_{ };
   Brick hover_{ };
   bool in_zone_{ false };

@@ -13,10 +13,20 @@
 #include "src/state/state_machine.h"
 
 Edit::Edit(const char *level)
-    : file_{ level }, hover_{ 0, 0, Brick::kYellow, &kMedia.blocks } {
+    : file_{ level },
+      controls_{ &kMedia.font, new Texture(), { 0, 2 }, { 0, 0 } },
+      hover_{ 0, 0, Brick::kYellow, &kMedia.blocks } {
+  controls_.Update("LEFT-CLICK:  PLACE BLOCK\n"
+                   "RIGHT-CLICK: REMOVE BLOCK\n"
+                   "SCROLL:      CHANGE BLOCK\n"
+                   "RETURN:      SAVE AND EXIT");
   if (Brick::Load(&bricks_, level)) {
     set_valid();
   }
+}
+
+Edit::~Edit() {
+  delete controls_.get_texture();
 }
 
 void Edit::HandleInput(SDL_Event input) {
@@ -74,6 +84,7 @@ StateMachine *Edit::Update() {
 }
 
 void Edit::Render() {
+  controls_.Render();
   SDL_SetRenderDrawColor(kGame.renderer.get_renderer(), 0xEC, 0xEF, 0xF4, 0xFF);
   SDL_RenderDrawRect(kGame.renderer.get_renderer(), &kZone);
 
