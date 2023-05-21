@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/graphic/font.h"
+#include "src/media/font.h"
 
 class Texture {
  public:

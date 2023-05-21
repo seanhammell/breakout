@@ -4,9 +4,9 @@
 
 #include <cstdlib>
 
-#include "src/media.h"
-#include "src/audio/sound.h"
-#include "src/graphic/texture.h"
+#include "src/media/media.h"
+#include "src/media/sound.h"
+#include "src/media/texture.h"
 #include "src/state/edit.h"
 #include "src/state/play.h"
 

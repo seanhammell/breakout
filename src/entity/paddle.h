@@ -4,7 +4,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/graphic/renderer.h"
-#include "src/graphic/texture.h"
+#include "src/media/texture.h"
 
 class Paddle {
  public:

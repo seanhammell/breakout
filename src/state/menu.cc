@@ -2,10 +2,10 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/media.h"
-#include "src/audio/sound.h"
-#include "src/graphic/font.h"
-#include "src/graphic/texture.h"
+#include "src/media/media.h"
+#include "src/media/sound.h"
+#include "src/media/font.h"
+#include "src/media/texture.h"
 #include "src/state/level_select.h"
 #include "src/state/state_machine.h"
 #include "src/ui/textbox.h"

@@ -1,21 +1,11 @@
-#include "src/audio/sound.h"
+#include "src/media/sound.h"
 
 #include <stdio.h>
 
 #include "SDL2/SDL_mixer.h"
 
-#include "src/media.h"
-
 Sound::~Sound() {
   Free();
-}
-
-bool Sound::LoadMediaSounds() {
-  if (!kMedia.brick.LoadChunk("./res/sound/Brick.wav")) { return false; }
-  if (!kMedia.paddle.LoadChunk("./res/sound/Paddle.wav")) { return false; }
-  if (!kMedia.wall.LoadChunk("./res/sound/Wall.wav")) { return false; }
-  if (!kMedia.enter.LoadChunk("./res/sound/Enter.wav")) { return false; }
-  return true;
 }
 
 bool Sound::LoadChunk(const char *path) {

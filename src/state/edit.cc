@@ -6,10 +6,10 @@
 #include "SDL2/SDL.h"
 
 #include "src/game.h"
-#include "src/media.h"
-#include "src/audio/sound.h"
 #include "src/entity/brick.h"
 #include "src/graphic/renderer.h"
+#include "src/media/media.h"
+#include "src/media/sound.h"
 #include "src/state/menu.h"
 #include "src/state/state_machine.h"
 

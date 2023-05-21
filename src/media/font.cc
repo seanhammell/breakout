@@ -1,19 +1,12 @@
-#include "src/graphic/font.h"
+#include "src/media/font.h"
 
 #include <stdio.h>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 
-#include "src/media.h"
-
 Font::~Font() {
   Free();
-}
-
-bool Font::LoadMediaFonts() {
-  if (!kMedia.font.LoadFromFile("./res/font/font.ttf", 8)) { return false; }
-  return true;
 }
 
 bool Font::LoadFromFile(const char *path, const int size) {

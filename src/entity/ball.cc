@@ -9,7 +9,7 @@
 #include "src/entity/paddle.h"
 #include "src/entity/physics.h"
 #include "src/graphic/renderer.h"
-#include "src/graphic/texture.h"
+#include "src/media/texture.h"
 
 Ball::Ball(Texture *texture, SDL_Rect clip)
     : texture_{ texture }, clip_{ clip } {}

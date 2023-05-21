@@ -5,11 +5,11 @@
 #include <cmath>
 #include <cstddef>
 
-#include "src/media.h"
-#include "src/audio/sound.h"
 #include "src/entity/ball.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
+#include "src/media/media.h"
+#include "src/media/sound.h"
 
 static const Physics::Line kScreenTop{ 0, 0, Renderer::kVirtualWidth, 0 };
 static const Physics::Line kScreenLeft{ 0, 0, 0, Renderer::kVirtualHeight };

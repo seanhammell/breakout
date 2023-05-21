@@ -5,9 +5,9 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/media.h"
 #include "src/graphic/renderer.h"
-#include "src/graphic/texture.h"
+#include "src/media/media.h"
+#include "src/media/texture.h"
 
 Brick::Brick(int x, int y, BrickType type, Texture *texture)
     : x_pos_{ x }, y_pos_{ y }, type_{ type }, texture_{ texture },

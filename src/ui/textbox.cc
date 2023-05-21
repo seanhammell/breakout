@@ -4,8 +4,8 @@
 
 #include <cstdlib>
 
-#include "src/media.h"
-#include "src/graphic/font.h"
+#include "src/media/media.h"
+#include "src/media/font.h"
 #include "src/ui/widget.h"
 
 Textbox::Textbox(Font *font, Texture *texture, Point anchor, Point offset,

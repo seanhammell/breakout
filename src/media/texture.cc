@@ -1,24 +1,13 @@
-#include "src/graphic/texture.h"
+#include "src/media/texture.h"
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
 
 #include "src/game.h"
-#include "src/media.h"
 
 Texture::~Texture() {
   Free();
-}
-
-bool Texture::LoadMediaTextures() {
-  if (!kMedia.title.LoadFromFile("./res/image/title.png")) { return false; }
-  if (!kMedia.end.LoadFromFile("./res/image/end.png")) { return false; }
-  if (!kMedia.select.LoadFromFile("./res/image/select.png")) { return false; }
-  if (!kMedia.blocks.LoadFromFile("./res/image/blocks.png")) { return false; }
-  if (!kMedia.heart.LoadFromFile("./res/image/heart.png")) { return false; }
-  if (!kMedia.pause.LoadFromFile("./res/image/pause.png")) { return false; }
-  return true;
 }
 
 bool Texture::LoadFromFile(const char *path) {

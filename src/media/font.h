@@ -10,8 +10,6 @@ class Font {
 
   ~Font();
 
-  static bool LoadMediaFonts();
-
   TTF_Font *get_font() const { return font_; }
   int get_size() { return size_; }
   SDL_Color get_color() const { return color_; }

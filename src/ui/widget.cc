@@ -3,7 +3,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/graphic/renderer.h"
-#include "src/graphic/texture.h"
+#include "src/media/texture.h"
 
 Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
     : texture_{ texture },

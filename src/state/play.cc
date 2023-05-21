@@ -7,12 +7,12 @@
 
 #include "SDL2/SDL.h"
 
-#include "src/media.h"
 #include "src/entity/ball.h"
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
-#include "src/graphic/font.h"
-#include "src/graphic/texture.h"
+#include "src/media/font.h"
+#include "src/media/media.h"
+#include "src/media/texture.h"
 #include "src/state/end.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"

@@ -2,23 +2,19 @@
 #include <ctime>
 
 #include "src/game.h"
-#include "src/media.h"
-#include "src/audio/sound.h"
-#include "src/graphic/texture.h"
+#include "src/media/media.h"
 #include "src/graphic/window.h"
 
 // Global game state.
 Game kGame;
 
 // Global media.
-Media kMedia;
+media::Media kMedia;
 
 int main() {
   std::srand(std::time(nullptr));
 
-  if (!Texture::LoadMediaTextures() ||
-      !Font::LoadMediaFonts() ||
-      !Sound::LoadMediaSounds()) {
+  if (!media::LoadMedia()) {
     return 0;
   }
 
