@@ -33,6 +33,8 @@ void Sound::PlayChunk() {
 }
 
 void Sound::Free() {
-  Mix_FreeChunk(chunk_);
-  chunk_ = NULL;
+  if (chunk_ != NULL) {
+    Mix_FreeChunk(chunk_);
+    chunk_ = NULL;
+  }
 }
