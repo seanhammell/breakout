@@ -1,6 +1,6 @@
 # Breakout
-![Screen Shot 2023-05-21 at 11 38 08 AM](https://github.com/seanhammell/breakout/assets/95873993/3a71d8cb-3f15-4235-92f3-4e04876cd708#image)
-![Screen Shot 2023-05-21 at 11 53 00 AM](https://github.com/seanhammell/breakout/assets/95873993/f0f87f66-e8c7-42b9-bfce-9627153c607c#image)
+![menu](https://github.com/seanhammell/breakout/assets/95873993/84e71d80-3ebb-4a1b-8449-a49d2a1c525f)
+![play](https://github.com/seanhammell/breakout/assets/95873993/b686880a-e7a3-46f7-8880-deadd6830485)
 
 # Project Description
 
