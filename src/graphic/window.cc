@@ -8,6 +8,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
+#include "SDL2/SDL_mixer.h"
 
 #include "src/game.h"
 #include "src/graphic/renderer.h"
@@ -88,6 +89,11 @@ bool Window::Create() {
 
   if (TTF_Init() != 0) {
     fprintf(stderr, "Error initializing SDL_ttf: %s\n", TTF_GetError());
+    return false;
+  }
+
+  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+    fprintf(stderr, "Error initializing SDL_mixer: %s\n", Mix_GetError());
     return false;
   }
 

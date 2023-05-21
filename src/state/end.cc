@@ -5,6 +5,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/media.h"
+#include "src/audio/sound.h"
 #include "src/graphic/font.h"
 #include "src/graphic/texture.h"
 #include "src/state/menu.h"
@@ -42,6 +43,7 @@ void End::HandleInput(SDL_Event input) {
         selection_ = kMenuState;
         break;
       case SDLK_RETURN:
+        kMedia.enter.PlayChunk();
         set_next_state(selection_);
         break;
       default:

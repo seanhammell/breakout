@@ -5,6 +5,8 @@
 #include <cmath>
 #include <cstddef>
 
+#include "src/media.h"
+#include "src/audio/sound.h"
 #include "src/entity/ball.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
@@ -169,14 +171,21 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   int paddle_center{ };
   switch (surface_) {
     case kAxisX:
+      if (hit_brick_ == NULL) {
+        kMedia.wall.PlayChunk();
+      }
       ball->y_vel_ = -ball->y_vel_;
       y_velocity = -y_velocity;
       break;
     case kAxisY:
+      if (hit_brick_ == NULL) {
+        kMedia.wall.PlayChunk();
+      }
       ball->x_vel_ = -ball->x_vel_;
       x_velocity = -x_velocity;
       break;
     case kPaddle:
+      kMedia.paddle.PlayChunk();
       ball_center = ball->x_pos_ + (Ball::kBallWidth / 2);
       paddle_center = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2);
       ball->x_vel_ += (ball_center - paddle_center) / 4;
@@ -193,6 +202,7 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   }
 
   if (hit_brick_ != NULL) {
+    kMedia.brick.PlayChunk();
     hit_brick_->hit();
   }
 
