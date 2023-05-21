@@ -7,6 +7,7 @@
 
 #include "src/game.h"
 #include "src/media.h"
+#include "src/audio/sound.h"
 #include "src/entity/brick.h"
 #include "src/graphic/renderer.h"
 #include "src/state/menu.h"
@@ -83,6 +84,7 @@ void Edit::HandleInput(SDL_Event input) {
       break;
     case SDL_KEYDOWN:
       if (input.key.keysym.sym == SDLK_RETURN) {
+        kMedia.enter.PlayChunk();
         SaveLevel();
         set_next_state(StateMachine::kMenuState);
         break;

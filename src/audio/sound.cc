@@ -11,10 +11,10 @@ Sound::~Sound() {
 }
 
 bool Sound::LoadMediaSounds() {
-  if (!kMedia.brick.LoadChunk("./sound/Brick.wav")) { return false; }
-  if (!kMedia.paddle.LoadChunk("./sound/Paddle.wav")) { return false; }
-  if (!kMedia.wall.LoadChunk("./sound/Wall.wav")) { return false; }
-  if (!kMedia.enter.LoadChunk("./sound/Enter.wav")) { return false; }
+  if (!kMedia.brick.LoadChunk("./res/sound/Brick.wav")) { return false; }
+  if (!kMedia.paddle.LoadChunk("./res/sound/Paddle.wav")) { return false; }
+  if (!kMedia.wall.LoadChunk("./res/sound/Wall.wav")) { return false; }
+  if (!kMedia.enter.LoadChunk("./res/sound/Enter.wav")) { return false; }
   return true;
 }
 

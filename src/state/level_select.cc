@@ -57,8 +57,8 @@ StateMachine *LevelSelect::Update() {
   if (trigger_) {
     // It is important that the buffer is static because Edit needs
     // the name of the file when it is time to save.
-    static char buffer[19];
-    snprintf(buffer, sizeof(buffer), "./res/level_0%d.txt", selection_);
+    static char buffer[25];
+    snprintf(buffer, sizeof(buffer), "./res/level/level_0%d.txt", selection_);
     switch (next_) {
       case kPlayState:
         return new Play(buffer);

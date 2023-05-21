@@ -12,12 +12,12 @@ Texture::~Texture() {
 }
 
 bool Texture::LoadMediaTextures() {
-  if (!kMedia.title.LoadFromFile("./img/title.png")) { return false; }
-  if (!kMedia.end.LoadFromFile("./img/end.png")) { return false; }
-  if (!kMedia.select.LoadFromFile("./img/select.png")) { return false; }
-  if (!kMedia.blocks.LoadFromFile("./img/blocks.png")) { return false; }
-  if (!kMedia.heart.LoadFromFile("./img/heart.png")) { return false; }
-  if (!kMedia.pause.LoadFromFile("./img/pause.png")) { return false; }
+  if (!kMedia.title.LoadFromFile("./res/image/title.png")) { return false; }
+  if (!kMedia.end.LoadFromFile("./res/image/end.png")) { return false; }
+  if (!kMedia.select.LoadFromFile("./res/image/select.png")) { return false; }
+  if (!kMedia.blocks.LoadFromFile("./res/image/blocks.png")) { return false; }
+  if (!kMedia.heart.LoadFromFile("./res/image/heart.png")) { return false; }
+  if (!kMedia.pause.LoadFromFile("./res/image/pause.png")) { return false; }
   return true;
 }
 
