@@ -16,8 +16,10 @@ To build the project, navigate to the breakout/ directory and run the command
 
 ### Menus
 Arrow Keys - Navigate
+
 Return - Select
 
 ### Play
 Arrow Keys - Move Paddle
+
 Spacebar - Serve
