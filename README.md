@@ -6,20 +6,9 @@ This project is an implementaion of the classic Atari game *Breakout*. The game 
 
 # How to Play
 
-To build the project, navigate to the breakout/ directory and run the command
+To build the project, navigate to the breakout/ directory and run the commands
 ```
     make
     ./build/breakout
 ```
-
-# Controls
-
-### Menus
-Arrow Keys - Navigate
-
-Return - Select
-
-### Play
-Arrow Keys - Move Paddle
-
-Spacebar - Serve
+Once the project is open, use the arrow keys and return key to navigate the menus. While playing, the arrow keys control the paddle and spacebar serves the ball.
