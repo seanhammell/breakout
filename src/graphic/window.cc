@@ -97,8 +97,11 @@ bool Window::Create() {
     return false;
   }
 
-  window_ = SDL_CreateWindow("Breakout", SDL_WINDOWPOS_CENTERED,
-                             SDL_WINDOWPOS_CENTERED, kWindowWidth,
+  SDL_Rect monitor;
+  SDL_GetDisplayBounds(SDL_GetNumVideoDisplays() - 1, &monitor);
+  monitor.x += (monitor.w - kWindowWidth) / 2;
+  monitor.y += (monitor.h - kWindowHeight) / 2;
+  window_ = SDL_CreateWindow("Breakout", monitor.x, monitor.y, kWindowWidth,
                              kWindowHeight, SDL_WINDOW_SHOWN);
   if (window_ == NULL) {
     fprintf(stderr, "Error creating window: %s\n", SDL_GetError());
