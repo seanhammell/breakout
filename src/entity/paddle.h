@@ -2,20 +2,18 @@
 #define SRC_ENTITY_PADDLE_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/graphic/renderer.h"
 #include "src/media/texture.h"
 
 class Paddle {
  public:
-  static const int kPaddleYPos{ Renderer::kVirtualHeight - 20 };
-  static const int kPaddleWidth{ 24 };
-  static const int kPaddleHeight{ 2 };
-  static const int kPaddleVelocity{ 2 };
+  static const int kPaddleYPos{Renderer::kVirtualHeight - 20};
+  static const int kPaddleWidth{24};
+  static const int kPaddleHeight{2};
+  static const int kPaddleVelocity{2};
 
   Paddle() = default;
-  Paddle(Texture *texture, SDL_Rect clip = {0, 3, kPaddleWidth,
-                                            kPaddleHeight});
+  Paddle(Texture *texture, SDL_Rect clip = {0, 3, kPaddleWidth, kPaddleHeight});
 
   ~Paddle() = default;
 
@@ -31,10 +29,10 @@ class Paddle {
   void Render();
 
  private:
-  int x_pos_{ (Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2 };
-  int x_vel_{ 0 };
-  Texture *texture_{ NULL };
-  SDL_Rect clip_{ };
+  int x_pos_{(Renderer::kVirtualWidth - Paddle::kPaddleWidth) / 2};
+  int x_vel_{0};
+  Texture *texture_{NULL};
+  SDL_Rect clip_{};
 };
 
 #endif  // SRC_ENTITY_PADDLE_H_

@@ -7,8 +7,8 @@
 
 class Window {
  public:
-  static const int kWindowWidth{ 796 };
-  static const int kWindowHeight{ 640 };
+  static const int kWindowWidth{796};
+  static const int kWindowHeight{640};
 
   Window();
 
@@ -27,10 +27,10 @@ class Window {
   // Destroys the SDL_Window.
   void Destroy();
 
-  bool instantiated_{ false };
-  SDL_Window *window_{ NULL };
-  int fps_{ 0 };
-  uint64_t last_second_{ SDL_GetTicks64() };
+  bool instantiated_{false};
+  SDL_Window *window_{NULL};
+  int fps_{0};
+  uint64_t last_second_{SDL_GetTicks64()};
 };
 
 #endif  // SRC_GRAPHIC_WINDOW_H_

@@ -1,12 +1,11 @@
 #include "src/entity/paddle.h"
 
 #include "SDL2/SDL.h"
-
 #include "src/graphic/renderer.h"
 #include "src/media/texture.h"
 
 Paddle::Paddle(Texture *texture, SDL_Rect clip)
-    : texture_{ texture }, clip_{ clip } {}
+    : texture_{texture}, clip_{clip} {}
 
 void Paddle::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
@@ -43,6 +42,4 @@ void Paddle::Update() {
   }
 }
 
-void Paddle::Render() {
-  texture_->Render(x_pos_, kPaddleYPos, &clip_);
-}
+void Paddle::Render() { texture_->Render(x_pos_, kPaddleYPos, &clip_); }

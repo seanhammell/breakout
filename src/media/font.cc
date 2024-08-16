@@ -5,9 +5,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 
-Font::~Font() {
-  Free();
-}
+Font::~Font() { Free(); }
 
 bool Font::LoadFromFile(const char *path, const int size) {
   Free();

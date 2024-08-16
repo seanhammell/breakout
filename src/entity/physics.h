@@ -10,7 +10,7 @@ class Ball;
 
 class Physics {
  public:
-  enum Collision{
+  enum Collision {
     kNone,
     kAxisX,
     kAxisY,
@@ -34,11 +34,11 @@ class Physics {
   ~Physics() = default;
 
   // Updates the Ball's position.
-  void Update(Ball *ball, const Paddle& paddle,
-              std::array<Brick, Brick::kMaxBricks> *bricks);
+  void Update(Ball* ball, const Paddle& paddle,
+              std::array<Brick, Brick::kMaxBricks>* bricks);
 
  private:
-  static constexpr double kEpsilon{ 0.0001 };
+  static constexpr double kEpsilon{0.0001};
   // Returns the distance between two points.
   double Distance(const Point& a, const Point& b);
 
@@ -51,19 +51,19 @@ class Physics {
 
   // Creates the bounds for the Paddle and Bricks to check for collisions.
   void CheckPaddle(const Paddle& paddle);
-  void CheckBricks(std::array<Brick, Brick::kMaxBricks> *bricks);
+  void CheckBricks(std::array<Brick, Brick::kMaxBricks>* bricks);
 
   // Moves the Ball along it's path, adjusting for collisions.
-  void ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
+  void ApplyVelocity(Ball* ball, int x_velocity, int y_velocity,
                      const Paddle& paddle,
-                     std::array<Brick, Brick::kMaxBricks> *bricks);
+                     std::array<Brick, Brick::kMaxBricks>* bricks);
 
-  Point origin_{ };
-  Point vertex_{ };
-  Line path_{ };
-  double nearest_vertex_{ };
-  Collision surface_{ };
-  Brick *hit_brick_{ NULL };
+  Point origin_{};
+  Point vertex_{};
+  Line path_{};
+  double nearest_vertex_{};
+  Collision surface_{};
+  Brick* hit_brick_{NULL};
 };
 
 #endif  // SRC_ENTITY_PHYSICS_H_

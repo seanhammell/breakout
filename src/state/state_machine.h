@@ -27,8 +27,8 @@ class StateMachine {
   virtual void Render() = 0;
 
  private:
-  bool valid_{ false };
-  States next_state_{ kNoState };
+  bool valid_{false};
+  States next_state_{kNoState};
 };
 
 #endif  // SRC_STATE_STATE_MACHINE_H_

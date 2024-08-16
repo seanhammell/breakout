@@ -8,17 +8,17 @@
 #include "src/entity/ball.h"
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
-#include "src/media/media.h"
 #include "src/media/chunk.h"
+#include "src/media/media.h"
 
-static const Physics::Line kScreenTop{ 0, 0, Renderer::kVirtualWidth, 0 };
-static const Physics::Line kScreenLeft{ 0, 0, 0, Renderer::kVirtualHeight };
-static const Physics::Line kScreenRight{ Renderer::kVirtualWidth, 0,
-                                         Renderer::kVirtualWidth,
-                                         Renderer::kVirtualHeight };
+static const Physics::Line kScreenTop{0, 0, Renderer::kVirtualWidth, 0};
+static const Physics::Line kScreenLeft{0, 0, 0, Renderer::kVirtualHeight};
+static const Physics::Line kScreenRight{Renderer::kVirtualWidth, 0,
+                                        Renderer::kVirtualWidth,
+                                        Renderer::kVirtualHeight};
 
-void Physics::Update(Ball *ball, const Paddle& paddle,
-                     std::array<Brick, Brick::kMaxBricks> *bricks) {
+void Physics::Update(Ball* ball, const Paddle& paddle,
+                     std::array<Brick, Brick::kMaxBricks>* bricks) {
   static constexpr int kTopThird = Renderer::kVirtualHeight / 3;
   int y_before = ball->y_pos_;
   ApplyVelocity(ball, ball->x_vel_, ball->y_vel_, paddle, bricks);
@@ -36,9 +36,9 @@ double Physics::Distance(const Point& a, const Point& b) {
 }
 
 bool Physics::Intersection(const Line& a, const Line& b) {
-  double denom{ (b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1) };
-  double num_a{ (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1) };
-  double num_b{ (a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1) };
+  double denom{(b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1)};
+  double num_a{(b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1)};
+  double num_b{(a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1)};
 
   if (std::abs(denom) < kEpsilon) {
     if (std::abs(num_a) < kEpsilon && std::abs(num_b) < kEpsilon) {
@@ -50,8 +50,8 @@ bool Physics::Intersection(const Line& a, const Line& b) {
     return false;
   }
 
-  double ua{ num_a / denom };
-  double ub{ num_b / denom };
+  double ua{num_a / denom};
+  double ub{num_b / denom};
 
   if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
     return false;
@@ -77,35 +77,35 @@ bool Physics::CheckCollision(const Line& bound, Collision type) {
 }
 
 void Physics::CheckPaddle(const Paddle& paddle) {
-  const double left{ static_cast<double>(paddle.get_x_pos()) };
-  const double right{ static_cast<double>(left + Paddle::kPaddleWidth) };
-  const double top{ static_cast<double>(Paddle::kPaddleYPos) };
+  const double left{static_cast<double>(paddle.get_x_pos())};
+  const double right{static_cast<double>(left + Paddle::kPaddleWidth)};
+  const double top{static_cast<double>(Paddle::kPaddleYPos)};
 
-  const Line paddle_bound{ left, top, right, top };
+  const Line paddle_bound{left, top, right, top};
 
   CheckCollision(paddle_bound, kPaddle);
 }
 
-void Physics::CheckBricks(std::array<Brick, Brick::kMaxBricks> *bricks) {
+void Physics::CheckBricks(std::array<Brick, Brick::kMaxBricks>* bricks) {
   hit_brick_ = NULL;
 
-  for (size_t i{ 0 }; i < bricks->size(); ++i) {
+  for (size_t i{0}; i < bricks->size(); ++i) {
     if ((*bricks)[i].is_hit() || (*bricks)[i].get_type() == Brick::kNoType) {
       continue;
     }
 
-    const double left{ static_cast<double>((*bricks)[i].get_x_pos()) };
-    const double right{ static_cast<double>(left + Brick::kBrickWidth) };
-    const double top{ static_cast<double>((*bricks)[i].get_y_pos()) };
-    const double bottom{ static_cast<double>(top + Brick::kBrickHeight) };
+    const double left{static_cast<double>((*bricks)[i].get_x_pos())};
+    const double right{static_cast<double>(left + Brick::kBrickWidth)};
+    const double top{static_cast<double>((*bricks)[i].get_y_pos())};
+    const double bottom{static_cast<double>(top + Brick::kBrickHeight)};
 
-    const Line left_bound{ left, top, left, bottom };
-    const Line right_bound{ right, top, right, bottom };
-    const Line top_bound{ left, top, right, top };
-    const Line bottom_bound{ left, bottom, right, bottom };
+    const Line left_bound{left, top, left, bottom};
+    const Line right_bound{right, top, right, bottom};
+    const Line top_bound{left, top, right, top};
+    const Line bottom_bound{left, bottom, right, bottom};
 
-    double x_magnitude{ std::abs(path_.x2 - path_.x1) };
-    double y_magnitude{ std::abs(path_.y2 - path_.y1) };
+    double x_magnitude{std::abs(path_.x2 - path_.x1)};
+    double y_magnitude{std::abs(path_.y2 - path_.y1)};
 
     if (x_magnitude > y_magnitude) {
       if (x_magnitude > kEpsilon) {
@@ -139,9 +139,9 @@ void Physics::CheckBricks(std::array<Brick, Brick::kMaxBricks> *bricks) {
   }
 }
 
-void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
+void Physics::ApplyVelocity(Ball* ball, int x_velocity, int y_velocity,
                             const Paddle& paddle,
-                            std::array<Brick, Brick::kMaxBricks> *bricks) {
+                            std::array<Brick, Brick::kMaxBricks>* bricks) {
   if (x_velocity == 0 && y_velocity == 0) {
     return;
   }
@@ -168,8 +168,8 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   CheckPaddle(paddle);
   CheckBricks(bricks);
 
-  int dx{ static_cast<int>(path_.x2 - path_.x1) };
-  int dy{ static_cast<int>(path_.y2 - path_.y1) };
+  int dx{static_cast<int>(path_.x2 - path_.x1)};
+  int dy{static_cast<int>(path_.y2 - path_.y1)};
 
   ball->x_pos_ += dx;
   ball->y_pos_ += dy;
@@ -177,9 +177,9 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   x_velocity = std::abs(dx) > std::abs(x_velocity) ? 0 : x_velocity - dx;
   y_velocity = std::abs(dy) > std::abs(y_velocity) ? 0 : y_velocity - dy;
 
-  int ball_center{ ball->x_pos_ + (Ball::kBallWidth / 2) };
-  int paddle_center{ paddle.get_x_pos() + (Paddle::kPaddleWidth / 2) };
-  int ball_paddle_offset{ ball_center - paddle_center };
+  int ball_center{ball->x_pos_ + (Ball::kBallWidth / 2)};
+  int paddle_center{paddle.get_x_pos() + (Paddle::kPaddleWidth / 2)};
+  int ball_paddle_offset{ball_center - paddle_center};
   switch (surface_) {
     case kAxisX:
       if (hit_brick_ == NULL) {

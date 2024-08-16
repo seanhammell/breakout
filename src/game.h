@@ -2,7 +2,6 @@
 #define SRC_GAME_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/graphic/renderer.h"
 #include "src/graphic/window.h"
 #include "src/state/state_machine.h"

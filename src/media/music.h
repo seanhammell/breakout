@@ -1,5 +1,5 @@
-#ifndef SRC_AUDIO_MUSIC_H_
-#define SRC_AUDIO_MUSIC_H_
+#ifndef SRC_MEDIA_MUSIC_H_
+#define SRC_MEDIA_MUSIC_H_
 
 #include "SDL2/SDL_mixer.h"
 
@@ -19,7 +19,7 @@ class Music {
   // Frees the current music_ if it exists.
   void Free();
 
-  Mix_Music *music_{ NULL };
+  Mix_Music *music_{NULL};
 };
 
-#endif  // SRC_AUDIO_MUSIC_H_
+#endif  // SRC_MEDIA_MUSIC_H_

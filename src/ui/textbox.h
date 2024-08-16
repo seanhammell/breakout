@@ -8,7 +8,7 @@ class Textbox : public Widget {
  public:
   Textbox() = default;
   Textbox(Font *font, Texture *texture, Point anchor, Point offset,
-          SDL_Rect clip = { });
+          SDL_Rect clip = {});
 
   ~Textbox() = default;
 
@@ -27,7 +27,7 @@ class Textbox : public Widget {
   // Updates the Textbox's width and height to fit the text.
   void FitToText();
 
-  Font *font_{ NULL };
+  Font *font_{NULL};
 };
 
 #endif  // SRC_UI_TEXTBOX_H_

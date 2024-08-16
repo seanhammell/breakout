@@ -7,9 +7,8 @@
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
 #include "SDL2/SDL_mixer.h"
-
+#include "SDL2/SDL_ttf.h"
 #include "src/game.h"
 #include "src/graphic/renderer.h"
 #include "src/state/menu.h"
@@ -28,13 +27,9 @@ Window::~Window() {
   instantiated_ = false;
 }
 
-bool Window::get_instantiated() const {
-  return instantiated_;
-}
+bool Window::get_instantiated() const { return instantiated_; }
 
-SDL_Window *Window::get_window() const {
-  return window_;
-}
+SDL_Window *Window::get_window() const { return window_; }
 
 void Window::Loop() {
   assert(kGame.window.get_instantiated());
@@ -67,7 +62,7 @@ void Window::Loop() {
     kGame.renderer.Present();
     ++fps_;
 
-    uint64_t now{ SDL_GetTicks64() };
+    uint64_t now{SDL_GetTicks64()};
     if (now - last_second_ > 1000ull) {
       SDL_Log("FPS: %d\n", fps_);
       fps_ = 0;
@@ -92,7 +87,7 @@ bool Window::Create() {
     return false;
   }
 
-  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+  if (Mix_OpenAudio(48000, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
     fprintf(stderr, "Error initializing SDL_mixer: %s\n", Mix_GetError());
     return false;
   }
@@ -113,6 +108,7 @@ bool Window::Create() {
 
 void Window::Destroy() {
   SDL_DestroyWindow(window_);
+  Mix_CloseAudio();
   TTF_Quit();
   IMG_Quit();
   SDL_Quit();

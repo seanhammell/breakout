@@ -1,15 +1,11 @@
 #include "src/ui/widget.h"
 
 #include "SDL2/SDL.h"
-
 #include "src/graphic/renderer.h"
 #include "src/media/texture.h"
 
 Widget::Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip)
-    : texture_{ texture },
-      anchor_{ anchor },
-      offset_{ offset },
-      clip_{ clip } {
+    : texture_{texture}, anchor_{anchor}, offset_{offset}, clip_{clip} {
   // If the width of the clip is 0, assume the element is the entire Texture.
   if (clip_.w == 0) {
     clip_.w = texture_->get_width();
@@ -24,7 +20,7 @@ void Widget::Render() {
 }
 
 int Widget::CalculatePosX() const {
-  int anchor{ };
+  int anchor{};
   switch (anchor_.x) {
     case 0:
       anchor = 0 + kPadding;
@@ -44,7 +40,7 @@ int Widget::CalculatePosX() const {
 }
 
 int Widget::CalculatePosY() const {
-  int anchor{ };
+  int anchor{};
   switch (anchor_.y) {
     case 0:
       anchor = 0 + kPadding;

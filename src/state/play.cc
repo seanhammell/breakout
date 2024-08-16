@@ -6,7 +6,6 @@
 #include <fstream>
 
 #include "SDL2/SDL.h"
-
 #include "src/entity/ball.h"
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
@@ -19,11 +18,11 @@
 #include "src/ui/widget.h"
 
 Play::Play(const char *level)
-    : score_display_{ &kMedia.font, new Texture(), { 2, 0 }, { 0, 0 } },
-      hearts_{ &kMedia.heart, { 0, 0 }, { 0, 0 } },
-      pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
-      ball_{ &kMedia.blocks },
-      paddle_{ &kMedia.blocks } {
+    : score_display_{&kMedia.font, new Texture(), {2, 0}, {0, 0}},
+      hearts_{&kMedia.heart, {0, 0}, {0, 0}},
+      pause_screen_{&kMedia.pause, {0, 0}, {0, 0}},
+      ball_{&kMedia.blocks},
+      paddle_{&kMedia.blocks} {
   kMedia.music.ToggleMusic();
   if (Brick::Load(&bricks_, level)) {
     set_valid();
@@ -77,11 +76,11 @@ void Play::Render() {
 
   score_display_.Render();
 
-  for (int i{ 0 }; i < ball_.remaining_lives(); ++i) {
-    hearts_.set_offset({ (hearts_.get_width() + Widget::kPadding) * i, 0 });
+  for (int i{0}; i < ball_.remaining_lives(); ++i) {
+    hearts_.set_offset({(hearts_.get_width() + Widget::kPadding) * i, 0});
     hearts_.Render();
   }
-  hearts_.set_offset({ 0, 0 });
+  hearts_.set_offset({0, 0});
 
   if (paused_) {
     pause_screen_.Render();
@@ -91,7 +90,7 @@ void Play::Render() {
 
 bool Play::ClearBricks() {
   score_ = 0;
-  bool cleared{ true };
+  bool cleared{true};
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
       score_ += brick.value();

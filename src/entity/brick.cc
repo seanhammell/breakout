@@ -4,14 +4,16 @@
 #include <fstream>
 
 #include "SDL2/SDL.h"
-
 #include "src/graphic/renderer.h"
 #include "src/media/media.h"
 #include "src/media/texture.h"
 
 Brick::Brick(int x, int y, BrickType type, Texture *texture)
-    : x_pos_{ x }, y_pos_{ y }, type_{ type }, texture_{ texture },
-      clip_{ type * kClipWidth - kClipWidth, 0, kClipWidth, kClipHeight } {}
+    : x_pos_{x},
+      y_pos_{y},
+      type_{type},
+      texture_{texture},
+      clip_{type * kClipWidth - kClipWidth, 0, kClipWidth, kClipHeight} {}
 
 constexpr int Brick::operator+(BrickType type) {
   return static_cast<int>(type);
@@ -23,20 +25,20 @@ void Brick::set_type(int type) {
 }
 
 bool Brick::Load(std::array<Brick, kMaxBricks> *bricks, const char *file) {
-  int x{ 1 };
-  int y{ 20 };
+  int x{1};
+  int y{20};
 
-  std::ifstream map{ file };
+  std::ifstream map{file};
 
   if (map.fail()) {
     fprintf(stderr, "Error loading map file\n");
     return false;
   }
 
-  for (size_t i{ 0 }; i < kMaxBricks; ++i) {
-    int tile{ -1 };
+  for (size_t i{0}; i < kMaxBricks; ++i) {
+    int tile{-1};
     map >> tile;
-    Brick::BrickType type{ static_cast<Brick::BrickType>(tile) };
+    Brick::BrickType type{static_cast<Brick::BrickType>(tile)};
 
     if (map.fail()) {
       fprintf(stderr, "Unexpected EOF\n");
@@ -63,6 +65,4 @@ bool Brick::Load(std::array<Brick, kMaxBricks> *bricks, const char *file) {
   return true;
 }
 
-void Brick::Render() {
-  texture_->Render(x_pos_, y_pos_, &clip_);
-}
+void Brick::Render() { texture_->Render(x_pos_, y_pos_, &clip_); }

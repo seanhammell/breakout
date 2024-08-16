@@ -4,7 +4,6 @@
 #include <array>
 
 #include "SDL2/SDL.h"
-
 #include "src/media/texture.h"
 
 class Brick {
@@ -18,13 +17,13 @@ class Brick {
     kTotalTypes,
   };
 
-  static const int kClipWidth{ 8 };
-  static const int kClipHeight{ 3 };
+  static const int kClipWidth{8};
+  static const int kClipHeight{3};
 
-  static const int kBrickWidth{ 9 };
-  static const int kBrickHeight{ 4 };
+  static const int kBrickWidth{9};
+  static const int kBrickHeight{4};
 
-  static constexpr size_t kMaxBricks{ 176 };
+  static constexpr size_t kMaxBricks{176};
 
   Brick() = default;
   Brick(int x, int y, BrickType type, Texture *texture);
@@ -52,12 +51,12 @@ class Brick {
   void Render();
 
  private:
-  int x_pos_{ 0 };
-  int y_pos_{ 0 };
-  bool hit_{ false };
-  BrickType type_{ kNoType };
-  Texture *texture_{ NULL };
-  SDL_Rect clip_{ };
+  int x_pos_{0};
+  int y_pos_{0};
+  bool hit_{false};
+  BrickType type_{kNoType};
+  Texture *texture_{NULL};
+  SDL_Rect clip_{};
 };
 
 #endif  // SRC_ENTITY_BRICK_H_

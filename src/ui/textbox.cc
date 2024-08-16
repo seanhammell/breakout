@@ -4,13 +4,13 @@
 
 #include <cstdlib>
 
-#include "src/media/media.h"
 #include "src/media/font.h"
+#include "src/media/media.h"
 #include "src/ui/widget.h"
 
 Textbox::Textbox(Font *font, Texture *texture, Point anchor, Point offset,
                  SDL_Rect clip)
-    : Widget{ texture, anchor, offset, clip }, font_{ font } {}
+    : Widget{texture, anchor, offset, clip}, font_{font} {}
 
 void Textbox::AppendNumber(const char *s, int n, bool fit) {
   char buffer[20];
@@ -19,8 +19,8 @@ void Textbox::AppendNumber(const char *s, int n, bool fit) {
 }
 
 void Textbox::ShowSelected() {
-  Widget selected{ &kMedia.blocks, get_anchor(), get_offset(), {24, 3, 2, 2} };
-  Point adjusted_offset{ selected.get_offset() };
+  Widget selected{&kMedia.blocks, get_anchor(), get_offset(), {24, 3, 2, 2}};
+  Point adjusted_offset{selected.get_offset()};
   adjusted_offset.x -= (get_width() / 2) + selected.get_width() + kPadding;
   adjusted_offset.y -= selected.get_height() / 2;
   selected.set_offset(adjusted_offset);
@@ -30,7 +30,7 @@ void Textbox::ShowSelected() {
 void Textbox::Update(const char *text, bool fit) {
   Texture *texture = get_texture();
   texture->LoadFromText(*font_, text);
-  set_clip({ 0, 0, texture->get_width(), texture->get_height() });
+  set_clip({0, 0, texture->get_width(), texture->get_height()});
   if (fit) {
     FitToText();
   }

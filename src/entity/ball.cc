@@ -4,15 +4,13 @@
 #include <cstdlib>
 
 #include "SDL2/SDL.h"
-
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
 #include "src/entity/physics.h"
 #include "src/graphic/renderer.h"
 #include "src/media/texture.h"
 
-Ball::Ball(Texture *texture, SDL_Rect clip)
-    : texture_{ texture }, clip_{ clip } {}
+Ball::Ball(Texture* texture, SDL_Rect clip) : texture_{texture}, clip_{clip} {}
 
 void Ball::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
@@ -25,7 +23,7 @@ void Ball::HandleInput(SDL_Event input) {
 }
 
 void Ball::Update(const Paddle& paddle,
-                  std::array<Brick, Brick::kMaxBricks> *bricks) {
+                  std::array<Brick, Brick::kMaxBricks>* bricks) {
   if (live_) {
     physics_.Update(this, paddle, bricks);
     if (y_pos_ > Renderer::kVirtualHeight) {
@@ -39,9 +37,7 @@ void Ball::Update(const Paddle& paddle,
   }
 }
 
-void Ball::Render() {
-  texture_->Render(x_pos_, y_pos_, &clip_);
-}
+void Ball::Render() { texture_->Render(x_pos_, y_pos_, &clip_); }
 
 void Ball::CenterOnPaddle(const Paddle& paddle) {
   x_pos_ = paddle.get_x_pos() + (Paddle::kPaddleWidth - kBallWidth) / 2;

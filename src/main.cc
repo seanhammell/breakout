@@ -2,8 +2,8 @@
 #include <ctime>
 
 #include "src/game.h"
-#include "src/media/media.h"
 #include "src/graphic/window.h"
+#include "src/media/media.h"
 
 // Global game state.
 Game kGame;

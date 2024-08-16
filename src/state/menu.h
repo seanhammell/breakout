@@ -2,10 +2,9 @@
 #define SRC_STATE_MENU_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/state/state_machine.h"
-#include "src/ui/widget.h"
 #include "src/ui/textbox.h"
+#include "src/ui/widget.h"
 
 class Menu : public StateMachine {
  public:
@@ -23,10 +22,10 @@ class Menu : public StateMachine {
   void Render() override;
 
  private:
-  Widget title_{ };
-  Textbox play_{ };
-  Textbox edit_{ };
-  StateMachine::States selection_{ kPlayState };
+  Widget title_{};
+  Textbox play_{};
+  Textbox edit_{};
+  StateMachine::States selection_{kPlayState};
 };
 
 #endif  // SRC_STATE_MENU_H_

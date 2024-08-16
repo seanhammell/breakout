@@ -2,7 +2,6 @@
 #define SRC_STATE_LEVEL_SELECT_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/state/state_machine.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
@@ -24,12 +23,12 @@ class LevelSelect : public StateMachine {
   void Render() override;
 
  private:
-  Widget title_{ };
-  Textbox mode_{ };
-  Textbox levels_{ };
-  StateMachine::States next_{ kNoState };
-  int selection_{ 1 };
-  bool trigger_{ false };
+  Widget title_{};
+  Textbox mode_{};
+  Textbox levels_{};
+  StateMachine::States next_{kNoState};
+  int selection_{1};
+  bool trigger_{false};
 };
 
 #endif  // SRC_STATE_LEVEL_SELECT_H_

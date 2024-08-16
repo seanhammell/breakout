@@ -2,7 +2,6 @@
 #define SRC_STATE_END_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/state/state_machine.h"
 #include "src/ui/textbox.h"
 #include "src/ui/widget.h"
@@ -23,11 +22,11 @@ class End : public StateMachine {
   void Render() override;
 
  private:
-  Widget title_{ };
-  Textbox score_{ };
-  Textbox play_{ };
-  Textbox menu_{ };
-  StateMachine::States selection_{ kPlayState };
+  Widget title_{};
+  Textbox score_{};
+  Textbox play_{};
+  Textbox menu_{};
+  StateMachine::States selection_{kPlayState};
 };
 
 #endif  // SRC_STATE_END_H_

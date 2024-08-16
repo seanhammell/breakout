@@ -4,9 +4,7 @@
 
 #include "SDL2/SDL_mixer.h"
 
-Music::~Music() {
-  Free();
-}
+Music::~Music() { Free(); }
 
 bool Music::LoadMusic(const char *path) {
   music_ = Mix_LoadMUS(path);

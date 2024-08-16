@@ -4,9 +4,7 @@
 
 #include "SDL2/SDL_mixer.h"
 
-Chunk::~Chunk() {
-  Free();
-}
+Chunk::~Chunk() { Free(); }
 
 bool Chunk::LoadChunk(const char *path) {
   chunk_ = Mix_LoadWAV(path);
@@ -18,9 +16,7 @@ bool Chunk::LoadChunk(const char *path) {
   return true;
 }
 
-void Chunk::PlayChunk() {
-  Mix_PlayChannel(-1, chunk_, 0);
-}
+void Chunk::PlayChunk() { Mix_PlayChannel(-1, chunk_, 0); }
 
 void Chunk::Free() {
   if (chunk_ != NULL) {

@@ -3,24 +3,21 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
-
 #include "src/game.h"
 
-Texture::~Texture() {
-  Free();
-}
+Texture::~Texture() { Free(); }
 
 bool Texture::LoadFromFile(const char *path) {
   Free();
 
-  SDL_Surface *sprite_sheet{ IMG_Load(path) };
+  SDL_Surface *sprite_sheet{IMG_Load(path)};
   if (sprite_sheet == NULL) {
     fprintf(stderr, "Error loading image: %s\n", IMG_GetError());
     return false;
   }
 
-  SDL_Texture *temp{ SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(),
-                                                  sprite_sheet) };
+  SDL_Texture *temp{SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(),
+                                                 sprite_sheet)};
   if (temp == NULL) {
     fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
     SDL_FreeSurface(sprite_sheet);
@@ -35,20 +32,18 @@ bool Texture::LoadFromFile(const char *path) {
   return texture_ != NULL;
 }
 
-bool Texture::LoadFromText(const Font& font, const char *text) {
+bool Texture::LoadFromText(const Font &font, const char *text) {
   Free();
 
-  SDL_Surface *surface{ TTF_RenderText_Solid_Wrapped(font.get_font(),
-                                                     text,
-                                                     font.get_color(),
-                                                     Renderer::kVirtualWidth) };
+  SDL_Surface *surface{TTF_RenderText_Solid_Wrapped(
+      font.get_font(), text, font.get_color(), Renderer::kVirtualWidth)};
   if (surface == NULL) {
     fprintf(stderr, "Error rendering text surface: %s\n", TTF_GetError());
     return false;
   }
 
-  texture_ = SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(),
-                                          surface);
+  texture_ =
+      SDL_CreateTextureFromSurface(kGame.renderer.get_renderer(), surface);
   if (texture_ == NULL) {
     fprintf(stderr, "Error creating texture: %s\n", SDL_GetError());
     return false;
@@ -61,7 +56,7 @@ bool Texture::LoadFromText(const Font& font, const char *text) {
 }
 
 void Texture::Render(const int x, const int y, SDL_Rect *clip) {
-  SDL_Rect dest{ x, y, width_, height_};
+  SDL_Rect dest{x, y, width_, height_};
   if (clip != NULL) {
     dest.w = clip->w;
     dest.h = clip->h;

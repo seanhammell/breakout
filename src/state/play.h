@@ -4,7 +4,6 @@
 #include <array>
 
 #include "SDL2/SDL.h"
-
 #include "src/entity/ball.h"
 #include "src/entity/brick.h"
 #include "src/entity/paddle.h"
@@ -32,14 +31,14 @@ class Play : public StateMachine {
   // and returning if the level is cleared.
   bool ClearBricks();
 
-  Textbox score_display_{ };
-  Widget hearts_{ };
-  Widget pause_screen_{ };
-  bool paused_{ false };
-  Ball ball_{ };
-  Paddle paddle_{ };
-  std::array<Brick, Brick::kMaxBricks> bricks_{ };
-  int score_{ };
+  Textbox score_display_{};
+  Widget hearts_{};
+  Widget pause_screen_{};
+  bool paused_{false};
+  Ball ball_{};
+  Paddle paddle_{};
+  std::array<Brick, Brick::kMaxBricks> bricks_{};
+  int score_{};
 };
 
 #endif  // SRC_STATE_PLAY_H_

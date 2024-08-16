@@ -3,23 +3,22 @@
 #include <stdio.h>
 
 #include "SDL2/SDL.h"
-
-#include "src/media/media.h"
 #include "src/media/chunk.h"
 #include "src/media/font.h"
+#include "src/media/media.h"
 #include "src/media/texture.h"
-#include "src/state/menu.h"
 #include "src/state/level_select.h"
+#include "src/state/menu.h"
 #include "src/state/state_machine.h"
 
 End::End(int score, bool victory)
-    : title_{ &kMedia.end,
-              { 1, 1 },
-              { 0, -kMedia.end.get_height() },
-              { 0, victory ? 16 : 0, 144, 16} },
-      score_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 0 } },
-      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } },
-      menu_ { &kMedia.font, new Texture(), { 1, 1 }, { 0, 32} } {
+    : title_{&kMedia.end,
+             {1, 1},
+             {0, -kMedia.end.get_height()},
+             {0, victory ? 16 : 0, 144, 16}},
+      score_{&kMedia.font, new Texture(), {1, 1}, {0, 0}},
+      play_{&kMedia.font, new Texture(), {1, 1}, {0, 24}},
+      menu_{&kMedia.font, new Texture(), {1, 1}, {0, 32}} {
   score_.AppendNumber("SCORE: ", score);
   play_.Update("PLAY AGAIN");
   menu_.Update("MAIN MENU");

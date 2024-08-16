@@ -2,7 +2,6 @@
 #define SRC_UI_WIDGET_H_
 
 #include "SDL2/SDL.h"
-
 #include "src/media/texture.h"
 
 class Widget {
@@ -12,10 +11,10 @@ class Widget {
     int y;
   };
 
-  static const int kPadding{ 2 };
+  static const int kPadding{2};
 
   Widget() = default;
-  Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip = { });
+  Widget(Texture *texture, Point anchor, Point offset, SDL_Rect clip = {});
 
   ~Widget() = default;
 
@@ -41,15 +40,15 @@ class Widget {
   int CalculatePosX() const;
   int CalculatePosY() const;
 
-  Texture *texture_{ NULL };
-  Point anchor_{ };
-  Point offset_{ };
-  SDL_Rect clip_{ };
+  Texture *texture_{NULL};
+  Point anchor_{};
+  Point offset_{};
+  SDL_Rect clip_{};
 
   // The width and height below are used to align groups of Widgets, they do
   // not necessarily reflect the width and height of the Widget itself.
-  int width_{ };
-  int height_{ };
+  int width_{};
+  int height_{};
 };
 
 #endif  // SRC_UI_WIDGET_H_

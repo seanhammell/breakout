@@ -1,10 +1,9 @@
 #include "src/state/menu.h"
 
 #include "SDL2/SDL.h"
-
-#include "src/media/media.h"
 #include "src/media/chunk.h"
 #include "src/media/font.h"
+#include "src/media/media.h"
 #include "src/media/texture.h"
 #include "src/state/level_select.h"
 #include "src/state/state_machine.h"
@@ -12,9 +11,9 @@
 #include "src/ui/widget.h"
 
 Menu::Menu()
-    : title_{ &kMedia.title, { 1, 1 }, { 0, -kMedia.title.get_height() / 2 } },
-      play_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 16 } },
-      edit_{ &kMedia.font, new Texture(), { 1, 1 }, { 0, 24 } } {
+    : title_{&kMedia.title, {1, 1}, {0, -kMedia.title.get_height() / 2}},
+      play_{&kMedia.font, new Texture(), {1, 1}, {0, 16}},
+      edit_{&kMedia.font, new Texture(), {1, 1}, {0, 24}} {
   play_.Update("PLAY");
   edit_.Update("LEVEL EDITOR");
   play_.set_width(edit_.get_width());
