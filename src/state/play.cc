@@ -12,6 +12,7 @@
 #include "src/entity/paddle.h"
 #include "src/media/font.h"
 #include "src/media/media.h"
+#include "src/media/music.h"
 #include "src/media/texture.h"
 #include "src/state/end.h"
 #include "src/ui/textbox.h"
@@ -23,12 +24,14 @@ Play::Play(const char *level)
       pause_screen_{ &kMedia.pause, { 0, 0 }, { 0, 0 } },
       ball_{ &kMedia.blocks },
       paddle_{ &kMedia.blocks } {
+  kMedia.music.ToggleMusic();
   if (Brick::Load(&bricks_, level)) {
     set_valid();
   }
 }
 
 Play::~Play() {
+  kMedia.music.ToggleMusic();
   delete score_display_.get_texture();
 }
 

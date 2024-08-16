@@ -1,7 +1,8 @@
 #include "src/media/media.h"
 
-#include "src/media/font.h"
 #include "src/media/chunk.h"
+#include "src/media/font.h"
+#include "src/media/music.h"
 #include "src/media/texture.h"
 
 bool media::LoadMedia() {
@@ -13,6 +14,8 @@ bool media::LoadMedia() {
   if (!kMedia.blocks.LoadFromFile("./res/image/blocks.png")) { return false; }
   if (!kMedia.heart.LoadFromFile("./res/image/heart.png")) { return false; }
   if (!kMedia.pause.LoadFromFile("./res/image/pause.png")) { return false; }
+
+  if (!kMedia.music.LoadMusic("./res/sound/Music.mp3")) { return false; }
 
   if (!kMedia.brick.LoadChunk("./res/sound/Brick.wav")) { return false; }
   if (!kMedia.paddle.LoadChunk("./res/sound/Paddle.wav")) { return false; }

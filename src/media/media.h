@@ -3,6 +3,7 @@
 
 #include "src/media/chunk.h"
 #include "src/media/font.h"
+#include "src/media/music.h"
 #include "src/media/texture.h"
 
 namespace media {
@@ -15,6 +16,8 @@ struct Media {
   Texture blocks;
   Texture heart;
   Texture pause;
+
+  Music music;
 
   Chunk brick;
   Chunk paddle;
