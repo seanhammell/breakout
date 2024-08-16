@@ -177,8 +177,9 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   x_velocity = std::abs(dx) > std::abs(x_velocity) ? 0 : x_velocity - dx;
   y_velocity = std::abs(dy) > std::abs(y_velocity) ? 0 : y_velocity - dy;
 
-  int ball_center{ };
-  int paddle_center{ };
+  int ball_center{ ball->x_pos_ + (Ball::kBallWidth / 2) };
+  int paddle_center{ paddle.get_x_pos() + (Paddle::kPaddleWidth / 2) };
+  int ball_paddle_offset{ ball_center - paddle_center };
   switch (surface_) {
     case kAxisX:
       if (hit_brick_ == NULL) {
@@ -196,11 +197,13 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
       break;
     case kPaddle:
       kMedia.paddle.PlayChunk();
-      ball_center = ball->x_pos_ + (Ball::kBallWidth / 2);
-      paddle_center = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2);
-      ball->x_vel_ = (ball_center - paddle_center) / (Paddle::kPaddleWidth / 2);
-      if (ball->x_vel_ == 0) {
-        ball->x_vel_ = ball_center < paddle_center ? -1 : 1;
+      if ((ball->x_vel_ < 0 && ball_paddle_offset > 0) ||
+          (ball->x_vel_ > 0 && ball_paddle_offset < 0)) {
+        // Reverse the x-velocity of the ball if the ball-paddle offset has
+        // a different sign than the x-velocity, e.g. the ball is travelling
+        // to the left (negative) and hits the right side of the paddle
+        // (positve).
+        ball->x_vel_ *= -1;
       }
       ball->y_vel_ = -ball->y_vel_;
 
