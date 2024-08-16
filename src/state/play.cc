@@ -88,12 +88,10 @@ void Play::Render() {
 
 bool Play::ClearBricks() {
   score_ = 0;
-  size_t broken_bricks{ 0 };
   bool cleared{ true };
   for (auto brick : bricks_) {
     if (brick.is_hit()) {
       score_ += brick.value();
-      ++broken_bricks;
       continue;
     } else if (brick.get_type() != Brick::kNoType) {
       cleared = false;

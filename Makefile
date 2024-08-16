@@ -4,8 +4,8 @@ TARGET_EXEC := breakout
 CXX := clang++
 CXXFLAGS := -g -std=c++17 -pedantic-errors
 CXXFLAGS += -Wall -Wextra -Werror
-CXXFLAGS += -I.
-LDFLAGS := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+CXXFLAGS += -I . -I /opt/homebrew/include
+LDFLAGS := -L /opt/homebrew/lib -l SDL2 -l SDL2_image -l SDL2_ttf -l SDL2_mixer
 
 # Finds all of the .cc files in the specified ./src directories.
 SRC_DIR := ./src
