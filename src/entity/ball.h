@@ -41,7 +41,7 @@ class Ball {
 
   int x_pos_{ (Renderer::kVirtualWidth - Ball::kBallWidth) / 2 };
   int y_pos_{ Paddle::kPaddleYPos - kBallHeight };
-  int x_vel_{ (std::rand() % 7) - 3 };
+  int x_vel_{ (std::rand() % 2) == 0 ? -1 : 1 };
   int y_vel_{ -1 };
   bool live_{ true };
   int n_lives_{ 3 };

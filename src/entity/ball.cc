@@ -17,7 +17,7 @@ Ball::Ball(Texture *texture, SDL_Rect clip)
 void Ball::HandleInput(SDL_Event input) {
   if (input.type == SDL_KEYDOWN && input.key.repeat == 0) {
     if (input.key.keysym.sym == SDLK_SPACE && !live_) {
-      x_vel_ = (std::rand() % 7) - 3;
+      x_vel_ = (std::rand() % 2) == 0 ? -1 : 1;
       y_vel_ = -y_vel_;
       live_ = true;
     }

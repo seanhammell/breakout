@@ -141,6 +141,7 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
   if (x_velocity == 0) {
     origin_.x = ball->x_pos_ + (Ball::kBallWidth / 2);
   }
+
   origin_.y = y_velocity < 0 ? ball->y_pos_ : ball->y_pos_ + Ball::kBallHeight;
   vertex_.x = origin_.x + x_velocity;
   vertex_.y = origin_.y + y_velocity;
@@ -188,11 +189,11 @@ void Physics::ApplyVelocity(Ball *ball, int x_velocity, int y_velocity,
       kMedia.paddle.PlayChunk();
       ball_center = ball->x_pos_ + (Ball::kBallWidth / 2);
       paddle_center = paddle.get_x_pos() + (Paddle::kPaddleWidth / 2);
-      ball->x_vel_ += (ball_center - paddle_center) / 4;
+      ball->x_vel_ = (ball_center - paddle_center) / (Paddle::kPaddleWidth / 2);
+      if (ball->x_vel_ == 0) {
+        ball->x_vel_ = ball_center < paddle_center ? -1 : 1;
+      }
       ball->y_vel_ = -ball->y_vel_;
-
-      ball->x_vel_ = std::max(ball->x_vel_, -3);
-      ball->x_vel_ = std::min(ball->x_vel_, 3);
 
       x_velocity = ball->x_vel_;
       y_velocity = ball->y_vel_;
