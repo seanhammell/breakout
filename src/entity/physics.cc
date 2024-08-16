@@ -19,7 +19,16 @@ static const Physics::Line kScreenRight{ Renderer::kVirtualWidth, 0,
 
 void Physics::Update(Ball *ball, const Paddle& paddle,
                      std::array<Brick, Brick::kMaxBricks> *bricks) {
+  static constexpr int kTopThird = Renderer::kVirtualHeight / 3;
+  int y_before = ball->y_pos_;
   ApplyVelocity(ball, ball->x_vel_, ball->y_vel_, paddle, bricks);
+  if (y_before >= kTopThird && ball->y_pos_ < kTopThird) {
+    ball->x_vel_ *= 2;
+    ball->y_vel_ *= 2;
+  } else if (y_before < kTopThird && ball->y_pos_ >= kTopThird) {
+    ball->x_vel_ /= 2;
+    ball->y_vel_ /= 2;
+  }
 }
 
 double Physics::Distance(const Point& a, const Point& b) {
