@@ -9,7 +9,7 @@
 #include "src/entity/brick.h"
 #include "src/graphic/renderer.h"
 #include "src/media/media.h"
-#include "src/media/sound.h"
+#include "src/media/chunk.h"
 #include "src/state/menu.h"
 #include "src/state/state_machine.h"
 

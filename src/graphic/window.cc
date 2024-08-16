@@ -77,7 +77,7 @@ void Window::Loop() {
 }
 
 bool Window::Create() {
-  if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
     fprintf(stderr, "Error initializing SDL: %s\n", SDL_GetError());
     return false;
   }

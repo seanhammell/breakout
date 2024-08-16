@@ -1,7 +1,7 @@
 #ifndef SRC_MEDIA_MEDIA_H_
 #define SRC_MEDIA_MEDIA_H_
 
-#include "src/media/sound.h"
+#include "src/media/chunk.h"
 #include "src/media/font.h"
 #include "src/media/texture.h"
 
@@ -16,10 +16,10 @@ struct Media {
   Texture heart;
   Texture pause;
 
-  Sound brick;
-  Sound paddle;
-  Sound wall;
-  Sound enter;
+  Chunk brick;
+  Chunk paddle;
+  Chunk wall;
+  Chunk enter;
 };
 
 bool LoadMedia();

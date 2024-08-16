@@ -5,7 +5,7 @@
 #include <cstdlib>
 
 #include "src/media/media.h"
-#include "src/media/sound.h"
+#include "src/media/chunk.h"
 #include "src/media/texture.h"
 #include "src/state/edit.h"
 #include "src/state/play.h"

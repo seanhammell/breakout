@@ -3,7 +3,7 @@
 #include "SDL2/SDL.h"
 
 #include "src/media/media.h"
-#include "src/media/sound.h"
+#include "src/media/chunk.h"
 #include "src/media/font.h"
 #include "src/media/texture.h"
 #include "src/state/level_select.h"

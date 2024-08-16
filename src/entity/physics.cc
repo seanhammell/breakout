@@ -9,7 +9,7 @@
 #include "src/entity/paddle.h"
 #include "src/graphic/renderer.h"
 #include "src/media/media.h"
-#include "src/media/sound.h"
+#include "src/media/chunk.h"
 
 static const Physics::Line kScreenTop{ 0, 0, Renderer::kVirtualWidth, 0 };
 static const Physics::Line kScreenLeft{ 0, 0, 0, Renderer::kVirtualHeight };
